@@ -1,30 +1,40 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable react-hooks/rules-of-hooks */
-import { Link } from '@material-ui/core'
-import Badge from '@material-ui/core/Badge'
-import InputBase from '@material-ui/core/InputBase'
-import { fade, makeStyles } from '@material-ui/core/styles'
-import Toolbar from '@material-ui/core/Toolbar'
-import cart from 'assets/icon/cart.png'
-import search from 'assets/icon/search.png'
-import user from 'assets/icon/user.png'
-import logo from 'assets/logo/logo.png'
-import React from 'react'
+import { Link, Paper } from '@material-ui/core';
+import Badge from '@material-ui/core/Badge';
+import InputBase from '@material-ui/core/InputBase';
+import { fade, makeStyles } from '@material-ui/core/styles';
+import Toolbar from '@material-ui/core/Toolbar';
+import cart from 'assets/icon/shopping-cart.svg';
+import search from 'assets/icon/search.png';
+import user from 'assets/icon/user.png';
+import logo from 'assets/logo/logo.png';
+import React from 'react';
+import { blackText, whiteText, grayText, primaryText, maxWidth } from 'assets/css_variable/variable';
 
+
+const textColor = '#ff8a0c';
 const usedStyles = makeStyles((theme) => ({
-  containHeader: {
-    height: 100,
+  root: {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
     zIndex: 10,
-    // backgroundColor: '#ff8604',
-    backgroundColor: '#fff',
-
+    height: 100,
+  },
+  containHeader: {
+    height: '100%',
+    backgroundColor: whiteText,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     borderBottom: '1px solid #e1e1e1',
+    margin: '0 auto',
   },
   contentHeader: {
-    width: 1200,
+    width: maxWidth,
     padding: 0,
     display: 'flex',
     justifyContent: 'space-between',
@@ -32,9 +42,9 @@ const usedStyles = makeStyles((theme) => ({
   search: {
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade('#757575', 0.15),
+    backgroundColor: fade(grayText, 0.15),
     '&:hover': {
-      backgroundColor: fade('#757575', 0.25),
+      backgroundColor: fade(grayText, 0.25),
     },
     marginRight: theme.spacing(2),
     marginLeft: 0,
@@ -77,9 +87,8 @@ const usedStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     marginRight: theme.spacing(6),
-    '& a': {
-      fontSize: '1.6rem',
-      fontWeight: 500,
+    '& a:hover': {
+      color: primaryText,
     },
     '& span': {
       fontSize: '1.6rem',
@@ -93,6 +102,13 @@ const usedStyles = makeStyles((theme) => ({
   headerCartOption: {
     display: 'flex',
     alignItems: 'center',
+    textDecoration:'none !important',
+    '&:hover': {
+      color: primaryText,
+      '& img': {
+        fill: primaryText,
+      }
+    },
     '& p': {
       fontSize: '1.6rem',
       marginLeft: theme.spacing(1.2),
@@ -103,55 +119,68 @@ const usedStyles = makeStyles((theme) => ({
     },
     '& span': {
       fontSize: '1.6rem',
-      color: '#fff',
+      color: whiteText,
     },
   },
   logo: {
     width: '100px',
   },
-}))
+  link: {
+    fontSize: '1.6rem',
+    fontWeight: 500,
+    textDecoration:'none !important' ,
+  }
+}));
+
+
+
 const header = () => {
   const classes = usedStyles()
   return (
-    <div className={classes.containHeader}>
-      <Toolbar className={classes.contentHeader}>
-        <Link href='#' color='inherit'>
-          <img className={classes.logo} src={logo} />
-        </Link>
-        <div className={classes.search}>
-          <div className={classes.searchIcon}>
-          <img src={search}></img>
+    <Paper>
+
+      <header className={classes.root}>
+        <div className={classes.containHeader}>
+        <Toolbar className={classes.contentHeader}>
+          <Link href='#' color='inherit'>
+            <img className={classes.logo} src={logo} />
+          </Link>
+          <div className={classes.search}>
+            <div className={classes.searchIcon}>
+            <img src={search}></img>
+            </div>
+            <InputBase
+              placeholder='Enter Your Search...'
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput,
+              }}
+            />
           </div>
-          <InputBase
-            placeholder='Enter Your Search...'
-            classes={{
-              root: classes.inputRoot,
-              input: classes.inputInput,
-            }}
-          />
-        </div>
-        <div className={classes.headerOptionRight}>
-          <div className={classes.headerUserOption}>
-            <img src={user}></img>
-            <Link href='#' color='inherit'>
-              Login
-            </Link>
-            <span> / </span>
-            <Link href='#' color='inherit'>
-              Register
-            </Link>
+          <div className={classes.headerOptionRight}>
+            <div className={classes.headerUserOption}>
+              <img src={user}></img>
+              <Link className={classes.link} href='#' color='inherit'>
+                Login
+              </Link>
+              <span> / </span>
+              <Link className={classes.link} href='#' color='inherit'>
+                Register
+              </Link>
+            </div>
+            <div>
+              <Link className={classes.headerCartOption} href='/' color='inherit'>
+                <Badge badgeContent={'0'} color='error'>
+                  <img src={cart}></img>
+                </Badge>
+                <p>My Cart</p>
+              </Link>
+            </div>
           </div>
-          <div>
-            <Link className={classes.headerCartOption} href='/' color='inherit'>
-              <Badge badgeContent={'0'} color='error'>
-                <img src={cart}></img>
-              </Badge>
-              <p>My Cart</p>
-            </Link>
-          </div>
-        </div>
-      </Toolbar>
-    </div>
+        </Toolbar>
+      </div>
+      </header>
+    </Paper>
   )
 }
 

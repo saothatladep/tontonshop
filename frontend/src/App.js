@@ -5,8 +5,10 @@ import HeaderOptionCategories from 'components/Header/headerOptionCategories'
 const app = () => {
   return (
     <div className='app'>
-      <Header />
-      <HeaderOptionCategories/>
+      <header>
+        <Header />
+        <HeaderOptionCategories/>
+      </header>
       <main>
         <h3>Welcome to my shop</h3>
       </main>
