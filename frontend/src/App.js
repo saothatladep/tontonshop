@@ -1,7 +1,7 @@
 import React from 'react'
 import Footer from 'components/Footer/footer'
-import Header from 'components/Header/header'
-import HeaderOptionCategories from 'components/Header/headerOptionCategories'
+import Header from 'components/Header/NavbarHeader'
+import HeaderOptionCategories from 'components/Header/OptionCategories'
 const app = () => {
   return (
     <div className='app'>
