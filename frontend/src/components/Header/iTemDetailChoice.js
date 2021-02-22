@@ -40,7 +40,7 @@ export const initOptionCategories = [
           'https://www.jodhpurifurniture.com:4000/images/category/thumbnail/thumb142x100/155046954087301.jpg',
         listChoice: [
           { idChoice: 141, titleChoice: 'Wooden Diwan' },
-          { idChoice: 142, titleChoice: 'Wooden Diwan with Storage' },
+          { idChoice: 142, titleChoice: 'Diwan with Storage' },
         ],
       },
     ],

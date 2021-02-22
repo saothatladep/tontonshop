@@ -13,7 +13,7 @@ const app = () => {
       </main>
       <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default app
+export default app;
