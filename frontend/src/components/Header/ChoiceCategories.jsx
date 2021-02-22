@@ -29,7 +29,7 @@ const usedStyles = makeStyles((theme) => ({
       color: '#666',
       padding: theme.spacing(2, 0, 1, 0),
       cursor: 'default',
-      fontFamily: '\'Montserrat\', sans-serif !important',
+      fontFamily: "'Montserrat', sans-serif !important",
     },
   },
   noPadding: {
@@ -71,13 +71,13 @@ const ChoiceCategories = (props) => {
   const classes = usedStyles()
   const { content } = props
   return (
-    <div className= {classes.listChoice}>
+    <div className={classes.listChoice}>
       {content.map((contentList) => (
         <ListItem className={classes.ItemDetail} key={contentList.idContent}>
-          <img src= {contentList.imgChild}></img>
+          <img src={contentList.imgChild}></img>
           <Typography color='inherit'>{contentList.titleContent}</Typography>
           <List>
-            <ChoiceDetail listChoice = {contentList.listChoice} />
+            <ChoiceDetail listChoice={contentList.listChoice} />
           </List>
         </ListItem>
       ))}

@@ -35,10 +35,12 @@ const DetailCategories = (props) => {
       <Box className={classes.containDetailCategories}>
         <Paper elevation={4}>
           <Container>
-            <Grid container
-  direction="row"
-  justify="space-around"
-  alignItems="center">
+            <Grid
+              container
+              direction='row'
+              justify='space-around'
+              alignItems='center'
+            >
               <Grid item md-8>
                 <List>
                   <ChoiceCategories content={category.content} />
@@ -47,7 +49,7 @@ const DetailCategories = (props) => {
               <Grid item md-4>
                 <Link href='#' color='inherit'>
                   <img
-                    style={{ width: '390px'}}
+                    style={{ width: '390px' }}
                     src={category.img}
                     alt=''
                   ></img>
