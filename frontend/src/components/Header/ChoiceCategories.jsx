@@ -22,13 +22,14 @@ const usedStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
     alignItems: 'flex-start',
     padding: 0,
-    marginRight: theme.spacing(3),
+    width: 182,
     '& p': {
-      fontSize: '1.3rem',
+      fontSize: '1.1rem',
       fontWeight: '600',
       color: '#666',
       padding: theme.spacing(2, 0, 1, 0),
       cursor: 'default',
+      fontFamily: '\'Montserrat\', sans-serif !important',
     },
   },
   noPadding: {

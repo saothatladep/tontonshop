@@ -1,13 +1,12 @@
 import React from 'react'
-import Footer from 'components/Footer/footer'
-import Header from 'components/Header/NavbarHeader'
+import Footer from 'components/Footer/Index'
+import Header from 'components/Header/Index'
 import HeaderOptionCategories from 'components/Header/OptionCategories'
 const app = () => {
   return (
     <div className='app'>
       <header>
-        <Header />
-        <HeaderOptionCategories/>
+        <Header/>
       </header>
       <main>
         <h3>Welcome to my shop</h3>

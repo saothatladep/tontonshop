@@ -1,19 +1,24 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable react-hooks/rules-of-hooks */
-import { Link, Paper } from '@material-ui/core';
-import Badge from '@material-ui/core/Badge';
-import InputBase from '@material-ui/core/InputBase';
-import { fade, makeStyles } from '@material-ui/core/styles';
-import Toolbar from '@material-ui/core/Toolbar';
-import cart from 'assets/icon/shopping-cart.svg';
-import search from 'assets/icon/search.png';
-import user from 'assets/icon/user.png';
-import logo from 'assets/logo/logo.png';
-import React from 'react';
-import { blackText, whiteText, grayText, primaryText, maxWidth } from 'assets/css_variable/variable';
+import { Link, Paper } from '@material-ui/core'
+import Badge from '@material-ui/core/Badge'
+import InputBase from '@material-ui/core/InputBase'
+import { fade, makeStyles } from '@material-ui/core/styles'
+import Toolbar from '@material-ui/core/Toolbar'
+import cart from 'assets/icon/shopping-cart.svg'
+import search from 'assets/icon/search.png'
+import user from 'assets/icon/user.png'
+import logo from 'assets/logo/logo.png'
+import React from 'react'
+import {
+  blackText,
+  whiteText,
+  grayText,
+  primaryText,
+  maxWidth,
+} from 'assets/css_variable/variable'
 
-
-const textColor = '#ff8a0c';
+const textColor = '#ff8a0c'
 const usedStyles = makeStyles((theme) => ({
   root: {
     position: 'fixed',
@@ -44,7 +49,8 @@ const usedStyles = makeStyles((theme) => ({
     borderRadius: theme.shape.borderRadius,
     backgroundColor: fade(grayText, 0.15),
     '&:hover': {
-      backgroundColor: fade(grayText, 0.25),
+      boxShadow: '0 1px 6px rgb(32 33 36 / 40%)',
+      borderColor: 'rgba(223,225,229,0)',
     },
     marginRight: theme.spacing(2),
     marginLeft: 0,
@@ -53,6 +59,7 @@ const usedStyles = makeStyles((theme) => ({
     '& img': {
       width: '25px',
     },
+    borderRadius: '50px',
   },
   searchIcon: {
     padding: theme.spacing(0, 2),
@@ -102,12 +109,12 @@ const usedStyles = makeStyles((theme) => ({
   headerCartOption: {
     display: 'flex',
     alignItems: 'center',
-    textDecoration:'none !important',
+    textDecoration: 'none !important',
     '&:hover': {
       color: primaryText,
       '& img': {
         fill: primaryText,
-      }
+      },
     },
     '& p': {
       fontSize: '1.6rem',
@@ -128,60 +135,61 @@ const usedStyles = makeStyles((theme) => ({
   link: {
     fontSize: '1.6rem',
     fontWeight: 500,
-    textDecoration:'none !important' ,
-  }
-}));
+    textDecoration: 'none !important',
+  },
+}))
 
-
-
-const header = () => {
+const NavHeader = () => {
   const classes = usedStyles()
   return (
     <Paper>
-
       <header className={classes.root}>
         <div className={classes.containHeader}>
-        <Toolbar className={classes.contentHeader}>
-          <Link href='#' color='inherit'>
-            <img className={classes.logo} src={logo} />
-          </Link>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-            <img src={search}></img>
+          <Toolbar className={classes.contentHeader}>
+            <Link href='#' color='inherit'>
+              <img className={classes.logo} src={logo} />
+            </Link>
+            <div className={classes.search}>
+              <div className={classes.searchIcon}>
+                <img src={search}></img>
+              </div>
+              <InputBase
+                placeholder='Enter Your Search...'
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+              />
             </div>
-            <InputBase
-              placeholder='Enter Your Search...'
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-            />
-          </div>
-          <div className={classes.headerOptionRight}>
-            <div className={classes.headerUserOption}>
-              <img src={user}></img>
-              <Link className={classes.link} href='#' color='inherit'>
-                Login
-              </Link>
-              <span> / </span>
-              <Link className={classes.link} href='#' color='inherit'>
-                Register
-              </Link>
+            <div className={classes.headerOptionRight}>
+              <div className={classes.headerUserOption}>
+                <img src={user}></img>
+                <Link className={classes.link} href='#' color='inherit'>
+                  Login
+                </Link>
+                <span> / </span>
+                <Link className={classes.link} href='#' color='inherit'>
+                  Register
+                </Link>
+              </div>
+              <div>
+                <Link
+                  className={classes.headerCartOption}
+                  href='/'
+                  color='inherit'
+                >
+                  <Badge badgeContent={'0'} color='error'>
+                    <img src={cart}></img>
+                  </Badge>
+                  <p>My Cart</p>
+                </Link>
+              </div>
             </div>
-            <div>
-              <Link className={classes.headerCartOption} href='/' color='inherit'>
-                <Badge badgeContent={'0'} color='error'>
-                  <img src={cart}></img>
-                </Badge>
-                <p>My Cart</p>
-              </Link>
-            </div>
-          </div>
-        </Toolbar>
-      </div>
+          </Toolbar>
+        </div>
       </header>
     </Paper>
   )
 }
 
-export default header
+export default NavHeader

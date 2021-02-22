@@ -5,6 +5,20 @@ import React from 'react'
 import ChoiceCategories from './ChoiceCategories'
 
 const usedStyles = makeStyles((theme) => ({
+  root: {
+    position: 'absolute',
+    top: '100%',
+    left: 0,
+    right: 0,
+    zIndex: 100,
+    float: 'left',
+    minWidth: 160,
+    textAlign: 'left',
+    listStyle: 'none',
+    borderRadius: 4,
+    padding: 0,
+    // display: 'none',
+  },
   containDetailCategories: {
     width: maxWidth,
     margin: '0 auto',
@@ -15,22 +29,25 @@ const usedStyles = makeStyles((theme) => ({
 
 const DetailCategories = (props) => {
   const classes = usedStyles()
-  const {category} = props;
+  const { category } = props
   return (
-    <div> 
+    <ul className={classes.root}>
       <Box className={classes.containDetailCategories}>
         <Paper elevation={4}>
           <Container>
-            <Grid container>
+            <Grid container
+  direction="row"
+  justify="space-around"
+  alignItems="center">
               <Grid item md-8>
                 <List>
-                  <ChoiceCategories content = {category.content} />
+                  <ChoiceCategories content={category.content} />
                 </List>
               </Grid>
               <Grid item md-4>
                 <Link href='#' color='inherit'>
                   <img
-                    style={{ width: '390px', marginTop: '20px' }}
+                    style={{ width: '390px'}}
                     src={category.img}
                     alt=''
                   ></img>
@@ -40,7 +57,7 @@ const DetailCategories = (props) => {
           </Container>
         </Paper>
       </Box>
-    </div>
+    </ul>
   )
 }
 
