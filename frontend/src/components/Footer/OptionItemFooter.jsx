@@ -17,11 +17,9 @@ const usedStyles = makeStyles((theme) => ({
       fontWeight: 500,
       fontFamily: "'Montserrat', sans-serif !important;",
       paddingTop: 2,
-    }, 
+    },
     '& :hover': {
-      
-        color: primaryText,
-      
+      color: primaryText,
     },
   },
   link: {
@@ -37,7 +35,7 @@ const OptionItemFooter = (props) => {
   return (
     <div className={classes.root}>
       {itemList.map((item) => (
-        <ListItem className={classes.container} key = {item.idList}>
+        <ListItem className={classes.container} key={item.idList}>
           <Link href='#' className={classes.link}>
             <ListItemText className={classes.title}>{item.text}</ListItemText>
           </Link>

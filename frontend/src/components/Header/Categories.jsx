@@ -1,9 +1,9 @@
-import { List, ListItem, ListItemText } from '@material-ui/core'
+import { ListItem, ListItemText } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { mainText, maxWidth, primaryText } from 'assets/css_variable/variable'
+import initOptionCategories from 'mocks/navbarItemData.js'
 import React, { useState } from 'react'
 import DetailCategories from './DetailCategories'
-import initOptionCategories from 'mocks/navbarItemData.js'
 
 const usedStyles = makeStyles((theme) => ({
   containCategories: {
@@ -34,13 +34,13 @@ const usedStyles = makeStyles((theme) => ({
       fontWeight: '500',
       padding: '10 0',
       textAlign: 'start',
-      fontFamily: '\'Montserrat\', sans-serif !important',
+      fontFamily: "'Montserrat', sans-serif !important",
       color: mainText,
     },
   },
   showHide: {
     display: 'none',
-  }
+  },
 }))
 
 const Categories = () => {
@@ -53,7 +53,10 @@ const Categories = () => {
         {categories.map((category) => (
           <ListItem className={classes.categoryItem} key={category.idCategory}>
             <ListItemText className={classes.text} primary={category.name} />
-            <DetailCategories className={classes.showHide} category={category} />
+            <DetailCategories
+              className={classes.showHide}
+              category={category}
+            />
           </ListItem>
         ))}
       </div>

@@ -1,7 +1,5 @@
 import { makeStyles, Paper } from '@material-ui/core'
-import {
-    minorText
-} from 'assets/css_variable/variable'
+import { minorText } from 'assets/css_variable/variable'
 import React from 'react'
 
 const usedStyles = makeStyles((theme) => ({

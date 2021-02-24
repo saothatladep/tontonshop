@@ -41,7 +41,6 @@ const usedStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
     paddingBottom: '10px',
-
   },
   icon: {
     fontSize: '2.4rem',
