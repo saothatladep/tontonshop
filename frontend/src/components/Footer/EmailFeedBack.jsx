@@ -1,6 +1,6 @@
 import { Button, InputBase } from '@material-ui/core'
 import { fade, makeStyles } from '@material-ui/core/styles'
-import { maxWidth, primaryText, whiteText } from 'assets/css_variable/variable'
+import { maxWidth, primaryText, whiteText ,mainText} from 'assets/css_variable/variable'
 import React from 'react'
 
 const usedStyles = makeStyles((theme) => ({
@@ -12,6 +12,7 @@ const usedStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'space-around',
+    zIndex:1000,
   },
   inputInput: {
     padding: theme.spacing(1.4, 1, 1, 0),
@@ -53,6 +54,7 @@ const usedStyles = makeStyles((theme) => ({
     fontSize: '3rem',
     fontWeight: '500',
     margin: 0,
+    color: mainText,
   },
   textSmall: {
     fontSize: '1.6rem',

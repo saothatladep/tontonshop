@@ -1,17 +1,6 @@
-import {
-  Box,
-  Container,
-  Grid,
-  Link,
-  List,
-  ListItem,
-  ListItemText,
-  Paper,
-  Typography,
-} from '@material-ui/core'
+import { List, ListItem, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import AlbumIcon from '@material-ui/icons/Album'
-import { maxWidth, primaryText } from 'assets/css_variable/variable'
+import { primaryText } from 'assets/css_variable/variable'
 import React from 'react'
 import ChoiceDetail from './ChoiceDetail'
 

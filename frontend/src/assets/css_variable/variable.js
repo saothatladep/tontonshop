@@ -3,3 +3,5 @@ export const primaryText = '#ff8a0c';
 export const whiteText = '#fff';
 export const blackText = '#00000000';
 export const grayText = '#757575';
+export const mainText = '#333';
+export const minorText = '#666';

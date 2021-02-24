@@ -5,18 +5,17 @@ import Badge from '@material-ui/core/Badge'
 import InputBase from '@material-ui/core/InputBase'
 import { fade, makeStyles } from '@material-ui/core/styles'
 import Toolbar from '@material-ui/core/Toolbar'
-import cart from 'assets/icon/shopping-cart.svg'
+import {
+  grayText,
+  maxWidth,
+  primaryText,
+  whiteText,
+} from 'assets/css_variable/variable'
 import search from 'assets/icon/search.png'
+import cart from 'assets/icon/shopping-cart.svg'
 import user from 'assets/icon/user.png'
 import logo from 'assets/logo/logo.png'
 import React from 'react'
-import {
-  blackText,
-  whiteText,
-  grayText,
-  primaryText,
-  maxWidth,
-} from 'assets/css_variable/variable'
 
 const textColor = '#ff8a0c'
 const usedStyles = makeStyles((theme) => ({
@@ -26,7 +25,7 @@ const usedStyles = makeStyles((theme) => ({
     left: 0,
     right: 0,
     bottom: 0,
-    zIndex: 10,
+    zIndex: 100,
     height: 100,
   },
   containHeader: {
