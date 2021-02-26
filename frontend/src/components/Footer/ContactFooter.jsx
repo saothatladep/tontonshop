@@ -1,19 +1,12 @@
-import React from 'react'
-import LocationOnIcon from '@material-ui/icons/LocationOn'
 import { Link, makeStyles } from '@material-ui/core'
-import PhoneIcon from '@material-ui/icons/Phone'
-import MailIcon from '@material-ui/icons/Mail'
 import FacebookIcon from '@material-ui/icons/Facebook'
-import YouTubeIcon from '@material-ui/icons/YouTube'
+import LocationOnIcon from '@material-ui/icons/LocationOn'
+import MailIcon from '@material-ui/icons/Mail'
+import PhoneIcon from '@material-ui/icons/Phone'
 import TwitterIcon from '@material-ui/icons/Twitter'
-import {
-  maxWidth,
-  primaryText,
-  mainText,
-  minorText,
-  blackText,
-  whiteText,
-} from 'assets/css_variable/variable'
+import YouTubeIcon from '@material-ui/icons/YouTube'
+import { mainText, minorText, primaryText } from 'assets/css_variable/variable'
+import React from 'react'
 const usedStyles = makeStyles((theme) => ({
   root: {},
   container: {},

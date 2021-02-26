@@ -23,8 +23,10 @@ const usedStyles = makeStyles((theme) => ({
       borderTop: '3px solid',
       borderColor: primaryText,
       '& $text': {
-        transition: '.3s ease-out',
-        color: primaryText,
+        '& span': {
+          transition: '.3s ease-out',
+          color: primaryText,
+        },
       },
     },
   },
@@ -38,25 +40,35 @@ const usedStyles = makeStyles((theme) => ({
       color: mainText,
     },
   },
-  showHide: {
-    display: 'none',
-  },
 }))
 
 const Categories = () => {
   const classes = usedStyles()
   const [categories, setCategories] = useState(initOptionCategories)
+  const [isOpen, setIsOpen] = useState(false)
+  const [index, setIndex] = useState(0)
+
+  const getKeyCategory = (event) => {
+    setIsOpen(true)
+    setIndex(event.currentTarget.getAttribute('id'))
+    console.log(event.currentTarget.getAttribute('id'))
+  }
 
   return (
     <div>
       <div className={classes.containCategories}>
         {categories.map((category) => (
-          <ListItem className={classes.categoryItem} key={category.idCategory}>
+          <ListItem
+            className={classes.categoryItem}
+            key={category.idCategory}
+            id={category.idCategory}
+            onMouseEnter={(e) => getKeyCategory(e)}
+            onMouseLeave={() => setIsOpen(false)}
+          >
             <ListItemText className={classes.text} primary={category.name} />
-            <DetailCategories
-              className={classes.showHide}
-              category={category}
-            />
+            {index == category.idCategory && isOpen && (
+              <DetailCategories category={category} />
+            )}
           </ListItem>
         ))}
       </div>

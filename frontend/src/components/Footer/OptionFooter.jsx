@@ -1,7 +1,7 @@
 import { List, makeStyles } from '@material-ui/core'
-import React from 'react'
+import { mainText } from 'assets/css_variable/variable'
 import OptionItemFooter from 'components/Footer/OptionItemFooter'
-import { mainText, maxWidth, primaryText } from 'assets/css_variable/variable'
+import React from 'react'
 
 const usedStyles = makeStyles((theme) => ({
   root: {

@@ -17,18 +17,33 @@ const usedStyles = makeStyles((theme) => ({
     listStyle: 'none',
     borderRadius: 4,
     padding: 0,
-    // display: 'none',
-    
+    cursor: 'default',    
+    animation: '$growDown 300ms ease-in-out forwards',
+    transformOrigin: 'top center',
+  },
+  '@keyframes growDown':{
+    '0%': {
+      transform: 'scaleY(0)'
+    },
+    '80%': {
+      transform: 'scaleY(1.1)'
+    },
+    '100%': {
+      transform: 'scaleY(1)'
+    },
   },
   containDetailCategories: {
     width: maxWidth,
     margin: '0 auto',
-    minHeight: 290,
+    minHeight: 340,
     backgroundColor: whiteText,
     boxShadow: '0 6px 12px rgb(0 0 0 / 18%)',
     borderBottomLeftRadius: 5,
     borderBottomRightRadius: 5,
     display: 'block',
+  },
+  img: {
+    margin: '0 auto',
   },
 }))
 
@@ -42,18 +57,18 @@ const DetailCategories = (props) => {
             <Grid
               container
               direction='row'
-              justify='space-around'
-              alignItems='center'
+              justify='flex-start'
+              alignItems='flex-start'
             >
               <Grid item md-8>
                 <List>
                   <ChoiceCategories content={category.content} />
                 </List>
               </Grid>
-              <Grid item md-4>
+              <Grid className={classes.img} item md-4>
                 <Link href='#' color='inherit'>
                   <img
-                    style={{ width: '390px' }}
+                    style={{ width: category.widthImg,height: category.heightImg, margin: '20px auto 0px auto'}}
                     src={category.img}
                     alt=''/>
                 </Link>

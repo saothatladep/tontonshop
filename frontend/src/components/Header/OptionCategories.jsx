@@ -1,6 +1,6 @@
 import { List, Paper } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import { maxWidth, primaryText } from 'assets/css_variable/variable'
+import { maxWidth } from 'assets/css_variable/variable'
 import React from 'react'
 import Categories from './Categories'
 

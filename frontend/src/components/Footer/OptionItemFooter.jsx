@@ -1,6 +1,6 @@
 import { Link, ListItem, ListItemText, makeStyles } from '@material-ui/core'
+import { minorText, primaryText } from 'assets/css_variable/variable'
 import React from 'react'
-import { mainText, minorText, primaryText } from 'assets/css_variable/variable'
 
 const usedStyles = makeStyles((theme) => ({
   root: {

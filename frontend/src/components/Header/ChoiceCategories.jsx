@@ -1,4 +1,4 @@
-import { List, ListItem, Typography } from '@material-ui/core'
+import { Link, List, ListItem, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { primaryText } from 'assets/css_variable/variable'
 import React from 'react'
@@ -63,7 +63,9 @@ const ChoiceCategories = (props) => {
     <div className={classes.listChoice}>
       {content.map((contentList) => (
         <ListItem className={classes.ItemDetail} key={contentList.idContent}>
-          <img src={contentList.imgChild}></img>
+          <Link href='#'>
+            <img src={contentList.imgChild}></img>
+          </Link>
           <Typography color='inherit'>{contentList.titleContent}</Typography>
           <List>
             <ChoiceDetail listChoice={contentList.listChoice} />

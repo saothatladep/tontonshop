@@ -5,7 +5,8 @@ const navbarItemData = [
     name: 'SOFA',
     img:
       'https://www.jodhpurifurniture.com:4000/images/category/1549361760853sofa_set.jpg',
-    widthImg: '390px',
+    widthImg: '377px',
+    heightImg: '236px',
     content: [
       {
         idContent: 11,
@@ -51,7 +52,8 @@ const navbarItemData = [
     name: 'LIVING',
     img:
       'https://www.jodhpurifurniture.com:4000/images/category/1550914838496Living_image.jpg',
-    widthImg: '390px',
+    widthImg: '377px',
+    heightImg: '257px',
     content: [
       {
         idContent: 21,
@@ -108,7 +110,8 @@ const navbarItemData = [
     name: 'BEDROOM',
     img:
       'https://www.jodhpurifurniture.com:4000/images/category/1550914871267Bedroom_image.jpg',
-    widthImg: '390px',
+    widthImg: '377px',
+    heightImg: '278px',
     content: [
       {
         idContent: 31,
@@ -164,7 +167,8 @@ const navbarItemData = [
     name: 'DINING',
     img:
       'https://www.jodhpurifurniture.com:4000/images/category/15509146689150D9A7556_m_Dining.jpg',
-    widthImg: '390px',
+    widthImg: '424px',
+    heightImg: '295px',
     content: [
       {
         idContent: 41,
@@ -219,7 +223,8 @@ const navbarItemData = [
     name: 'STUDY',
     img:
       'https://www.jodhpurifurniture.com:4000/images/category/1549361906927Study--for-main.jpg',
-    widthImg: '390px',
+    widthImg: '453px',
+    heightImg: '295px',
     content: [
       {
         idContent: 51,

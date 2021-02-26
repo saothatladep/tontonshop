@@ -17,7 +17,6 @@ import user from 'assets/icon/user.png'
 import logo from 'assets/logo/logo.png'
 import React from 'react'
 
-const textColor = '#ff8a0c'
 const usedStyles = makeStyles((theme) => ({
   root: {
     position: 'fixed',
@@ -45,7 +44,7 @@ const usedStyles = makeStyles((theme) => ({
   },
   search: {
     position: 'relative',
-    borderRadius: theme.shape.borderRadius,
+    // borderRadius: theme.shape.borderRadius,
     backgroundColor: fade(grayText, 0.15),
     '&:hover': {
       boxShadow: '0 1px 6px rgb(32 33 36 / 40%)',

@@ -1,10 +1,10 @@
 import { Box, Container, Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { maxWidth, whiteText } from 'assets/css_variable/variable'
+import footerItemData from 'mocks/footerItemData'
 import React, { useState } from 'react'
 import ContactFooter from './ContactFooter'
 import OptionFooter from './OptionFooter'
-import footerItemData from 'mocks/footerItemData'
 const usedStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: whiteText,
