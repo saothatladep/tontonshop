@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const orderSchema = mongoose.schema({
+const orderSchema = mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
@@ -37,19 +37,19 @@ const orderSchema = mongoose.schema({
         email_address: { type: String },
     },
     taxPrice: {
-        type: number,
+        type: Number,
         required: true,
         default: 0,
     },
 
     shippingPrice: {
-        type: number,
+        type: Number,
         required: true,
         default: 0,
     },
 
     totalPrice: {
-        type: number,
+        type: Number,
         required: true,
         default: 0,
     },
@@ -74,14 +74,10 @@ const orderSchema = mongoose.schema({
         required: true,
         default: 1,
     },
-    dateCreated: {
-        type: Date,
-        default:Date.now,
-    }
 }, {
     timestamps: true,
 });
 
-const Order = mongoose.model('Order', orderSchema),
+const Order = mongoose.model('Order', orderSchema)
 
 export default Order;

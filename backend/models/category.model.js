@@ -1,7 +1,11 @@
 import mongoose from 'mongoose';
 
-const categorySchema = mongoose.schema({
+const categorySchema = mongoose.Schema({
     name: {
+        type: String,
+        required: true,
+    },
+    img: {
         type: String,
         required: true,
     },
@@ -15,14 +19,15 @@ const categorySchema = mongoose.schema({
         required: true,
         ref: 'User',
     },
-    dateCreated: {
-        type: Date,
-        default: Date.now,
-    }
+    catalogue: {
+        type: mongoose.Schema.ObjectId,
+        required: true,
+        ref: 'Catalogue',
+    },
 }, {
     timestamps: true,
 });
 
-const Category = mongoose.model('Category', categorySchema),
+const Category = mongoose.model('Category', categorySchema)
 
 export default Category;

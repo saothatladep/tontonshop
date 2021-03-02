@@ -26,7 +26,7 @@ const imgSchema = mongoose.Schema({
     timestamps: true,
 });
 
-const productStuffSchema = mongoose.schema({
+const productSchema = mongoose.Schema({
     category: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
@@ -64,9 +64,9 @@ const productStuffSchema = mongoose.schema({
         required: true,
     },
     dimensions: {
-        length: { type: Number, required: true },
-        width: { type: Number, required: true },
-        height: { type: Number, required: true },
+        length: { type: Number},
+        width: { type: Number},
+        height: { type: Number},
     },
     img: [imgSchema],
     rating: {
@@ -84,6 +84,6 @@ const productStuffSchema = mongoose.schema({
     timestamps: true,
 });
 
-const Product = mongoose.model('Product', productStuffSchema),
+const Product = mongoose.model('Product', productSchema)
 
 export default Product;
