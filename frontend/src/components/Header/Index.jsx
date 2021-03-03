@@ -1,12 +1,12 @@
 import React from 'react'
 import NavbarHeader from 'components/Header/NavbarHeader'
-import HeaderOptionCategories from 'components/Header/OptionCategories'
+import OptionTypes from 'components/Header/OptionTypes'
 
 const Header = () => {
   return (
     <div>
       <NavbarHeader />
-      <HeaderOptionCategories />
+      <OptionTypes />
     </div>
   )
 }

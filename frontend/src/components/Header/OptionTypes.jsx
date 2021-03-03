@@ -2,7 +2,7 @@ import { List, Paper } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { maxWidth } from 'assets/css_variable/variable'
 import React from 'react'
-import Categories from './Categories'
+import Types from './Types'
 
 const usedStyles = makeStyles((theme) => ({
   containOption: {
@@ -28,14 +28,14 @@ const usedStyles = makeStyles((theme) => ({
   },
 }))
 
-const headerOptionCategories = () => {
+const OptionTypes = () => {
   const classes = usedStyles()
   return (
     <div className={classes.root}>
       <Paper elevation={0}>
         <div className={classes.containOption}>
           <List className={classes.list}>
-            <Categories />
+            <Types />
           </List>
         </div>
       </Paper>
@@ -43,4 +43,4 @@ const headerOptionCategories = () => {
   )
 }
 
-export default headerOptionCategories
+export default OptionTypes

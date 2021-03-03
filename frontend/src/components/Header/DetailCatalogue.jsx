@@ -1,8 +1,8 @@
-import { Link, List, ListItem, Typography } from '@material-ui/core'
+import { List, ListItem, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { primaryText } from 'assets/css_variable/variable'
 import React from 'react'
-import ChoiceDetail from './ChoiceDetail'
+import Categories from './Categories'
 
 const usedStyles = makeStyles((theme) => ({
   ItemDetail: {
@@ -48,7 +48,7 @@ const usedStyles = makeStyles((theme) => ({
       },
     },
   },
-  listChoice: {
+  listCatalogue: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
@@ -56,19 +56,17 @@ const usedStyles = makeStyles((theme) => ({
   },
 }))
 
-const ChoiceCategories = (props) => {
+const DetailCatalogue = (props) => {
   const classes = usedStyles()
-  const { content } = props
+  const { listCatalogues } = props
   return (
-    <div className={classes.listChoice}>
-      {content.map((contentList) => (
-        <ListItem className={classes.ItemDetail} key={contentList.idContent}>
-          <Link href='#'>
-            <img src={contentList.imgChild}></img>
-          </Link>
-          <Typography color='inherit'>{contentList.titleContent}</Typography>
+    <div className={classes.listCatalogue}>
+      {listCatalogues.map((listCatalogue) => (
+        <ListItem className={classes.ItemDetail} key={listCatalogue._id}>
+          <img src={listCatalogue.img}></img>
+          <Typography color='inherit'>{listCatalogue.name}</Typography>
           <List>
-            <ChoiceDetail listChoice={contentList.listChoice} />
+            <Categories listCategories={listCatalogue.listCategories} />
           </List>
         </ListItem>
       ))}
@@ -76,4 +74,4 @@ const ChoiceCategories = (props) => {
   )
 }
 
-export default ChoiceCategories
+export default DetailCatalogue

@@ -43,20 +43,20 @@ router.get(
           as: 'listCatalogues.listCategories',
         },
       },
-      {
-        $unwind: {
-          path: '$listCatalogues.listCategories',
-          preserveNullAndEmptyArrays: true,
-        },
-      },
-      {
-        $lookup: {
-          from: Product.collection.name,
-          localField: 'listCatalogues.listCategories._id',
-          foreignField: 'category',
-          as: 'listCatalogues.listCategories.listProducts',
-        },
-      },
+      // {
+      //   $unwind: {
+      //     path: '$listCatalogues.listCategories',
+      //     preserveNullAndEmptyArrays: true,
+      //   },
+      // },
+      // {
+      //   $lookup: {
+      //     from: Product.collection.name,
+      //     localField: 'listCatalogues.listCategories._id',
+      //     foreignField: 'category',
+      //     as: 'listCatalogues.listCategories.listProducts',
+      //   },
+      // },
       {
         $group: {
           _id: '$_id',

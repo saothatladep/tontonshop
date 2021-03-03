@@ -1,7 +1,7 @@
 import React from 'react'
 import Footer from 'components/Footer/Index'
 import Header from 'components/Header/Index'
-import HeaderOptionCategories from 'components/Header/OptionCategories'
+import HeaderOptionCategories from 'components/Header/OptionTypes'
 import Body from 'components/Body/Index'
 const app = () => {
   return (

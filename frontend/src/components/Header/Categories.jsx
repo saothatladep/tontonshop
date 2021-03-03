@@ -1,77 +1,61 @@
-import { ListItem, ListItemText } from '@material-ui/core'
+import { Link, ListItem, ListItemText } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import { mainText, maxWidth, primaryText } from 'assets/css_variable/variable'
-import initOptionCategories from 'mocks/navbarItemData.js'
-import React, { useState } from 'react'
-import DetailCategories from './DetailCategories'
+import AlbumIcon from '@material-ui/icons/Album'
+import { primaryText } from 'assets/css_variable/variable'
+import React from 'react'
 
 const usedStyles = makeStyles((theme) => ({
-  containCategories: {
-    width: maxWidth,
-    display: 'flex',
-    position: 'static !important',
-    cursor: 'default',
+  containerCategory: {
+    padding: 0,
+    marginBottom: 8,
   },
-  categoryItem: {
-    padding: '10px 16px',
-    borderTop: '3px solid transparent',
-    width: 'auto',
+  categoryItemDetail: {
+    display: 'flex',
     cursor: 'pointer',
-    position: 'static !important',
+    alignItems: 'flex-start',
+    textDecoration: 'none !important',
+    padding: 0,
+    '& span': {
+      fontSize: '1.4rem',
+      color: '#666',
+      marginTop: '-7px',
+      alignItems: 'flex-start',
+      fontFamily: "'Montserrat', sans-serif !important",
+    },
+    '& svg': {
+      color: '#615353',
+      marginRight: theme.spacing(0.5),
+    },
     '&:hover': {
-      transition: '.3s ease-out',
-      borderTop: '3px solid',
-      borderColor: primaryText,
-      '& $text': {
-        '& span': {
-          transition: '.3s ease-out',
-          color: primaryText,
-        },
+      '& span': {
+        color: primaryText,
+      },
+      '& svg': {
+        color: primaryText,
       },
     },
   },
   text: {
     '& span': {
-      fontSize: '1.6rem',
-      fontWeight: '500',
-      padding: '10 0',
-      textAlign: 'start',
-      fontFamily: "'Montserrat', sans-serif !important",
-      color: mainText,
+      fontSize: '1,3rem',
+      fontWeight: '400',
     },
   },
 }))
 
-const Categories = () => {
+const Categories = (props) => {
   const classes = usedStyles()
-  const [categories, setCategories] = useState(initOptionCategories)
-  const [isOpen, setIsOpen] = useState(false)
-  const [index, setIndex] = useState(0)
-
-  const getKeyCategory = (event) => {
-    setIsOpen(true)
-    setIndex(event.currentTarget.getAttribute('id'))
-    console.log(event.currentTarget.getAttribute('id'))
-  }
-
+  const { listCategories } = props
   return (
     <div>
-      <div className={classes.containCategories}>
-        {categories.map((category) => (
-          <ListItem
-            className={classes.categoryItem}
-            key={category.idCategory}
-            id={category.idCategory}
-            onMouseEnter={(e) => getKeyCategory(e)}
-            onMouseLeave={() => setIsOpen(false)}
-          >
-            <ListItemText className={classes.text} primary={category.name} />
-            {index == category.idCategory && isOpen && (
-              <DetailCategories category={category} />
-            )}
-          </ListItem>
-        ))}
-      </div>
+      {listCategories.map((Category) => (
+        <ListItem className={classes.containerCategory} key={Category._id}>
+          <Link className={classes.categoryItemDetail}>
+            <AlbumIcon />
+            <ListItemText className={classes.text} primary={Category.name} />
+          </Link>
+        </ListItem>
+      ))}
     </div>
   )
 }
