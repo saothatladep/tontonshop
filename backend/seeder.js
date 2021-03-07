@@ -39,7 +39,7 @@ const importData = async () => {
 
     // await Category.insertMany(categories)
     // await Type.insertMany(types)
-    await Product.insertMany(products)
+    // await Product.insertMany(products)
 
 
 

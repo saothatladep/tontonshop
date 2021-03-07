@@ -159,13 +159,6 @@ const categories = [
     catalogue: '603c90ca43063746e42821be',
   },
   {
-    name: 'Stools',
-    img:
-      'https://www.jodhpurifurniture.com:4000/images/category/1550472224989Stools.jpg',
-    user: '603c90ca43063746e42821b4',
-    catalogue: '603c90ca43063746e42821be',
-  },
-  {
     name: 'Wooden Khats',
     img:
       'https://www.jodhpurifurniture.com:4000/images/category/16038993240120D9A5842.jpg',
@@ -191,13 +184,6 @@ const categories = [
     name: 'Single Beds',
     img:
       'https://www.jodhpurifurniture.com:4000/images/category/1550472548617Single-Size-Beds.jpg',
-    user: '603c90ca43063746e42821b4',
-    catalogue: '603c90ca43063746e42821c0',
-  },
-  {
-    name: 'Hydraulic Storage Beds',
-    img:
-      'https://www.jodhpurifurniture.com:4000/images/category/1550472499760King-Size-Beds.jpg',
     user: '603c90ca43063746e42821b4',
     catalogue: '603c90ca43063746e42821c0',
   },
@@ -311,13 +297,6 @@ const categories = [
   },
   {
     name: 'Round Dining Sets',
-    img:
-      'https://www.jodhpurifurniture.com:4000/images/category/15504645722804-Seater-Dining-Sets.jpg',
-    user: '603c90ca43063746e42821b4',
-    catalogue: '603c90ca43063746e42821c3',
-  },
-  {
-    name: 'Dining Tables',
     img:
       'https://www.jodhpurifurniture.com:4000/images/category/15504645722804-Seater-Dining-Sets.jpg',
     user: '603c90ca43063746e42821b4',
