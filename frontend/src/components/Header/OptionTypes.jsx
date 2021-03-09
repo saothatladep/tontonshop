@@ -22,17 +22,20 @@ const usedStyles = makeStyles((theme) => ({
     right: 0,
     left: 0,
     bottom: 0,
-    zIndex: 10,
+    zIndex: 100,
     marginTop: 100,
     maxHeight: '50px',
   },
+  container: {
+    boxShadow: '0 0 4px #ccc',
+  }
 }))
 
 const OptionTypes = () => {
   const classes = usedStyles()
   return (
     <div className={classes.root}>
-      <Paper elevation={0}>
+      <Paper className={classes.container} elevation={0}>
         <div className={classes.containOption}>
           <List className={classes.list}>
             <Types />

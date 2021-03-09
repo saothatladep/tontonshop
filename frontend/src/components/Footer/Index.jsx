@@ -3,7 +3,7 @@ import DetailFooter from './DetailFooter'
 import EmailFeedBack from './EmailFeedBack'
 import RightsFooter from './RightsFooter'
 
-const footer = () => {
+const Footer = () => {
   return (
     <div>
       <EmailFeedBack/>
@@ -14,4 +14,4 @@ const footer = () => {
 
 }
 
-export default footer
+export default Footer
