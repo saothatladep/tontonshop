@@ -1,0 +1,90 @@
+import { Link } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+import {
+  mainText,
+  maxWidth,
+  primaryText,
+  whiteText,
+} from 'assets/css_variable/variable'
+import React from 'react'
+const usedStyles = makeStyles((theme) => ({
+  root: {},
+  container: {
+    position: 'relative',
+    textAlign: 'left',
+  },
+  img: {
+    width: '100%',
+    height: 'auto',
+    verticalAlign: 'middle',
+  },
+  box: {
+    position: 'absolute',
+    background: whiteText,
+    top: '20%',
+    maxWidth: 320,
+    height: 250,
+    right: -9,
+    border: '1px solid',
+    borderColor: primaryText,
+    textAlign: 'left',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    alignItems: 'flex-start',
+    '& h4': {
+      color: '#707070',
+      marginLeft: 16,
+      fontSize: '1.8rem',
+      letterSpacing: 0.36,
+      margin: 0,
+      fontWeight: 600,
+    },
+    '& h2': {
+      color: '#222',
+      fontWeight: 300,
+      marginLeft: 16,
+      fontSize: '3.5rem',
+      letterSpacing: 0.7,
+      lineHeight: 1.2,
+      margin: 0,
+    },
+    '& a': {
+        marginLeft: 16,
+
+      padding: '11px 26px 12px',
+      backgroundColor: primaryText,
+      letterSpacing: 0.32,
+      color: whiteText,
+      fontSize: '1.6rem',
+      fontWeight: 500,
+      border: '1px solid #f7941d',
+      cursor: 'pointer',
+      textDecoration: 'none !important',
+      '&:hover': {
+        backgroundColor: whiteText,
+        color: primaryText,
+      },
+    },
+  },
+}))
+const RoomUpRight = () => {
+  const classes = usedStyles()
+  return (
+    <div className={classes.root}>
+      <div className={classes.container}>
+        <div className={classes.box}>
+          <h4>#Bedroom</h4>
+          <h2>BEDROOM FURNITURE</h2>
+          <Link>Shop Now</Link>
+        </div>
+        <img
+          src='https://www.jodhpurifurniture.com/assets/images/banner/Dream%20BedRoom.jpg'
+          alt=''
+        />
+      </div>
+    </div>
+  )
+}
+
+export default RoomUpRight

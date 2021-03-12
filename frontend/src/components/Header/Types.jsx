@@ -14,13 +14,13 @@ const usedStyles = makeStyles((theme) => ({
   },
   typeItem: {
     padding: '10px 16px',
-    borderTop: '3px solid transparent',
+    border: '3px solid transparent',
     width: 'auto',
     cursor: 'pointer',
     position: 'static !important',
     '&:hover': {
       transition: '.3s ease-out',
-      borderTop: '3px solid',
+      border: '3px solid',
       borderColor: primaryText,
       '& $text': {
         '& span': {
@@ -33,7 +33,7 @@ const usedStyles = makeStyles((theme) => ({
   text: {
     '& span': {
       fontSize: '1.6rem',
-      fontWeight: '500',
+      fontWeight: '600',
       padding: '10 0',
       textAlign: 'start',
       fontFamily: "'Montserrat', sans-serif !important",

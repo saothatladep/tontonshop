@@ -1,7 +1,6 @@
-import React from 'react'
 import NavbarHeader from 'components/Header/NavbarHeader'
 import OptionTypes from 'components/Header/OptionTypes'
-
+import React from 'react'
 const Header = () => {
   return (
     <div>

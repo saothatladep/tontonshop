@@ -1,13 +1,13 @@
 import React from 'react'
 import DetailFooter from './DetailFooter'
-import EmailFeedBack from './EmailFeedBack'
+import Address from './Address'
 import RightsFooter from './RightsFooter'
 
 const Footer = () => {
   return (
     <div>
-      <EmailFeedBack/>
       <DetailFooter/>
+      <Address/>
       <RightsFooter/>
     </div>
   )

@@ -6,7 +6,9 @@ const usedStyles = makeStyles((theme) => ({
   root: {},
   container: {
     textAlign: 'center',
-    borderTop: '1px solid #e1e1e1',
+    // borderTop: '1px solid #e1e1e1',
+    background: '#f9f9f9',
+
   },
   title: {
     margin: 0,

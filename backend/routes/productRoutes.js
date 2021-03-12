@@ -53,4 +53,14 @@ router.get(
   })
 )
 
+router.get(
+  '/random/20',
+  asyncHandler(async (req, res) => {
+    const products = await Product.aggregate([
+      {$sample: {size:20}}
+    ])
+    res.json(products)
+  })
+)
+
 export default router

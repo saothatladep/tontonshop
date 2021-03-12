@@ -8,7 +8,7 @@ const usedStyles = makeStyles((theme) => ({
     marginBottom: 20,
   },
   mainTitle: {
-    fontSize: '1.6rem',
+    fontSize: '1.8rem',
     fontWeight: 600,
     color: mainText,
     paddingTop: 0,

@@ -42,16 +42,15 @@ const usedStyles = makeStyles((theme) => ({
     padding: '12px 0',
     height: 100,
     '& p': {
-      fontWeight: 500,
+      fontWeight: 600,
       fontSize: '1.8rem',
-      letterSpacing: 1.1,
       color: primaryText,
       margin: 0,
     },
     '& h4': {
       fontWeight: 400,
       fontSize: '1.4rem',
-      letterSpacing: '1.3px',
+      letterSpacing: 1,
       color: whiteText,
       margin: 0,
     },

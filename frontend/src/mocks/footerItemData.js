@@ -1,7 +1,7 @@
 const footerItemData = [
   {
     id: 1,
-    titleMain: 'OUR COMPANY',
+    titleMain: 'Our Company',
     list: [
       {
         idList: 11,
@@ -33,7 +33,7 @@ const footerItemData = [
 
   {
     id: 2,
-    titleMain: 'CUSTOMER SERVICES',
+    titleMain: 'Customer Services',
     list: [
       {
         idList: 21,
@@ -85,7 +85,7 @@ const footerItemData = [
 
   {
     id: 3,
-    titleMain: 'TOP CATEGORIES',
+    titleMain: 'Top Categories',
     list: [
       {
         idList: 31,

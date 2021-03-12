@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import 'react-slideshow-image/dist/styles.css'
-import { Slide } from 'react-slideshow-image'
+import { Zoom  } from 'react-slideshow-image'
 import slideAds from 'mocks/slideAds.js'
 import { makeStyles } from '@material-ui/core'
 
@@ -13,25 +13,27 @@ const usedStyles = makeStyles((theme) => ({
 const SlideAds = () => {
   const classes = usedStyles()
   const [ads, setAds] = useState(slideAds)
-  const slideProperties = {
-    duration: 3000,
-    pauseOnHover: true
+  const zoomProperties = {
+    // duration: 3000,
+    // pauseOnHover: true,
+    indicators: false,
+    scale: 1.4
   };
   return (
     <div className='slide-container'>
-      <Slide {...slideProperties}>
+      <Zoom {...zoomProperties}>
         {ads.map((ad) => (
-          <div key = {ad.id} className='each-slide'>
-            <div
+          <div key = {ad.id}
               style={{
                 backgroundImage:
                   `url(${ad.img})`,
                 height: '495px',
+                objectFit: 'cover',
+                width: '100%',
               }}
             />
-          </div>
         ))}
-      </Slide>
+      </Zoom>
     </div>
   )
 }

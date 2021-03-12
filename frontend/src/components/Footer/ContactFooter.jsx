@@ -1,17 +1,25 @@
-import { Link, makeStyles } from '@material-ui/core'
+import { Link, makeStyles, fade } from '@material-ui/core'
 import FacebookIcon from '@material-ui/icons/Facebook'
-import LocationOnIcon from '@material-ui/icons/LocationOn'
 import MailIcon from '@material-ui/icons/Mail'
 import PhoneIcon from '@material-ui/icons/Phone'
 import TwitterIcon from '@material-ui/icons/Twitter'
 import YouTubeIcon from '@material-ui/icons/YouTube'
-import { mainText, minorText, primaryText } from 'assets/css_variable/variable'
+import {
+  mainText,
+  minorText,
+  primaryText,
+  whiteText,
+} from 'assets/css_variable/variable'
 import React from 'react'
+import { Button, InputBase } from '@material-ui/core'
+
 const usedStyles = makeStyles((theme) => ({
   root: {},
-  container: {},
+  container: {
+    marginTop: -10,
+  },
   mainTitle: {
-    fontSize: '1.6rem',
+    fontSize: '1.8rem',
     fontWeight: 600,
     color: mainText,
     padding: '10px 0',
@@ -19,34 +27,19 @@ const usedStyles = makeStyles((theme) => ({
   title: {
     color: minorText,
     fontSize: '1.5rem',
-    letterSpacing: 0.3,
-    fontWeight: 500,
-    padding: '8px 0',
+    lineHeight: 2.1,
+    fontWeight: 450,
+    marginBottom: 20,
   },
-  containerAddress: {
+  containerMail: {
     display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
-  },
-  address: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingBottom: '10px',
+    margin: '8px 0',
   },
   icon: {
     fontSize: '2.4rem',
     margin: '6px 8px 8px -4px',
-  },
-  linkAddress: {
-    textDecoration: 'none !important',
-    color: minorText,
-    fontSize: '1.4rem',
-    fontWeight: 500,
-    '&:hover': {
-      color: primaryText,
-    },
   },
   phone: {
     display: 'flex',
@@ -94,6 +87,38 @@ const usedStyles = makeStyles((theme) => ({
     fontSize: '2.8rem',
     color: '338ccc',
   },
+  inputInput: {
+    padding: theme.spacing(1.4, 1, 1, 0),
+    paddingLeft: theme.spacing(2),
+    transition: theme.transitions.create('width'),
+    width: '250px',
+    height: '50px',
+    fontSize: '1.6rem',
+    border: '1px solid #e1e1e1',
+    backgroundColor: fade(whiteText, 1),
+    '&:hover': {
+      boxShadow: '0 1px 6px rgb(32 33 36 / 28%)',
+      borderColor: 'rgba(223,225,229,0)',
+    },
+    // borderRadius: 50,
+  },
+  ButtonSub: {
+    height: 50,
+    backgroundColor: primaryText,
+    border: '1px solid',
+    borderColor: primaryText,
+    '& span': {
+      fontSize: '1.6rem',
+      color: whiteText,
+      fontWeight: '300',
+    },
+    '&:hover': {
+      backgroundColor: 'transparent',
+      '& span': {
+        color: primaryText,
+      },
+    },
+  },
 }))
 
 const ContactFooter = () => {
@@ -101,32 +126,17 @@ const ContactFooter = () => {
 
   return (
     <div>
-      <div>
-        <p className={classes.mainTitle}>CONTACT INFO</p>
+      <div className={classes.container}>
+        <p className={classes.mainTitle}>Subscribe Our Newsletter</p>
         <p className={classes.title}>
-          We at Jodhpuri would love to hear your opinion about our venture.
+          Enter your email address to stay tuned with latest offers and products
         </p>
-        <div className={classes.containerAddress}>
-          <div className={classes.address}>
-            <LocationOnIcon className={classes.icon} />
-            <Link
-              className={classes.linkAddress}
-              href='https://www.google.com/maps/place/Galaxy+Cinema+Nguy%E1%BB%85n+V%C4%83n+Qu%C3%A1/@10.8448266,106.6356593,16.94z/data=!4m13!1m7!3m6!1s0x31157a4d736a1e5f:0xb03bb0c9e2fe62be!2zVmnhu4d0IE5hbQ!3b1!8m2!3d14.058324!4d108.277199!3m4!1s0x317529809630bdb9:0x21c165d4ca1c1e42!8m2!3d10.8469098!4d106.6342516?hl=vi-VN'
-            >
-              119B Đường Nguyễn Văn Quá, Đông Hưng Thuận, Quận 12, Thành phố Hồ
-              Chí Minh, Việt Nam
-            </Link>
-          </div>
-          <div className={classes.address}>
-            <LocationOnIcon className={classes.icon} />
-            <Link
-              className={classes.linkAddress}
-              href='https://www.google.com/maps/place/Nh%C3%A0+h%C3%A0ng+C%E1%BA%A7n+Phong+2/@10.8448266,106.6356593,16z/data=!4m13!1m7!3m6!1s0x31157a4d736a1e5f:0xb03bb0c9e2fe62be!2zVmnhu4d0IE5hbQ!3b1!8m2!3d14.058324!4d108.277199!3m4!1s0x31752987022c5e3f:0xcb7c4e91d5f80813!8m2!3d10.8446126!4d106.6328153?hl=vi-VN'
-            >
-              C100 Đường Nguyễn Văn Quá, Đông Hưng Thuận, Quận 12, Thành phố Hồ
-              Chí Minh, Việt Nam
-            </Link>
-          </div>
+        <div className={classes.containerMail}>
+          <InputBase
+            className={classes.inputInput}
+            placeholder='Enter your email address'
+          />
+          <Button className={classes.ButtonSub}>SEND</Button>
         </div>
         <div className={classes.phone}>
           <PhoneIcon className={classes.icon} />

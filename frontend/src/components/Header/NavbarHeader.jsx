@@ -15,17 +15,18 @@ import search from 'assets/icon/search.png'
 import cart from 'assets/icon/shopping-cart.svg'
 import user from 'assets/icon/user.png'
 import logo from 'assets/logo/logo.png'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 const usedStyles = makeStyles((theme) => ({
   root: {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    zIndex: 100,
+    // position: 'fixed',
+    // top: 0,
+    // left: 0,
+    // right: 0,
+    // bottom: 0,
+    // zIndex: 100,
     height: 100,
+    // visibility: 'hidden'
   },
   containHeader: {
     height: '100%',

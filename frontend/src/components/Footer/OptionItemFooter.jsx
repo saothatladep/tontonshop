@@ -12,9 +12,9 @@ const usedStyles = makeStyles((theme) => ({
   title: {
     '& span': {
       color: minorText,
-      fontSize: '1.4rem',
-      letterSpacing: 0.8,
-      fontWeight: 500,
+      fontSize: '1.5rem',
+      // letterSpacing: 0.8,
+      fontWeight: 450,
       fontFamily: "'Montserrat', sans-serif !important;",
       paddingTop: 2,
     },
@@ -25,8 +25,8 @@ const usedStyles = makeStyles((theme) => ({
   link: {
     textDecoration: 'none !important',
     color: minorText,
-    fontSize: '1.4rem',
-    fontWeight: 500,
+    fontSize: '1.5rem',
+    fontWeight: 450,
   },
 }))
 const OptionItemFooter = (props) => {

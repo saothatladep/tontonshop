@@ -9,6 +9,7 @@ const usedStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: whiteText,
     padding: 0,
+    borderTop: '1px solid #e1e1e1',
   },
   container: {
     width: maxWidth,
@@ -33,26 +34,16 @@ const DetailFooter = () => {
             container
             direction='row'
             justify='space-between'
-            alignItems='center'
+            alignItems='flex-start'
             spacing={5}
           >
-            <Grid item md={5}>
-              <ContactFooter />
-            </Grid>
-            <Grid item md={7}>
-              <Grid
-                container
-                direction='row'
-                justify='flex-end'
-                alignItems='baseline'
-                spacing={5}
-              >
-                {footerListOption.map((footer) => (
-                  <Grid item md={4} key={footer.id}>
-                    <OptionFooter footer={footer} />
-                  </Grid>
-                ))}
+            {footerListOption.map((footer) => (
+              <Grid item md={3} key={footer.id}>
+                <OptionFooter footer={footer} />
               </Grid>
+            ))}
+            <Grid item md={3}>
+              <ContactFooter />
             </Grid>
           </Grid>
         </Container>
