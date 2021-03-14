@@ -42,7 +42,9 @@ router.get(
 router.get(
   '/category/:id',
   asyncHandler(async (req, res) => {
-    const product = await Product.find({ category: req.params.id })
+    const product = await Product.find({ category: req.params.id }).populate({
+      path: 'category',
+    })
 
     if (product) {
       res.json(product)

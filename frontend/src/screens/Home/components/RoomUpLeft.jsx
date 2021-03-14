@@ -1,12 +1,10 @@
-import { Link } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import {
-  mainText,
-  maxWidth,
   primaryText,
-  whiteText,
+  whiteText
 } from 'assets/css_variable/variable'
 import React from 'react'
+import { Link } from 'react-router-dom'
 const usedStyles = makeStyles((theme) => ({
   root: {},
   container: {
@@ -76,7 +74,7 @@ const RoomUpLeft = () => {
         <div className={classes.box}>
           <h4>#Diningroom</h4>
           <h2>Tables & Dining Furniture</h2>
-          <Link>Shop Now</Link>
+          <Link to = {'/category/603c9d90fafd2c4bbc488ff8'}>Shop Now</Link>
         </div>
         <img
           src='https://www.jodhpurifurniture.com/assets/images/banner/Tables%20&%20Dining.jpg'

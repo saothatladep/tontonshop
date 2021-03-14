@@ -1,13 +1,12 @@
 import { Paper } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { mainText, maxWidth } from 'assets/css_variable/variable'
-import roomCategories from 'mocks/roomCategories.js'
+import feedBack from 'mocks/feedBack'
 import React, { useState } from 'react'
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 import 'react-slideshow-image/dist/styles.css'
 import FeedBackChild from './FeedBackChild'
-import feedBack from 'mocks/feedBack'
 const usedStyles = makeStyles((theme) => ({
   root: {
     paddingTop: 0,
@@ -39,7 +38,7 @@ const usedStyles = makeStyles((theme) => ({
     marginTop: 20,
     textAlign: 'left',
     '& li': {
-        marginRight: 8,
+      marginRight: 8,
     },
   },
   room: {
@@ -86,11 +85,9 @@ const FeedBack = () => {
             className={classes.slide}
             customTransition={'all 4s ease 0s'}
           >
-              {
-                  comments.map(comment => (
-                    <FeedBackChild key = {comment._id} comment={comment}/>
-                  ))
-              }
+            {comments.map((comment) => (
+              <FeedBackChild key={comment._id} comment={comment} />
+            ))}
           </Carousel>
         </div>
       </Paper>

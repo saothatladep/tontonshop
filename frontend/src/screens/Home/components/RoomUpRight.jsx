@@ -1,12 +1,7 @@
-import { Link } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import {
-  mainText,
-  maxWidth,
-  primaryText,
-  whiteText,
-} from 'assets/css_variable/variable'
+import { primaryText, whiteText } from 'assets/css_variable/variable'
 import React from 'react'
+import { Link } from 'react-router-dom'
 const usedStyles = makeStyles((theme) => ({
   root: {},
   container: {
@@ -50,7 +45,7 @@ const usedStyles = makeStyles((theme) => ({
       margin: 0,
     },
     '& a': {
-        marginLeft: 16,
+      marginLeft: 16,
 
       padding: '11px 26px 12px',
       backgroundColor: primaryText,
@@ -76,7 +71,7 @@ const RoomUpRight = () => {
         <div className={classes.box}>
           <h4>#Bedroom</h4>
           <h2>BEDROOM FURNITURE</h2>
-          <Link>Shop Now</Link>
+          <Link to={'/category/603c9d90fafd2c4bbc488fea'}>Shop Now</Link>
         </div>
         <img
           src='https://www.jodhpurifurniture.com/assets/images/banner/Dream%20BedRoom.jpg'

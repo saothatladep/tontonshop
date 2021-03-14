@@ -1,12 +1,5 @@
-import { Link } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import {
-  mainText,
-  maxWidth,
-  primaryText,
-  whiteText,
-} from 'assets/css_variable/variable'
-import { white } from 'colors'
+import { primaryText, whiteText } from 'assets/css_variable/variable'
 import React from 'react'
 
 const usedStyles = makeStyles((theme) => ({
@@ -72,24 +65,18 @@ const usedStyles = makeStyles((theme) => ({
 }))
 
 const FeedBackChild = (props) => {
-    const {comment} = props
+  const { comment } = props
   const classes = usedStyles()
   return (
     <div>
       <div className={classes.container}>
-        <img
-          className={classes.img}
-          src={comment.img}
-          alt=''
-        />
+        <img className={classes.img} src={comment.img} alt='' />
         <div className={classes.box}>
           <img
             src='https://www.jodhpurifurniture.com/assets/images/testimonial.png'
             alt=''
           />
-          <p>
-            {comment.comment}
-          </p>
+          <p>{comment.comment}</p>
           <h3>
             {comment.name}
             <span> /{comment.location}</span>

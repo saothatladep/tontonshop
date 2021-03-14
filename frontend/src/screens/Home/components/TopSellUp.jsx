@@ -1,4 +1,4 @@
-import { Link } from '@material-ui/core'
+import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import { primaryText, whiteText } from 'assets/css_variable/variable'
 import React from 'react'
@@ -81,7 +81,7 @@ const TopSellUp = (props) => {
 
   return (
     <div>
-      <Link className={classes.noDecoration}>
+      <Link to = {`/category/${categoryUp._id}`} className={classes.noDecoration}>
         <div className={classes.container}>
           <div>
             <img className={classes.img} src={categoryUp.img} />

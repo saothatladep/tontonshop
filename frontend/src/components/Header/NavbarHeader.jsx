@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable react-hooks/rules-of-hooks */
-import { Link, Paper } from '@material-ui/core'
+import { Paper } from '@material-ui/core'
+import { Link } from 'react-router-dom'
 import Badge from '@material-ui/core/Badge'
 import InputBase from '@material-ui/core/InputBase'
 import { fade, makeStyles } from '@material-ui/core/styles'
@@ -145,7 +146,7 @@ const NavHeader = () => {
       <header className={classes.root}>
         <div className={classes.containHeader}>
           <Toolbar className={classes.contentHeader}>
-            <Link href='#' color='inherit'>
+            <Link to='/' color='inherit'>
               <img className={classes.logo} src={logo} />
             </Link>
             <div className={classes.search}>

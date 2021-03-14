@@ -1,4 +1,5 @@
-import { Link, ListItem, ListItemText } from '@material-ui/core'
+import { ListItem, ListItemText } from '@material-ui/core'
+import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import AlbumIcon from '@material-ui/icons/Album'
 import { primaryText } from 'assets/css_variable/variable'
@@ -50,7 +51,7 @@ const Categories = (props) => {
     <div>
       {listCategories.map((Category) => (
         <ListItem className={classes.containerCategory} key={Category._id}>
-          <Link className={classes.categoryItemDetail}>
+          <Link to = {`/category/${Category._id}`} className={classes.categoryItemDetail}>
             <AlbumIcon />
             <ListItemText className={classes.text} primary={Category.name} />
           </Link>

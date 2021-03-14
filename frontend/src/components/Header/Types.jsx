@@ -59,7 +59,6 @@ const Types = () => {
   const getKeyType = (event) => {
     setIsOpen(true)
     setIndex(event.currentTarget.getAttribute('id'))
-    console.log(event.currentTarget.getAttribute('id'))
   }
 
   return (

@@ -1,13 +1,7 @@
-import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import {
-  maxWidth,
-  mainText,
-  primaryText,
-  whiteText,
-} from 'assets/css_variable/variable'
-import { Link, Paper } from '@material-ui/core'
-import { Box, Container, Grid, List } from '@material-ui/core'
+import { primaryText, whiteText } from 'assets/css_variable/variable'
+import React from 'react'
+import { Link } from 'react-router-dom'
 
 const usedStyles = makeStyles((theme) => ({
   root: {},
@@ -87,7 +81,10 @@ const TopSellDown = (props) => {
   const classes = usedStyles()
   return (
     <div>
-      <Link className={classes.noDecoration}>
+      <Link
+        to={`/category/${categoryDown._id}`}
+        className={classes.noDecoration}
+      >
         <div className={classes.container}>
           <img className={classes.img} src={categoryDown.img} />
           <div className={classes.middleBox}>

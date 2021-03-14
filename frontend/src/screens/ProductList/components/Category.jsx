@@ -1,16 +1,16 @@
+import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import { primaryText } from 'assets/css_variable/variable'
 import React from 'react'
-import { Link } from 'react-router-dom'
 
 const usedStyles = makeStyles((theme) => ({
   root: {},
   container: {
-    height: 185,
+    maxHeight: 135,
+    minHeight: 120,
     width: 180,
+    height: '100%',
     border: '4px solid #ebebeb',
-    margin: '27px 0 15px',
-    padding: '30px 0',
     cursor: 'pointer',
     '&:hover': {
       boxShadow: '2px 3.464px 37.2px 2.8px rgb(0 0 0 / 8%)',
@@ -21,48 +21,51 @@ const usedStyles = makeStyles((theme) => ({
         color: primaryText,
       },
     },
-  },
-  img: {
-    backgroundPosition: 'center center',
-    backgroundRepeat: 'no-repeat',
-    height: 60,
-  },
-  link: {
-    textDecoration: 'none !important',
-    cursor: 'pointer',
-    '& p': {
-      fontSize: '1.3rem',
-      color: '#414141',
-      paddingTop: '93px',
-      fontWeight: 700,
-      fontFamily: "'Montserrat', sans-serif !important",
+    '& img': {
+      height: '100%',
+      width: '60%',
+      margin: '7px auto',
     },
+    '& p': {
+      color: '#333',
+      fontSize: '1.4rem',
+      padding: '2px 5px 12px 5px',
+      fontWeight: 600,
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap',
+      margin: 0,
+    },
+  },
+  focus: {
+    color: '#ff8a0c !important',
+  },
+  noPadding: {
+    padding: 0,
   },
   noDecoration: {
     textDecoration: 'none !important',
   },
 }))
-const CategoryChild = (props) => {
-  const { category } = props
+const Category = (props) => {
+  const { category, match } = props;
   const classes = usedStyles()
+  console.log(match.params.id)
+  console.log(category._id)
+
   return (
     <div>
       <Link to = {`/category/${category._id}`} className={classes.noDecoration}>
         <div className={classes.container}>
-          <div
-            className={classes.img}
-            style={{
-              backgroundImage: `url(${category.img})`,
-            }}
-          >
-            <a className={classes.link}>
-              <p>{category.name}</p>
-            </a>
-          </div>
+          <img
+            src={category.img}
+            alt={category.name}
+          />
+          <p className={(category._id === match.params.id) ? classes.focus : ''}> {category.name} </p>
         </div>
       </Link>
     </div>
   )
 }
 
-export default CategoryChild
+export default Category

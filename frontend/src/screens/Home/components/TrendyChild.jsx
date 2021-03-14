@@ -1,6 +1,7 @@
-import { Link, makeStyles } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core'
 import { primaryText, mainText } from 'assets/css_variable/variable'
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const usedStyles = makeStyles((theme) => ({
   root: {
@@ -46,7 +47,7 @@ const TrendyChild = (props) => {
   const classes = usedStyles()
   return (
     <div className={classes.root}>
-      <Link className={classes.noDecoration}>
+      <Link to = {`/category/${category._id}`} className={classes.noDecoration}>
         <div className={classes.container}>
           <img src={category.img} alt={category.name} />
           <p>{category.name}</p>
