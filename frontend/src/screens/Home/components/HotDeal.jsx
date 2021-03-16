@@ -83,7 +83,6 @@ const HotDeal = () => {
     const fetchProducts = async () => {
       const { data } = await axios.get('/api/products/random/20')
       setProducts(data)
-      console.log(data)
     }
     fetchProducts()
   }, [])

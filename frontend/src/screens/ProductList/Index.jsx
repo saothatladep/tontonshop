@@ -4,6 +4,7 @@ import Filter from './components/Filter'
 import OtherCategories from './components/OtherCategories'
 import Products from './components/Products'
 import axios from 'axios'
+import ScrollToTop from 'components/ScrollToTop'
 
 const ProductList = (props) => {
   const { match } = props
@@ -14,9 +15,10 @@ const ProductList = (props) => {
       const { data } = await axios.get(`/api/categories/${match.params.id}`)
       setCategories(data)
     }
+    window.scrollTo(0, 0)
     fetchCategories()
   }, [match])
-  console.log(categories.catalogue)
+  console.log(categories)
 
   return (
     <div>
@@ -24,6 +26,7 @@ const ProductList = (props) => {
       <Filter />
       <Products match={match} />
       <Consult />
+      <ScrollToTop />
     </div>
   )
 }

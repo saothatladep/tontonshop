@@ -1,4 +1,4 @@
-import { Link } from '@material-ui/core'
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles'
 import Rating from '@material-ui/lab/Rating'
 import { primaryText, whiteText } from 'assets/css_variable/variable'
@@ -12,7 +12,7 @@ const usedStyles = makeStyles((theme) => ({
     borderRadius: 5,
     textAlign: 'left',
     cursor: 'pointer',
-    maxWidth: 375,
+    width: 378,
     '&:hover': {
       border: '1px solid',
       borderColor: primaryText,
@@ -42,9 +42,10 @@ const usedStyles = makeStyles((theme) => ({
     },
     '& span': {},
   },
+  
   img: {
     maxWidth: '100%',
-    height: 234,
+    height: 236,
   },
   noPadding: {
     padding: 0,
@@ -58,7 +59,7 @@ const ProductDetail = (props) => {
   const classes = usedStyles()
   return (
     <div>
-      <Link className={classes.noDecoration}>
+      <Link to = {`/product/${product._id}`} className={classes.noDecoration}>
         <div className={classes.container}>
           <img
             className={classes.img}

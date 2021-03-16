@@ -50,8 +50,6 @@ const usedStyles = makeStyles((theme) => ({
 const Category = (props) => {
   const { category, match } = props;
   const classes = usedStyles()
-  console.log(match.params.id)
-  console.log(category._id)
 
   return (
     <div>

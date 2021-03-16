@@ -16,7 +16,7 @@ const feedBack = [
     {
         _id: 3,
         img: 'https://www.jodhpurifurniture.com:4000/images/testimonials/155030009482603.jpg',
-        comment: '"Had a great shopping experience at Jodhpuri. The easy process helped me to buy by products within minutes. Also the delivery was too quick. "',
+        comment: '"Had a great shopping experience at Jodhpuri. The easy process helped me to buy by products within minutes. "',
         name: 'James',
         location: 'Tokyo',
     },
