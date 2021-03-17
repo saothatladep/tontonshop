@@ -33,17 +33,18 @@ const usedStyles = makeStyles((theme) => ({
 const ProductImages = (props) => {
   const { product } = props
   const classes = usedStyles()
-  console.log(product.images[0].img)
+  // console.log(product.images[0].img)
   const [img, setImg] = useState(0)
+  console.log(product)
 
-  console.log(img)
+  // console.log(img)
   return (
     <div>
       <div className={classes.container}>
         <ReactImageMagnify
           {...{
             smallImage: {
-              alt: 'Wristwatch by Ted Baker London',
+              alt: '',
               isFluidWidth: true,
               src: img === 0 ? product.images[0].img : img,
             },
