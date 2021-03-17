@@ -48,7 +48,7 @@ const Empty = () => {
     <div className={classes.root}>
       <div className={classes.container}>
         <p>This product is not available currently</p>
-        <img src={box} />
+        <img src={box} alt ='' />
         <Link to = '/' className = {classes.link}>
             BACK TO HOME
         </Link>

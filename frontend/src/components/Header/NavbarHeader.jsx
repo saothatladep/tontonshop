@@ -13,10 +13,12 @@ import {
   whiteText,
 } from 'assets/css_variable/variable'
 import search from 'assets/icon/search.png'
-import cart from 'assets/icon/shopping-cart.svg'
+import cartImg from 'assets/icon/shopping-cart.svg'
 import user from 'assets/icon/user.png'
 import logo from 'assets/logo/logo.png'
 import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+
 
 const usedStyles = makeStyles((theme) => ({
   root: {
@@ -110,6 +112,7 @@ const usedStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     textDecoration: 'none !important',
+    color: '#333',
     '&:hover': {
       color: primaryText,
       '& img': {
@@ -136,11 +139,14 @@ const usedStyles = makeStyles((theme) => ({
     fontSize: '1.6rem',
     fontWeight: 500,
     textDecoration: 'none !important',
+    color: '#333',
   },
 }))
 
 const NavHeader = () => {
   const classes = usedStyles()
+  const  cart  = useSelector((state) => state.cart)
+  console.log(cart.cartItems.length)
   return (
     <Paper>
       <header className={classes.root}>
@@ -173,13 +179,13 @@ const NavHeader = () => {
                 </Link>
               </div>
               <div>
-                <Link
+                <Link to={`/cart/my-cart`}
                   className={classes.headerCartOption}
                   href='/'
                   color='inherit'
                 >
-                  <Badge badgeContent={'0'} color='error'>
-                    <img src={cart}></img>
+                  <Badge badgeContent={cart.cartItems.length} color='error'>
+                    <img src={cartImg}></img>
                   </Badge>
                   <p>My Cart</p>
                 </Link>

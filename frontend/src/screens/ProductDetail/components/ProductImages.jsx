@@ -5,15 +5,19 @@ import { primaryText, whiteText } from 'assets/css_variable/variable'
 import React, { useState, useEffect } from 'react'
 import { Box, Container, Grid, Paper } from '@material-ui/core'
 
+import ReactImageMagnify from 'react-image-magnify'
+
 const usedStyles = makeStyles((theme) => ({
   root: {},
   container: {
     width: '100%',
-
+    '& div:nth-child(1)': {
+      zIndex: 10,
+    },
     // border: '1px solid black',
   },
   img: {
-    width: '100%',
+    // maxWidth: '100%',
   },
   otherImg: {
     '& img': {
@@ -29,12 +33,27 @@ const usedStyles = makeStyles((theme) => ({
 const ProductImages = (props) => {
   const { product } = props
   const classes = usedStyles()
-  const [img, setImg] = useState(product.images[0].img)
   console.log(product.images[0].img)
+  const [img, setImg] = useState(0)
+
+  console.log(img)
   return (
     <div>
       <div className={classes.container}>
-        <img className={classes.img} src={img} alt='' />
+        <ReactImageMagnify
+          {...{
+            smallImage: {
+              alt: 'Wristwatch by Ted Baker London',
+              isFluidWidth: true,
+              src: img === 0 ? product.images[0].img : img,
+            },
+            largeImage: {
+              src: img === 0 ? product.images[0].img : img,
+              width: 2000,
+              height: 1000,
+            },
+          }}
+        />
         <div className={classes.otherImg}>
           <Box>
             <Container className={classes.noPadding}>
@@ -45,11 +64,15 @@ const ProductImages = (props) => {
                 alignItems='center'
                 // spacing={0}
               >
-                {/* {product.images.map((image) => (
+                {product.images.map((image) => (
                   <Grid item md-2 key={image._id}>
-                    <img src={image.img} alt='' />
+                    <img
+                      src={image.img}
+                      alt=''
+                      onClick={(e) => setImg(image.img)}
+                    />
                   </Grid>
-                ))} */}
+                ))}
               </Grid>
             </Container>
           </Box>

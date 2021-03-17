@@ -27,44 +27,42 @@ const usedStyles = makeStyles((theme) => ({
   },
 }))
 const Product = (props) => {
-  const { match } = props
+  const { product, loading, error, match, history } = props
   const classes = usedStyles()
-  const [productDetail, setProductDetail] = useState([])
-  const dispatch = useDispatch()
-
-  const productDetails = useSelector((state) => state.productDetails)
-  const { loading, error, product } = productDetails
-  useEffect(() => {
-    dispatch(listProductDetails(match.params.id))
-  }, [dispatch, match])
-
-  console.log(product)
-
-
   return (
     <div>
-      <Paper className={classes.root} elevation={0}>
-        <div className={classes.container}>
-          <Box>
-            <Container className={classes.noPadding}>
-              <Grid
-                container
-                direction='row'
-                justify='space-between'
-                alignItems='flex-start'
-                spacing={3}
-              >
-                {/* <Grid item md={7}>
-                  <ProductImages product={product} />
+      {loading ? (
+        <Loading />
+      ) : error ? (
+        <Messages>{error}</Messages>
+      ) : (
+        <Paper className={classes.root} elevation={0}>
+          <div className={classes.container}>
+            <Box>
+              <Container className={classes.noPadding}>
+                <Grid
+                  container
+                  direction='row'
+                  justify='space-between'
+                  alignItems='flex-start'
+                  spacing={3}
+                >
+                  <Grid item md={7}>
+                    <ProductImages product={product} />
+                  </Grid>
+                  <Grid item md={5}>
+                    <ProductInfo
+                      product={product}
+                      match={match}
+                      history={history}
+                    />
+                  </Grid>
                 </Grid>
-                <Grid item md={5}>
-                  <ProductInfo product={product} />
-                </Grid> */}
-              </Grid>
-            </Container>
-          </Box>
-        </div>
-      </Paper>
+              </Container>
+            </Box>
+          </div>
+        </Paper>
+      )}
     </div>
   )
 }

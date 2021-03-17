@@ -1,13 +1,9 @@
-import { Paper } from '@material-ui/core'
+import { Box, Container, Grid, Paper } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import { mainText, maxWidth, primaryText } from 'assets/css_variable/variable'
-import React, { useState, useEffect } from 'react'
-import Category from './Category'
-import { Box, Container, Grid, List } from '@material-ui/core'
-import { useDispatch, useSelector } from 'react-redux'
-import ProductDetail from './ProductDetail'
-import { listProducts } from 'actions/productActions.js'
+import { maxWidth } from 'assets/css_variable/variable'
 import axios from 'axios'
+import React, { useEffect, useState } from 'react'
+import Category from './Category'
 
 const usedStyles = makeStyles((theme) => ({
   root: {

@@ -4,6 +4,8 @@ import { makeStyles } from '@material-ui/core/styles'
 import Rating from '@material-ui/lab/Rating'
 import { primaryText, whiteText } from 'assets/css_variable/variable'
 import AdjustIcon from '@material-ui/icons/Adjust'
+import Button from '@material-ui/core/Button';
+
 const usedStyles = makeStyles((theme) => ({
   root: {},
   container: {
@@ -104,9 +106,16 @@ const usedStyles = makeStyles((theme) => ({
     '& input': {
       fontSize: '2rem',
       marginLeft: 10,
+      color: '#333',
+      border: '1px solid #e1e1e1',
       fontWeight: 600,
+      outline: '0 !important',
+      boxShadow: 'none',
+      textAlign: 'center',
+      height: 34,
+      width: 100,
     },
-    '& a': {
+    '& button': {
       height: 46,
       width: 150,
       background: primaryText,
@@ -121,6 +130,7 @@ const usedStyles = makeStyles((theme) => ({
       textDecoration: 'none !important',
       cursor: 'pointer',
       borderRadius: 5,
+      disable: true,
       '&:hover': {
         background: whiteText,
         color: primaryText,
@@ -135,9 +145,13 @@ const usedStyles = makeStyles((theme) => ({
   },
 }))
 const ProductInfo = (props) => {
-  const { product } = props
+  const { product, match, history } = props
   const classes = usedStyles()
-  const [qty, setQty] = useState(0)
+  const [qty, setQty] = useState(1)
+
+  const addToCartHandler = () => {
+    history.push(`/cart/${match.params.id}?qty=${qty}`)
+  }
 
   return (
     <div>
@@ -170,37 +184,40 @@ const ProductInfo = (props) => {
               Description:
               <li>
                 <AdjustIcon />
-                  <span>SKU:</span>
-                  <span>{product.sku}</span>
+                <span>SKU:</span>
+                <span>{product.sku}</span>
               </li>
               <li>
                 <AdjustIcon />
-                  <span>Category:</span>
-                  <span>fsdkfhjklsd</span>
+                <span>Category:</span>
+                <span>{product.category.name}</span>
               </li>
               <li>
                 <AdjustIcon />
-                  <span>Material:</span>
-                  <span>{product.category.name}</span>
+                <span>Material:</span>
+                <span>{product.material}</span>
               </li>
               <li>
                 <AdjustIcon />
-                  <span>Color Finish:</span>
-                  <span>{product.color}</span>
+                <span>Color Finish:</span>
+                <span>{product.color}</span>
               </li>
               <li>
                 <AdjustIcon />
-                  <span>Dimensions:</span>
-                  <span>{product.dimensions.length}</span>
-                  <span>{product.dimensions.width}</span>
-                  <span>{product.dimensions.height}</span>
+                <span>Dimensions:</span>
+                <span>
+                  {product.dimensions.length} x {product.dimensions.width} x{' '}
+                  {product.dimensions.height} (inches)
+                </span>
               </li>
             </ul>
           </div>
 
           <div className={classes.status}>
             <span>Status: </span>
-            <span>In Stock</span>
+            <span>
+              {product.countInStock === 0 ? 'Out In Stock' : 'In Stock'}
+            </span>
           </div>
         </div>
 
@@ -211,12 +228,19 @@ const ProductInfo = (props) => {
               type='number'
               id='quantity'
               name='quantity'
-              min={0}
+              value={qty}
               max={product.countInStock}
-              onChange={(e) => setQty(e.target)}
+              onChange={(e) => setQty(e.target.value)}
             />
           </form>
-          <Link> ADD TO CART </Link>
+          <Button
+            className={''}
+            disabled={product.countInStock === 0 ? true : false}
+            onClick={addToCartHandler}
+          >
+            {' '}
+            ADD TO CART{' '}
+          </Button>
         </div>
       </div>
     </div>
