@@ -1,12 +1,13 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { whiteText, maxWidth, primaryText } from 'assets/css_variable/variable'
-import box from 'assets/icon/box.png'
+import empty from 'assets/icon/empty.png'
 import {Link} from 'react-router-dom'
 
 const usedStyles = makeStyles((theme) => ({
   root: {
-    // paddingTop: 65,
+    padding: '65px 0',
+    marginTop: -12,
   },
   container: {
     width: maxWidth,
@@ -27,11 +28,12 @@ const usedStyles = makeStyles((theme) => ({
   link: {
     textDecoration: 'none !important',
     background: primaryText,
-    padding: '12px 8px',
+    padding: '16px 8px',
     color: '#fff',
     fontSize: '1.6rem',
     cursor: 'pointer',
-    width: 150,
+    width: 200,
+    textAlign: 'center',
     margin: '0 auto',
     fontWeight: 500,
     border: '1px solid',
@@ -42,19 +44,19 @@ const usedStyles = makeStyles((theme) => ({
     },
   },
 }))
-const Empty = () => {
+const CartEmpty = () => {
     const classes = usedStyles();
   return (
     <div className={classes.root}>
       <div className={classes.container}>
-        <p>This product is not available currently</p>
-        <img src={box} alt ='' />
+        <p>Your cart is currently empty.</p>
+        <img src={empty} alt ='' />
         <Link to = '/' className = {classes.link}>
-            BACK TO HOME
+            RETURN TO HOME
         </Link>
       </div>
     </div>
   )
 }
 
-export default Empty
+export default CartEmpty

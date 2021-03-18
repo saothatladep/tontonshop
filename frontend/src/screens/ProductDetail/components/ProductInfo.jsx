@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import Rating from '@material-ui/lab/Rating'
 import { primaryText, whiteText } from 'assets/css_variable/variable'
 import AdjustIcon from '@material-ui/icons/Adjust'
-import Button from '@material-ui/core/Button';
+import Button from '@material-ui/core/Button'
 
 const usedStyles = makeStyles((theme) => ({
   root: {},
@@ -229,6 +229,7 @@ const ProductInfo = (props) => {
               id='quantity'
               name='quantity'
               value={qty}
+              min = {1}
               max={product.countInStock}
               onChange={(e) => setQty(e.target.value)}
             />

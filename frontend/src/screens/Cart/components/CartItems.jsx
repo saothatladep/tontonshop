@@ -4,13 +4,13 @@ import { primaryText, whiteText, maxWidth } from 'assets/css_variable/variable'
 import { Link } from 'react-router-dom'
 import DeleteIcon from '@material-ui/icons/Delete'
 import { useDispatch, useSelector } from 'react-redux'
-import { addToCart , removeFromCart } from 'actions/cartActions'
+import { addToCart, removeFromCart } from 'actions/cartActions'
 
 const usedStyles = makeStyles((theme) => ({
   root: {},
   container: {
     width: '100%',
-    padding: '24px 0 32px 0',
+    padding: '24px 0 64px 0',
   },
   table: {
     width: '100%',
@@ -94,7 +94,7 @@ const CartItems = (props) => {
   const dispatch = useDispatch()
 
   const removeFromCartHandler = (id) => {
-      dispatch(removeFromCart(id))
+    dispatch(removeFromCart(id))
   }
   return (
     <div className={classes.root}>
@@ -123,7 +123,7 @@ const CartItems = (props) => {
                 </td>
                 <td>
                   <Link to={`/product/${cartItem.product}`}>
-                    <h2>Olivia King Size Bed with Uplift Storage </h2>
+                    <h2>{cartItem.name}</h2>
                   </Link>
                 </td>
                 <td>

@@ -5,17 +5,21 @@ import colors from 'colors'
 import categoryRoutes from './routes/categoryRoutes.js'
 import typeRoutes from './routes/typeRoutes.js'
 import productRoutes from './routes/productRoutes.js'
+import userRoutes from './routes/userRoutes.js'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 dotenv.config()
 
 connectDB()
 
 const app = express()
+app.use(express.json())
+
 
 app.get('/', (req, res) => {
   res.send('API is running...')
 })
 
+app.use('/api/users', userRoutes)
 app.use('/api/categories', categoryRoutes)
 app.use('/api/types', typeRoutes)
 app.use('/api/products', productRoutes)

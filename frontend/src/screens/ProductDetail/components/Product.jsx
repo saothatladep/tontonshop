@@ -40,9 +40,7 @@ const Product = (props) => {
                 alignItems='flex-start'
                 spacing={3}
               >
-                <Grid item md={7}>
-                  {product.name}
-                  
+                <Grid item md={7}>                  
                   <ProductImages product={product} />
                 </Grid>
                 <Grid item md={5}>
