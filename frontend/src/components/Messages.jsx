@@ -11,13 +11,13 @@ const usedStyles = makeStyles((theme) => ({
     },
   }));
 
-const Messages = () => {
+const Messages = ({children}) => {
     const classes = usedStyles();
     return (
         <div>
             <div className={classes.root}>
                 <Alert variant="outlined" severity="error">
-                    This is an error alert — check it out!
+                    {children}
                 </Alert>
             </div>
         </div>

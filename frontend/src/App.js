@@ -6,6 +6,10 @@ import ProductDetail from 'screens/ProductDetail/Index'
 import Footer from 'components/Footer/Index'
 import Header from 'components/Header/Index'
 import Cart from 'screens/Cart/Index'
+import Login from 'screens/Login/Index'
+import Register from 'screens/Register/Index'
+
+
 const app = () => {
   return (
     <div className='app'>
@@ -14,7 +18,10 @@ const app = () => {
         <Route path='/' component={Home} exact />
         <Route path='/category/:id' component={ProductList} />
         <Route path='/product/:id' component={ProductDetail} />
-        <Route path='/cart/:id' component={Cart} />
+        <Route path='/cart/:id?' component={Cart} />
+        <Route path='/login' component={Login} />
+        <Route path='/register' component={Register} />
+
       </Switch>
       <Footer />
     </div>

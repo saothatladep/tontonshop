@@ -74,7 +74,7 @@ const Cart = (props) => {
           </div>
         )}
       </Paper>
-      <ScrollToTop/>
+      <ScrollToTop />
     </div>
   )
 }

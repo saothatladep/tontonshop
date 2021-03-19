@@ -30,7 +30,7 @@ const ProductDetail = (props) => {
     window.scrollTo(0, 0)
   }, [])
   
-  console.log(product)
+  // console.log(product)
   console.log(status)
 
 

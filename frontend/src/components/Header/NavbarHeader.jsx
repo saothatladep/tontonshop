@@ -1,11 +1,13 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable react-hooks/rules-of-hooks */
 import { Paper } from '@material-ui/core'
-import { Link } from 'react-router-dom'
 import Badge from '@material-ui/core/Badge'
 import InputBase from '@material-ui/core/InputBase'
-import { fade, makeStyles } from '@material-ui/core/styles'
+import Menu from '@material-ui/core/Menu'
+import MenuItem from '@material-ui/core/MenuItem'
+import { fade, makeStyles, withStyles } from '@material-ui/core/styles'
 import Toolbar from '@material-ui/core/Toolbar'
+import { logout } from 'actions/userActions.js'
 import {
   grayText,
   maxWidth,
@@ -16,20 +18,13 @@ import search from 'assets/icon/search.png'
 import cartImg from 'assets/icon/shopping-cart.svg'
 import user from 'assets/icon/user.png'
 import logo from 'assets/logo/logo.png'
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-
+import { Link } from 'react-router-dom'
 
 const usedStyles = makeStyles((theme) => ({
   root: {
-    // position: 'fixed',
-    // top: 0,
-    // left: 0,
-    // right: 0,
-    // bottom: 0,
-    // zIndex: 100,
     height: 100,
-    // visibility: 'hidden'
   },
   containHeader: {
     height: '100%',
@@ -122,7 +117,7 @@ const usedStyles = makeStyles((theme) => ({
     '& p': {
       fontSize: '1.6rem',
       marginLeft: theme.spacing(1.2),
-      fontWeight: 500,
+      fontWeight: 600,
     },
     '& img': {
       width: '30px',
@@ -137,16 +132,61 @@ const usedStyles = makeStyles((theme) => ({
   },
   link: {
     fontSize: '1.6rem',
-    fontWeight: 500,
+    fontWeight: 550,
     textDecoration: 'none !important',
     color: '#333',
+  },
+  menu: {
+    marginRight: 36,
+    position: 'relative',
+    '&:hover $dropDown': {
+      display: 'block',
+    },
+  },
+  bridge: {
+    height: 16,
+    width: '100%',
+    position: 'absolute',
+    top: -16,
+    backgroundColor: 'transparent',
+  },
+  dropDown: {
+    display: 'none',
+    position: 'absolute',
+    backgroundColor: '#fff',
+    minWidth: 160,
+    top: 35,
+    boxShadow: '0 8px 16px 0 rgb(0 0 0 / 20%)',
+    zIndex: 9999999,
+    border: '1px solid #e1e1e1',
+    '& p': {
+      color: '#333',
+      padding: '12px 0 0px 14px',
+      marginTop: -1,
+      fontSize: 14,
+      fontWeight: 600,
+      borderTop: '1px solid #e1e1e1',
+      letterSpacing: 0.3,
+      '&:hover': {
+        color: primaryText,
+      },
+    },
   },
 }))
 
 const NavHeader = () => {
   const classes = usedStyles()
-  const  cart  = useSelector((state) => state.cart)
-  console.log(cart.cartItems.length)
+  const cart = useSelector((state) => state.cart)
+
+  const logOutHandler = () => {
+    dispatch(logout())
+  }
+
+  const dispatch = useDispatch()
+
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+
   return (
     <Paper>
       <header className={classes.root}>
@@ -168,23 +208,43 @@ const NavHeader = () => {
               />
             </div>
             <div className={classes.headerOptionRight}>
-              <div className={classes.headerUserOption}>
-                <img src={user}></img>
-                <Link className={classes.link} href='#' color='inherit'>
-                  Login
-                </Link>
-                <span> / </span>
-                <Link className={classes.link} href='#' color='inherit'>
-                  Register
-                </Link>
-              </div>
+              {userInfo ? (
+                <div className={classes.menu}>
+                  <div className={classes.headerUserOption}>
+                    <img src={user} />
+                    <Link className={classes.link}>{userInfo.name} ▼</Link>
+                    <div className={classes.dropDown}>
+                      <div className={classes.bridge}></div>
+
+                      <Link className={classes.link} to={'/profile'}>
+                        <p>My Profile</p>
+                      </Link>
+                      <Link className={classes.link} to={'/myorder'}>
+                        <p>My Order</p>
+                      </Link>
+                      <Link className={classes.link} onClick={logOutHandler}>
+                        <p>Log Out</p>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className={classes.headerUserOption}>
+                  <img src={user}></img>
+                  <Link to={`/login`} className={classes.link}>
+                    Login
+                  </Link>
+                </div>
+              )}
+
               <div>
-                <Link to={`/cart/my-cart`}
-                  className={classes.headerCartOption}
-                  href='/'
-                  color='inherit'
-                >
-                  <Badge badgeContent={cart.cartItems.length} color='error'>
+                <Link to={`/cart/my-cart`} className={classes.headerCartOption}>
+                  <Badge
+                    badgeContent={
+                      cart.cartItems.length === 0 ? '0' : cart.cartItems.length
+                    }
+                    color='error'
+                  >
                     <img src={cartImg}></img>
                   </Badge>
                   <p>My Cart</p>
