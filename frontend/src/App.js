@@ -8,6 +8,7 @@ import Header from 'components/Header/Index'
 import Cart from 'screens/Cart/Index'
 import Login from 'screens/Login/Index'
 import Register from 'screens/Register/Index'
+import Profile from 'screens/Profile/Index'
 
 
 const app = () => {
@@ -21,6 +22,8 @@ const app = () => {
         <Route path='/cart/:id?' component={Cart} />
         <Route path='/login' component={Login} />
         <Route path='/register' component={Register} />
+        <Route path='/profile' component={Profile} />
+
 
       </Switch>
       <Footer />

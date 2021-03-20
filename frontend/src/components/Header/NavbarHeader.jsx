@@ -3,22 +3,20 @@
 import { Paper } from '@material-ui/core'
 import Badge from '@material-ui/core/Badge'
 import InputBase from '@material-ui/core/InputBase'
-import Menu from '@material-ui/core/Menu'
-import MenuItem from '@material-ui/core/MenuItem'
-import { fade, makeStyles, withStyles } from '@material-ui/core/styles'
+import { fade, makeStyles } from '@material-ui/core/styles'
 import Toolbar from '@material-ui/core/Toolbar'
 import { logout } from 'actions/userActions.js'
 import {
   grayText,
   maxWidth,
   primaryText,
-  whiteText,
+  whiteText
 } from 'assets/css_variable/variable'
 import search from 'assets/icon/search.png'
 import cartImg from 'assets/icon/shopping-cart.svg'
 import user from 'assets/icon/user.png'
 import logo from 'assets/logo/logo.png'
-import React, { useState } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
@@ -219,7 +217,7 @@ const NavHeader = () => {
                       <Link className={classes.link} to={'/profile'}>
                         <p>My Profile</p>
                       </Link>
-                      <Link className={classes.link} to={'/myorder'}>
+                      <Link className={classes.link} to={'/order'}>
                         <p>My Order</p>
                       </Link>
                       <Link className={classes.link} onClick={logOutHandler}>

@@ -13,7 +13,7 @@ const usedStyles = makeStyles((theme) => ({
     right: 12,
     bottom: 100,
     textAlign: 'center',
-    lineHeight: 6.5,
+    lineHeight: 7.5,
     backgroundColor: primaryText,
     border: '2px solid',
     borderColor: primaryText,
