@@ -9,7 +9,9 @@ import Cart from 'screens/Cart/Index'
 import Login from 'screens/Login/Index'
 import Register from 'screens/Register/Index'
 import Profile from 'screens/Profile/Index'
-
+import Shipping from 'screens/Shipping/Index'
+import Payment from 'screens/Payment/Index'
+import PlaceOrder from 'screens/PlaceOrder/Index'
 
 const app = () => {
   return (
@@ -23,8 +25,9 @@ const app = () => {
         <Route path='/login' component={Login} />
         <Route path='/register' component={Register} />
         <Route path='/profile' component={Profile} />
-
-
+        <Route path='/shipping' component={Shipping} />
+        <Route path='/payment' component={Payment} />
+        <Route path='/placeorder' component={PlaceOrder} />
       </Switch>
       <Footer />
     </div>

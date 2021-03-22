@@ -101,7 +101,7 @@ const Summary = (props) => {
               {cartItems.reduce((acc, cartItem) => acc + cartItem.qty, 0)}
             </span>
           </li>
-          <li>
+          {/* <li>
             Shipping & Handling:
             <span>
               {new Intl.NumberFormat('vi-VN', {
@@ -110,7 +110,7 @@ const Summary = (props) => {
               }).format(ship)}
             </span>
           </li>
-          <hr />
+          <hr /> */}
           <li className={classes.totalPrice}>
             <b>Total:</b>{' '}
             <span>

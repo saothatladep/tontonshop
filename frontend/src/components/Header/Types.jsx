@@ -36,7 +36,6 @@ const usedStyles = makeStyles((theme) => ({
       fontWeight: '600',
       padding: '10 0',
       textAlign: 'start',
-      fontFamily: "'Montserrat', sans-serif !important",
       color: mainText,
     },
   },

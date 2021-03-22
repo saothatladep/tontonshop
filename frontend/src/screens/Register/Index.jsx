@@ -5,10 +5,10 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
-import Alert from '@material-ui/lab/Alert'
 import { register } from 'actions/userActions.js'
 import { maxWidth, primaryText, whiteText } from 'assets/css_variable/variable'
 import Loading from 'components/Loading'
+import Messages from 'components/Messages'
 import ScrollToTop from 'components/ScrollToTop'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -61,8 +61,9 @@ const usedStyles = makeStyles((theme) => ({
   },
   form: {
     width: '50%',
-    border: '1px solid #e1e1e1',
-    padding: '48px 64px',
+    border: '1px solid',
+    borderColor: primaryText,
+    padding: '48px 64px 26px 64px',
     borderRadius: '5px',
     '& label': {
       fontSize: '2rem',
@@ -132,24 +133,10 @@ const Register = (props) => {
           <CssBaseline />
           <div className={classes.paper}>
             {message && (
-              <Alert
-                severity='error'
-                variant='filled'
-                size='large'
-                style={{ fontSize: '1.5rem' }}
-              >
-                {message}
-              </Alert>
+              <Messages severity = {'warning'} message={message}/>
             )}
             {error && (
-              <Alert
-                severity='error'
-                variant='filled'
-                size='large'
-                style={{ fontSize: '1.5rem' }}
-              >
-                {error}
-              </Alert>
+              <Messages severity = {'error'} message={error}/>
             )}
             {loading && <Loading />}
             <p>Sign up with us</p>

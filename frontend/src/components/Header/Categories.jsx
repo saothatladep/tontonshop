@@ -21,7 +21,6 @@ const usedStyles = makeStyles((theme) => ({
       color: '#666',
       marginTop: '-7px',
       alignItems: 'flex-start',
-      fontFamily: "'Montserrat', sans-serif !important",
     },
     '& svg': {
       color: '#615353',
@@ -39,7 +38,7 @@ const usedStyles = makeStyles((theme) => ({
   text: {
     '& span': {
       fontSize: '1,3rem',
-      fontWeight: '400',
+      fontWeight: '500',
     },
   },
 }))

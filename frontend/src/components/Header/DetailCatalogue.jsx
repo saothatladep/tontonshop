@@ -18,7 +18,6 @@ const usedStyles = makeStyles((theme) => ({
       color: '#666',
       padding: theme.spacing(2, 0, 1, 0),
       cursor: 'default',
-      fontFamily: "'Montserrat', sans-serif !important",
     },
   },
   noPadding: {
@@ -53,6 +52,11 @@ const usedStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
     alignItems: 'flex-start',
     marginTop: theme.spacing(1.5),
+    '& p': {
+      fontSize: '1.1rem',
+      color: '#333',
+      fontWeight: 'bold',
+    },
   },
 }))
 

@@ -2,17 +2,14 @@ import { Paper } from '@material-ui/core'
 import Button from '@material-ui/core/Button'
 import Container from '@material-ui/core/Container'
 import CssBaseline from '@material-ui/core/CssBaseline'
-import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
-import { login } from 'actions/userActions.js'
 import { maxWidth, primaryText, whiteText } from 'assets/css_variable/variable'
-import Loading from 'components/Loading'
-import Messages from 'components/Messages'
 import ScrollToTop from 'components/ScrollToTop'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { saveShippingAddress } from 'actions/cartActions'
+import CheckOutSteps from 'components/CheckOutSteps'
 
 const usedStyles = makeStyles((theme) => ({
   root: { background: '#fff' },
@@ -39,6 +36,7 @@ const usedStyles = makeStyles((theme) => ({
     '& input': {
       borderStyle: 'none',
       height: 20,
+      //   margin: '10px 0',
       outline: 0,
       boxShadow: 'none',
       background: '#f5f5f5',
@@ -64,7 +62,6 @@ const usedStyles = makeStyles((theme) => ({
     borderColor: primaryText,
     padding: '48px 64px 26px 64px',
     borderRadius: '5px',
-
     '& label': {
       fontSize: '2rem',
       color: 'e3e3e3',
@@ -91,68 +88,98 @@ const usedStyles = makeStyles((theme) => ({
     },
   },
 }))
-const Login = (props) => {
-  const { location, history } = props
 
+const Shipping = (props) => {
+  const { history } = props
   const classes = usedStyles()
+
+  const cart = useSelector((state) => state.cart)
+  const { shippingAddress } = cart
+
+  const [phone, setPhone] = useState(shippingAddress.phone)
+  const [address, setAddress] = useState(shippingAddress.address)
+  const [city, setCity] = useState(shippingAddress.city)
+  const [postalCode, setPostalCode] = useState(shippingAddress.postalCode)
+  const [country, setCountry] = useState(shippingAddress.country)
 
   const dispatch = useDispatch()
 
-  const userLogin = useSelector((state) => state.userLogin)
-  const { loading, error, userInfo } = userLogin
-
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-
-  const redirect = location.search ? location.search.split('=')[1] : '/'
-
   const submitHandler = (e) => {
     e.preventDefault()
-    dispatch(login(email, password))
-  }
 
-  useEffect(() => {
-    if (userInfo) {
-      history.push(redirect)
-    }
-    window.scrollTo(0, 0)
-  }, [history, userInfo, redirect])
+    dispatch(saveShippingAddress({ phone, address, city, postalCode, country }))
+
+    history.push('/payment')
+  }
 
   return (
     <div className={classes.root}>
       <Paper className={classes.container} elevation={0}>
+        <CheckOutSteps step1 step2 />
         <Container component='main' minWidth='xs'>
           <CssBaseline />
           <div className={classes.paper}>
-            {error && (
-              <Messages severity = {'error'} message={error}/>
-            )}
-            {loading && <Loading />}
-            <p>Sign in to your account</p>
+            <p>Delivery And Shipping Details</p>
             <form className={classes.form} onSubmit={submitHandler} noValidate>
               <TextField
                 variant='outlined'
                 margin='normal'
-                required
                 fullWidth
-                id='email'
-                label='Email Address'
-                name='email'
-                autoComplete='email'
-                autoFocus
-                onChange={(e) => setEmail(e.target.value)}
+                id='phone'
+                label='Phone Number'
+                name='phone'
+                autoComplete='phone-number'
+                value={phone}
+                required={true}
+                onChange={(e) => setPhone(e.target.value)}
               />
               <TextField
                 variant='outlined'
                 margin='normal'
-                required
                 fullWidth
-                name='password'
-                label='Password'
-                type='password'
-                id='password'
-                autoComplete='current-password'
-                onChange={(e) => setPassword(e.target.value)}
+                id='address'
+                label='Address'
+                name='address'
+                autoComplete='address'
+                value={address}
+                required={true}
+                onChange={(e) => setAddress(e.target.value)}
+              />
+              <TextField
+                variant='outlined'
+                margin='normal'
+                fullWidth
+                id='city'
+                label='City'
+                name='city'
+                autoComplete='city'
+                value={city}
+                required={true}
+                onChange={(e) => setCity(e.target.value)}
+              />
+              <TextField
+                variant='outlined'
+                margin='normal'
+                fullWidth
+                name='postalCode'
+                label='Postal Code'
+                id='postalCode'
+                required={true}
+                autoComplete='Postal-code'
+                value={postalCode}
+                onChange={(e) => setPostalCode(e.target.value)}
+              />
+              <TextField
+                variant='outlined'
+                margin='normal'
+                fullWidth
+                name='country'
+                label='Country'
+                id='country'
+                required={true}
+                value={country}
+                autoComplete='country'
+                onChange={(e) => setCountry(e.target.value)}
               />
 
               <Button
@@ -161,26 +188,8 @@ const Login = (props) => {
                 variant='contained'
                 className={classes.submit}
               >
-                Log In
+                CONTINUE
               </Button>
-              <Grid container>
-                <Grid item xs>
-                  <Link to={''} variant='body2'>
-                    Forgot password?
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <span>Don't have an account?</span>
-                  <Link
-                    to={
-                      redirect ? `/register?redirect=${redirect}` : '/register'
-                    }
-                    variant='body2'
-                  >
-                    {' Register'}
-                  </Link>
-                </Grid>
-              </Grid>
             </form>
           </div>
         </Container>
@@ -190,4 +199,4 @@ const Login = (props) => {
   )
 }
 
-export default Login
+export default Shipping

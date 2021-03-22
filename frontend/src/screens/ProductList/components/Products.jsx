@@ -52,7 +52,7 @@ const Products = (props) => {
       {loading ? (
         <Loading />
       ) : error ? (
-        <Messages>{error}</Messages>
+        <Messages severity={'error'} message={error} />
       ) : (
         <Paper className={classes.root} elevation={0}>
           <div className={classes.container}>

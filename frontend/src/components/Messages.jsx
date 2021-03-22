@@ -1,27 +1,41 @@
-import { makeStyles } from '@material-ui/core/styles';
-import Alert from '@material-ui/lab/Alert';
-import React from 'react';
+import { makeStyles } from '@material-ui/core/styles'
+import Alert from '@material-ui/lab/Alert'
+import React, {useState} from 'react'
+import IconButton from '@material-ui/core/IconButton'
+import Collapse from '@material-ui/core/Collapse'
+import CloseIcon from '@material-ui/icons/Close'
 
-const usedStyles = makeStyles((theme) => ({
-    root: {
-      width: '100%',
-      '& > * + *': {
-        marginTop: theme.spacing(2),
-      },
-    },
-  }));
 
-const Messages = ({children}) => {
-    const classes = usedStyles();
-    return (
-        <div>
-            <div className={classes.root}>
-                <Alert variant="outlined" severity="error">
-                    {children}
-                </Alert>
-            </div>
-        </div>
-    )
+const Messages = (props) => {
+  const {severity, message} = props
+  const [open, setOpen] = useState(true)
+
+  return (
+    <div>
+      <Collapse in={open}>
+        <Alert
+          severity={severity}
+          variant='filled'
+          size='large'
+          style={{ fontSize: '1.5rem' }}
+          action={
+            <IconButton
+              aria-label='close'
+              color='inherit'
+              size='small'
+              onClick={() => {
+                setOpen(false)
+              }}
+            >
+              <CloseIcon fontSize='inherit' />
+            </IconButton>
+          }
+        >
+          {message}
+        </Alert>
+      </Collapse>
+    </div>
+  )
 }
 
 export default Messages

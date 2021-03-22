@@ -6,6 +6,7 @@ import React, { useState, useEffect } from 'react'
 import { Box, Container, Grid, Paper } from '@material-ui/core'
 import Magnifier from 'react-magnifier'
 import ReactImageMagnify from 'react-image-magnify'
+import { useDispatch, useSelector } from 'react-redux'
 
 const usedStyles = makeStyles((theme) => ({
   root: {},
@@ -33,11 +34,15 @@ const usedStyles = makeStyles((theme) => ({
 const ProductImages = (props) => {
   const { product } = props
   const classes = usedStyles()
-  // console.log(product.images[0].img)
-  const [img, setImg] = useState(0)
-  console.log(product)
 
-  // console.log(img)
+  // const productDetails = useSelector((state) => state.productDetails)
+  // const { loading, error, product } = productDetails
+
+  // console.log(productDetails)
+
+  const [img, setImg] = useState(0)
+  // console.log(product)
+
   return (
     <div>
       <div className={classes.container}>
@@ -50,7 +55,6 @@ const ProductImages = (props) => {
                 direction='row'
                 justify='flex-start'
                 alignItems='center'
-                // spacing={0}
               >
                 {product.images.map((image) => (
                   <Grid item md-2 key={image._id}>

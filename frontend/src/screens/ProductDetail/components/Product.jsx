@@ -25,7 +25,7 @@ const Product = (props) => {
   const { product, match, history } = props
   const classes = usedStyles()
 
-  console.log(product)
+  // console.log(product)
 
   return (
     <div>
@@ -40,7 +40,7 @@ const Product = (props) => {
                 alignItems='flex-start'
                 spacing={3}
               >
-                <Grid item md={7}>                  
+                <Grid item md={7}>        
                   <ProductImages product={product} />
                 </Grid>
                 <Grid item md={5}>

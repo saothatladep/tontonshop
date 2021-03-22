@@ -13,9 +13,7 @@ const usedStyles = makeStyles((theme) => ({
     '& span': {
       color: minorText,
       fontSize: '1.5rem',
-      // letterSpacing: 0.8,
       fontWeight: 450,
-      fontFamily: "'Montserrat', sans-serif !important;",
       paddingTop: 2,
     },
     '& :hover': {

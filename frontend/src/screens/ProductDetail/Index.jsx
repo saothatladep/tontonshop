@@ -31,7 +31,7 @@ const ProductDetail = (props) => {
   }, [])
   
   // console.log(product)
-  console.log(status)
+  // console.log(status)
 
 
   return (

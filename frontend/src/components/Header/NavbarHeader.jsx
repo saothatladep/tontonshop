@@ -236,7 +236,7 @@ const NavHeader = () => {
               )}
 
               <div>
-                <Link to={`/cart/my-cart`} className={classes.headerCartOption}>
+                <Link to={`/cart/mycart`} className={classes.headerCartOption}>
                   <Badge
                     badgeContent={
                       cart.cartItems.length === 0 ? '0' : cart.cartItems.length

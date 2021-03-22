@@ -4,14 +4,15 @@ import Container from '@material-ui/core/Container'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { makeStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
-import Alert from '@material-ui/lab/Alert'
 import { getUserDetails, updateUserProfile } from 'actions/userActions.js'
 import { maxWidth, primaryText, whiteText } from 'assets/css_variable/variable'
 import Loading from 'components/Loading'
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import Messages from 'components/Messages'
 import ScrollToTop from 'components/ScrollToTop'
 import { USER_UPDATE_PROFILE_RESET } from 'constants/userConstants'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+
 const usedStyles = makeStyles((theme) => ({
   root: { background: '#fff' },
   container: {
@@ -98,7 +99,8 @@ const Profile = (props) => {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [message, setMessage] = useState(null)
-
+  const [status, setStatus] = useState(false)
+  
   const dispatch = useDispatch()
 
   const userDetails = useSelector((state) => state.userDetails)
@@ -114,8 +116,8 @@ const Profile = (props) => {
     if (!userInfo) {
       history.push('/login')
     } else {
-      if (!user.name) {
-        dispatch({type: USER_UPDATE_PROFILE_RESET})
+      if (!user.name || success) {
+        dispatch({ type: USER_UPDATE_PROFILE_RESET })
         dispatch(getUserDetails('profile'))
       } else {
         setName(user.name)
@@ -123,16 +125,17 @@ const Profile = (props) => {
       }
     }
     window.scrollTo(0, 0)
+    // window.location.reload(false);
   }, [dispatch, history, userInfo, user, success])
 
   const submitHandler = (e) => {
     e.preventDefault()
-
     if (password !== confirmPassword) {
       setMessage('Password do not match')
     } else {
       dispatch(updateUserProfile({ id: user._id, name, email, password }))
     }
+    setStatus(true)
   }
 
   return (
@@ -141,37 +144,16 @@ const Profile = (props) => {
         <Container component='main' minWidth='xs'>
           <CssBaseline />
           <div className={classes.paper}>
-            {message && (
-              <Alert
-                severity='error'
-                variant='filled'
-                size='large'
-                style={{ fontSize: '1.5rem' }}
-              >
-                {message}
-              </Alert>
-            )}
-            {error && (
-              <Alert
-                severity='error'
-                variant='filled'
-                size='large'
-                style={{ fontSize: '1.5rem' }}
-              >
-                {error}
-              </Alert>
-            )}
-            {success && (
-              <Alert
-                severity='success'
-                variant='filled'
-                size='large'
-                style={{ fontSize: '1.5rem' }}
-              >
-                Profile updated successfully
-              </Alert>
-            )}
+            {message && <Messages severity={'warning'} message={message} />}
+            {error && <Messages severity={'error'} message={error} />}
             {loading && <Loading />}
+
+            {status && (
+              <Messages
+                severity={'success'}
+                message={'Profile updated successfully'}
+              />
+            )}
             <p>User Profile</p>
             <form className={classes.form} onSubmit={submitHandler} noValidate>
               <TextField
