@@ -85,7 +85,6 @@ const usedStyles = makeStyles((theme) => ({
 const Summary = (props) => {
   const { cartItems, history} = props
   const classes = usedStyles()
-  const ship = cartItems.length ===0 ? 0 : 1000000
 
   const checkoutHandler = () => {
       history.push('/login?redirect=shipping')
@@ -101,16 +100,6 @@ const Summary = (props) => {
               {cartItems.reduce((acc, cartItem) => acc + cartItem.qty, 0)}
             </span>
           </li>
-          {/* <li>
-            Shipping & Handling:
-            <span>
-              {new Intl.NumberFormat('vi-VN', {
-                style: 'currency',
-                currency: 'VND',
-              }).format(ship)}
-            </span>
-          </li>
-          <hr /> */}
           <li className={classes.totalPrice}>
             <b>Total:</b>{' '}
             <span>
@@ -120,7 +109,7 @@ const Summary = (props) => {
               }).format(
                 cartItems.reduce(
                   (acc, cartItem) => acc + cartItem.qty * cartItem.price,
-                  ship
+                  0
                 )
               )}
             </span>

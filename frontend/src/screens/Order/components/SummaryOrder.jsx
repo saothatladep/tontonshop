@@ -1,11 +1,11 @@
 import { makeStyles } from '@material-ui/core/styles'
 import { primaryText, whiteText } from 'assets/css_variable/variable'
 import Button from '@material-ui/core/Button'
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { createOrder } from 'actions/orderActions.js'
+import { getOrderDetails } from 'actions/orderActions.js'
 import Messages from 'components/Messages'
-
+import Loading from 'components/Loading'
 const usedStyles = makeStyles((theme) => ({
   root: { paddingTop: 32 },
   container: {
@@ -63,55 +63,35 @@ const usedStyles = makeStyles((theme) => ({
       },
     },
   },
-  lastBorder: {
-    borderBottom: '1px solid black',
-  },
 }))
 const SummaryOrder = (props) => {
   const classes = usedStyles()
+  const { match } = props
+  const orderId = match.params.id
 
   const dispatch = useDispatch()
 
-  const { userInfo, cart, history } = props
-  const { cartItems, shippingAddress, paymentMethod } = cart
+  const orderDetails = useSelector((state) => state.orderDetails)
+  const { order, loading, error } = orderDetails
 
-  //calculate prices
-  cart.itemsPrice = cartItems.reduce(
-    (acc, item) => acc + item.price * item.qty,
-    0
-  )
-
-  cart.shippingPrice = cart.itemsPrice > 1000000000 ? 0 : 10000000
-
-  cart.taxPrice = Number(0.1 * cart.itemsPrice)
-
-  cart.totalPrice =
-    Number(cart.itemsPrice) + Number(cart.shippingPrice) + Number(cart.taxPrice)
-
-  const orderCreate = useSelector((state) => state.orderCreate)
-  const { order, success, error } = orderCreate 
-
-  useEffect(() => {
-    if(success) {
-      history.push(`/order/${order._id}`)
-    }
-    // eslint-disable-next-line
-  },[history, success])
-
-  const placeOrderHandler = () => {
-    dispatch(createOrder({
-        orderItems: cartItems,
-        shippingAddress: shippingAddress,
-        paymentMethod: paymentMethod,
-        itemsPrice: cart.itemsPrice,
-        shippingPrice: cart.shippingPrice,
-        taxPrice: cart.taxPrice,
-        totalPrice: cart.totalPrice,
-    }))
-    console.log(cartItems)
+  if (!loading) {
+    order.itemsPrice = order.orderItems.reduce(
+      (acc, item) => acc + item.price * item.qty,
+      0
+    )
   }
 
-  return (
+  useEffect(() => {
+    if (!order || order._id !== orderId) {
+      dispatch(getOrderDetails(orderId))
+    }
+  }, [order, orderId])
+
+  return loading ? (
+    <Loading />
+  ) : error ? (
+    <Messages severity={'error'} message={error} />
+  ) : (
     <div className={classes.root}>
       <div className={classes.container}>
         <p>order summary</p>
@@ -122,7 +102,7 @@ const SummaryOrder = (props) => {
               {new Intl.NumberFormat('vi-VN', {
                 style: 'currency',
                 currency: 'VND',
-              }).format(cart.itemsPrice)}
+              }).format(order.itemsPrice)}
             </span>
           </h1>
           <h1>
@@ -131,7 +111,7 @@ const SummaryOrder = (props) => {
               {new Intl.NumberFormat('vi-VN', {
                 style: 'currency',
                 currency: 'VND',
-              }).format(cart.shippingPrice)}
+              }).format(order.shippingPrice)}
             </span>
           </h1>
           <h1>
@@ -140,31 +120,21 @@ const SummaryOrder = (props) => {
               {new Intl.NumberFormat('vi-VN', {
                 style: 'currency',
                 currency: 'VND',
-              }).format(cart.taxPrice)}
+              }).format(order.taxPrice)}
             </span>
           </h1>
-          <h1 className={classes.lastBorder}>
+          <h1>
             Total:{' '}
             <span>
               {new Intl.NumberFormat('vi-VN', {
                 style: 'currency',
                 currency: 'VND',
-              }).format(cart.totalPrice)}
+              }).format(order.totalPrice)}
             </span>
           </h1>
         </div>
-        <Button
-          disabled={cartItems === 0}
-          type='submit'
-          fullWidth
-          variant='contained'
-          onClick={placeOrderHandler}
-        >
-          Place order
-        </Button>
       </div>
       {error && <Messages severity={'error'} message={error} />}
-
     </div>
   )
 }

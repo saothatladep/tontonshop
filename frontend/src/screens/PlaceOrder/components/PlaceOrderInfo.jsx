@@ -71,7 +71,7 @@ const usedStyles = makeStyles((theme) => ({
     },
   },
 }))
-const OrderInfo = (props) => {
+const PlaceOrderInfo = (props) => {
   const { userInfo, cart } = props
   const { cartItems, shippingAddress, paymentMethod } = cart
 
@@ -129,4 +129,4 @@ const OrderInfo = (props) => {
   )
 }
 
-export default OrderInfo
+export default PlaceOrderInfo

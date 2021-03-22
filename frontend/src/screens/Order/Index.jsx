@@ -2,12 +2,13 @@ import { Box, Container, Grid, Paper } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { maxWidth, whiteText } from 'assets/css_variable/variable'
 import React from 'react'
-import PlaceOrderInfo from './components/PlaceOrderInfo'
-import SummaryPlaceOrder from './components/SummaryPlaceOrder'
+import OrderInfo from './components/OrderInfo'
+import SummaryOrder from './components/SummaryOrder'
 import Messages from 'components/Messages'
 import ScrollToTop from 'components/ScrollToTop'
-import CheckOutSteps from 'components/CheckOutSteps'
+import Loading from 'components/Loading'
 import { useDispatch, useSelector } from 'react-redux'
+import { getOrderDetails } from 'actions/orderActions.js'
 
 const usedStyles = makeStyles((theme) => ({
   root: {
@@ -25,20 +26,14 @@ const usedStyles = makeStyles((theme) => ({
 }))
 
 const PlaceOrder = (props) => {
-  const { history } = props
+  const { match } = props
 
   const classes = usedStyles()
-
-  const cart = useSelector(state => state.cart)
-  const userLogin = useSelector((state) => state.userLogin)
-  const { userInfo } = userLogin  
-  console.log(userInfo)
 
   return (
     <div>
       <Paper className={classes.root} elevation={0}>
         <div className={classes.container}>
-          <CheckOutSteps step1 step2 step3 step4 />
           <Box>
             <Container className={classes.noPadding}>
               <Grid
@@ -49,10 +44,10 @@ const PlaceOrder = (props) => {
                 spacing={3}
               >
                 <Grid item md={8}>
-                  <PlaceOrderInfo userInfo={userInfo} cart={cart} />
+                  <OrderInfo match={match} />
                 </Grid>
-                <Grid item md={4} >
-                  <SummaryPlaceOrder userInfo={userInfo} cart={cart} history={history} />
+                <Grid item md={4}>
+                  <SummaryOrder match={match} />
                 </Grid>
               </Grid>
             </Container>
