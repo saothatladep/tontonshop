@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import { Box, Container, Grid, Paper } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import { maxWidth, primaryText, whiteText } from 'assets/css_variable/variable'
 import Rating from '@material-ui/lab/Rating'
+import { primaryText } from 'assets/css_variable/variable'
+import React from 'react'
 
 const usedStyles = makeStyles((theme) => ({
   root: {

@@ -1,4 +1,4 @@
-import { Link } from '@material-ui/core'
+import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import { mainText, primaryText, whiteText } from 'assets/css_variable/variable'
 import React from 'react'
@@ -57,9 +57,9 @@ const HotDealChild = (props) => {
   const classes = usedStyles()
   return (
     <div>
-      <Link className={classes.noDecoration}>
+      <Link to = {`/product/${product._id}`} className={classes.noDecoration}>
         <div className={classes.container}>
-          <img src={product.images[0].img} alt='' />
+          {product.images.length > 0 ? <img src={product.images[0].img} alt='' /> : ''}
           <p>{product.name}</p>
           <h4>
             Price: &nbsp;

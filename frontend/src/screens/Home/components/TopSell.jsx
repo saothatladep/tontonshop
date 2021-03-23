@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import { Box, Container, Grid, Paper } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import { maxWidth, mainText } from 'assets/css_variable/variable'
-import { Paper } from '@material-ui/core'
-import { Box, Container, Grid, List } from '@material-ui/core'
-import TopSellUp from './TopSellUp'
-import topSellCategoriesUp from 'mocks/topSellCategoriesUp'
+import { mainText, maxWidth } from 'assets/css_variable/variable'
 import topSellCategoriesDown from 'mocks/topSellCategoriesDown'
+import topSellCategoriesUp from 'mocks/topSellCategoriesUp'
+import React, { useState } from 'react'
 import TopSellDown from './TopSellDown'
+import TopSellUp from './TopSellUp'
 
 
 const usedStyles = makeStyles((theme) => ({

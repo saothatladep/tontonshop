@@ -1,10 +1,12 @@
 import { Box, Container, Grid, Paper } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
+import { listProductDetails } from 'actions/productActions.js'
 import { maxWidth } from 'assets/css_variable/variable'
-import React from 'react'
+import Loading from 'components/Loading'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import ProductImages from './ProductImages'
 import ProductInfo from './ProductInfo'
-
 const usedStyles = makeStyles((theme) => ({
   root: {
     padding: '32px 0',
@@ -22,39 +24,52 @@ const usedStyles = makeStyles((theme) => ({
   },
 }))
 const Product = (props) => {
-  const { product, match, history } = props
+  const { match, history } = props
   const classes = usedStyles()
 
-  // console.log(product)
+
+  const dispatch = useDispatch()
+
+  const productDetails = useSelector((state) => state.productDetails)
+  const { loading, error, product } = productDetails
+
+  useEffect(() => {
+    dispatch(listProductDetails(match.params.id))
+    window.scrollTo(0, 0)
+  }, [dispatch, match])
 
   return (
     <div>
-      <Paper className={classes.root} elevation={0}>
-        <div className={classes.container}>
-          <Box>
-            <Container className={classes.noPadding}>
-              <Grid
-                container
-                direction='row'
-                justify='space-between'
-                alignItems='flex-start'
-                spacing={3}
-              >
-                <Grid item md={7}>        
-                  <ProductImages product={product} />
+      {loading ? (
+        <Loading />
+      ) : (
+        <Paper className={classes.root} elevation={0}>
+          <div className={classes.container}>
+            <Box>
+              <Container className={classes.noPadding}>
+                <Grid
+                  container
+                  direction='row'
+                  justify='space-between'
+                  alignItems='flex-start'
+                  spacing={3}
+                >
+                  <Grid item md={7}>
+                    <ProductImages product={product} />
+                  </Grid>
+                  <Grid item md={5}>
+                    <ProductInfo
+                      product={product}
+                      match={match}
+                      history={history}
+                    />
+                  </Grid>
                 </Grid>
-                <Grid item md={5}>
-                  <ProductInfo
-                    product={product}
-                    match={match}
-                    history={history}
-                  />
-                </Grid>
-              </Grid>
-            </Container>
-          </Box>
-        </div>
-      </Paper>
+              </Container>
+            </Box>
+          </div>
+        </Paper>
+      )}
     </div>
   )
 }

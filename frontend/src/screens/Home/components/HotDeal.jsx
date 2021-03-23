@@ -7,6 +7,7 @@ import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 import 'react-slideshow-image/dist/styles.css'
 import HotDealChild from './HotDealChild'
+import Loading from 'components/Loading'
 
 const usedStyles = makeStyles((theme) => ({
   root: {
@@ -78,14 +79,25 @@ const HotDeal = () => {
     //   items: 1
     // }
   }
-  const [products, setProducts] = useState([])
+
+  const [productsList, setProductsList] = useState({
+    product: [], 
+    status: true
+  })
+
   useEffect(() => {
     const fetchProducts = async () => {
       const { data } = await axios.get('/api/products/random/20')
-      setProducts(data)
+      setProductsList({
+        products: data,
+        status: false,
+      })
     }
     fetchProducts()
   }, [])
+
+  const {products, status} = productsList
+
   return (
     <div>
       <Paper className={classes.root} elevation={0}>
@@ -94,19 +106,23 @@ const HotDeal = () => {
             <p>HOT DEALS</p>
             <img src='https://www.jodhpurifurniture.com/assets/images/border2.png' />
           </div>
-          <Carousel
-            responsive={responsive}
-            autoPlaySpeed={3000}
-            autoPlay={true}
-            infinite={true}
-            // transitionDuration={2000}
-            className={classes.slide}
-            customTransition={'all 2s ease 0s'}
-          >
-            {products.map((product) => (
-              <HotDealChild key={product._id} product={product} />
-            ))}
-          </Carousel>
+          {status ? (
+            <Loading />
+          ) : (
+            <Carousel
+              responsive={responsive}
+              autoPlaySpeed={3000}
+              autoPlay={true}
+              infinite={true}
+              // transitionDuration={2000}
+              className={classes.slide}
+              customTransition={'all 2s ease 0s'}
+            >
+              {products.length > 0 && products.map((product) => (
+                <HotDealChild key={product._id} product={product} />
+              ))}
+            </Carousel>
+          )}
         </div>
       </Paper>
     </div>

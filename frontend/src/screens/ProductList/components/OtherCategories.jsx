@@ -4,6 +4,7 @@ import { maxWidth } from 'assets/css_variable/variable'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Category from './Category'
+import Loading from 'components/Loading'
 
 const usedStyles = makeStyles((theme) => ({
   root: {
@@ -22,41 +23,53 @@ const usedStyles = makeStyles((theme) => ({
 const OtherCategories = (props) => {
   const { catalogue, match } = props
   const classes = usedStyles()
-  const [categories, setCategories] = useState([])
+  const [categoriesList, setCategoriesList] = useState({
+    categories: [],
+    status: true,
+  })
 
   useEffect(() => {
     const fetchCategories = async () => {
       const { data } = await axios.get(`/api/categories/catalogue/${catalogue}`)
-      setCategories(data)
+      setCategoriesList({
+        categories: data,
+        status: false,
+      })
     }
     fetchCategories()
   }, [catalogue])
 
+  const { categories, status } = categoriesList
+
   return (
     <div>
-      <Paper className={classes.root} elevation={0}>
-        <div className={classes.container}>
-          <div className={''}>
-            <Box>
-              <Container className={classes.noPadding}>
-                <Grid
-                  container
-                  direction='row'
-                  justify='center'
-                  alignItems='center'
-                  spacing={3}
-                >
-                  {categories.map((category) => (
-                    <Grid key={category._id} item md-2>
-                      <Category category={category} match={match} />
-                    </Grid>
-                  ))}
-                </Grid>
-              </Container>
-            </Box>
+      {status ? (
+        <Loading />
+      ) : (
+        <Paper className={classes.root} elevation={0}>
+          <div className={classes.container}>
+            <div className={''}>
+              <Box>
+                <Container className={classes.noPadding}>
+                  <Grid
+                    container
+                    direction='row'
+                    justify='center'
+                    alignItems='center'
+                    spacing={3}
+                  >
+                    {categories.map((category) => (
+                      <Grid key={category._id} item md-2>
+                        <Category category={category} match={match} />
+                      </Grid>
+                    ))}
+                  </Grid>
+                </Container>
+              </Box>
+            </div>
           </div>
-        </div>
-      </Paper>
+        </Paper>
+      )}
     </div>
   )
 }

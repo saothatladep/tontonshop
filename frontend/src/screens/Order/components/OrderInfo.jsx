@@ -2,9 +2,12 @@ import { makeStyles } from '@material-ui/core/styles'
 import { primaryText } from 'assets/css_variable/variable'
 import Messages from 'components/Messages'
 import Loading from 'components/Loading'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getOrderDetails } from 'actions/orderActions.js'
+import axios from 'axios'
+import { ORDER_PAY_RESET } from 'constants/orderConstants'
+
 const usedStyles = makeStyles((theme) => ({
   root: {},
   container: {
@@ -78,17 +81,46 @@ const OrderInfo = (props) => {
   const { match } = props
   const orderId = match.params.id
 
+  const [sdkReady, setSdkReady] = useState(false)
 
   const dispatch = useDispatch()
 
   const orderDetails = useSelector((state) => state.orderDetails)
   const { order, loading, error } = orderDetails
 
+  const orderPay = useSelector((state) => state.orderPay)
+  const { loading: loadingPay, success: successPay } = orderPay
+
   useEffect(() => {
-    if (!order || order._id !== orderId) {
-      dispatch(getOrderDetails(orderId))
+    const addPayPalScript = async () => {
+      const { data: clientId } = await axios.get('/api/config/paypal')
+      const script = document.createElement('script')
+      script.type = 'text/javascript'
+      script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`
+      script.async = true
+      script.onload = () => {
+        setSdkReady(true)
+      }
+      document.body.appendChild(script)
     }
-  }, [order, orderId])
+
+    if (!order || order._id !== orderId || successPay) {
+      dispatch({ type: ORDER_PAY_RESET })
+      dispatch(getOrderDetails(orderId))
+    } else if (!order.isPaid) {
+      if (!window.paypal) {
+        addPayPalScript()
+      } else {
+        setSdkReady(true)
+      }
+    }
+  }, [order, orderId, successPay, dispatch])
+
+  // useEffect(() => {
+  //   if (!order || order._id !== orderId) {
+  //     dispatch(getOrderDetails(orderId))
+  //   }
+  // }, [order, orderId])
 
   const classes = usedStyles()
 
@@ -121,13 +153,19 @@ const OrderInfo = (props) => {
             </span>
           </h1>
           <h1>
-            Status: <span style= {{color: primaryText}}>{order.isDelivered ? 'Delivered' : ' Not Delivered'}</span>
+            Status:{' '}
+            <span style={{ color: primaryText }}>
+              {order.isDelivered ? 'Delivered' : ' Not Delivered'}
+            </span>
           </h1>
           <h1>
             Payment Method: <span>{order.paymentMethod}</span>
           </h1>
           <h1>
-            Payment status: <span style= {{color: primaryText}}>{order.isPaid ? 'Paid' : 'Not Paid'}</span>
+            Payment status:{' '}
+            <span style={ order.isPaid ? {color: 'green'} : {color: primaryText} }>
+              {order.isPaid ?  `Paid on ${order.paidAt}` : 'Not Paid'}
+            </span>
           </h1>
         </div>
 

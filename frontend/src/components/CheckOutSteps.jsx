@@ -1,14 +1,12 @@
-import React, { useState } from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import {
-  mainText,
-  maxWidth,
-  primaryText,
-  whiteText,
-} from 'assets/css_variable/variable'
 import Paper from '@material-ui/core/Paper'
-import Tabs from '@material-ui/core/Tabs'
+import { makeStyles } from '@material-ui/core/styles'
 import Tab from '@material-ui/core/Tab'
+import Tabs from '@material-ui/core/Tabs'
+import {
+  maxWidth,
+  primaryText
+} from 'assets/css_variable/variable'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const usedStyles = makeStyles((theme) => ({

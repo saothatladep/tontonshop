@@ -4,7 +4,7 @@ import { mainText, maxWidth, primaryText } from 'assets/css_variable/variable'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Catalogues from './Catalogues'
-
+import Loading from 'components/Loading'
 const usedStyles = makeStyles((theme) => ({
   containTypes: {
     width: maxWidth,
@@ -43,17 +43,25 @@ const usedStyles = makeStyles((theme) => ({
 
 const Types = () => {
   const classes = usedStyles()
-  const [types, setTypes] = useState([])
+  const [typesList, setTypesList] = useState({
+    types: [], 
+    status: true,
+  })
   const [isOpen, setIsOpen] = useState(false)
   const [index, setIndex] = useState('')
 
   useEffect(() => {
     const fetchTypes = async () => {
       const { data } = await axios.get('/api/types/getAll')
-      setTypes(data)
+      setTypesList({
+        types: data,
+        status: false,
+      })
     }
     fetchTypes()
   }, [])
+
+  const {types, status} = typesList
 
   const getKeyType = (event) => {
     setIsOpen(true)
@@ -62,7 +70,9 @@ const Types = () => {
 
   return (
     <div>
-      <div className={classes.containTypes}>
+      {
+        status ? <Loading/> : (
+          <div className={classes.containTypes}>
         {types.map((type) => (
           <ListItem
             className={classes.typeItem}
@@ -72,12 +82,13 @@ const Types = () => {
             onMouseLeave={() => setIsOpen(false)}
           >
             <ListItemText className={classes.text} primary={type.name} />
-            {index == type._id && isOpen && (
-              <Catalogues type={type} />
-            )}
+            {index === type._id && isOpen && <Catalogues type={type} />}
           </ListItem>
         ))}
       </div>
+        )     
+      }
+      
     </div>
   )
 }

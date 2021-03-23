@@ -1,13 +1,12 @@
 import { Box, Container, Grid, Paper } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import { maxWidth, whiteText } from 'assets/css_variable/variable'
+import { maxWidth } from 'assets/css_variable/variable'
+import CheckOutSteps from 'components/CheckOutSteps'
+import ScrollToTop from 'components/ScrollToTop'
 import React from 'react'
+import { useSelector } from 'react-redux'
 import PlaceOrderInfo from './components/PlaceOrderInfo'
 import SummaryPlaceOrder from './components/SummaryPlaceOrder'
-import Messages from 'components/Messages'
-import ScrollToTop from 'components/ScrollToTop'
-import CheckOutSteps from 'components/CheckOutSteps'
-import { useDispatch, useSelector } from 'react-redux'
 
 const usedStyles = makeStyles((theme) => ({
   root: {

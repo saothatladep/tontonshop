@@ -220,7 +220,7 @@ const NavHeader = () => {
                       <Link className={classes.link} to={'/order'}>
                         <p>My Order</p>
                       </Link>
-                      <Link className={classes.link} onClick={logOutHandler}>
+                      <Link to ={'/'} className={classes.link} onClick={logOutHandler}>
                         <p>Log Out</p>
                       </Link>
                     </div>

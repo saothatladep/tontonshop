@@ -34,7 +34,7 @@ const OptionItemFooter = (props) => {
     <div className={classes.root}>
       {itemList.map((item) => (
         <ListItem className={classes.container} key={item.idList}>
-          <Link href='#' className={classes.link}>
+          <Link href={item.url} className={classes.link}>
             <ListItemText className={classes.title}>{item.text}</ListItemText>
           </Link>
         </ListItem>

@@ -1,15 +1,13 @@
+import { Box, Container, Grid, Paper } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+import { addToCart } from 'actions/cartActions'
+import { maxWidth } from 'assets/css_variable/variable'
+import ScrollToTop from 'components/ScrollToTop'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { link } from 'react-router-dom'
-import { addToCart } from 'actions/cartActions'
-import Message from 'components/Messages'
-import { makeStyles } from '@material-ui/core/styles'
-import { primaryText, whiteText, maxWidth } from 'assets/css_variable/variable'
-import { Box, Container, Grid, Paper } from '@material-ui/core'
+import CartEmpty from './components/CartEmpty'
 import CartItems from './components/CartItems'
 import Summary from './components/Summary'
-import CartEmpty from './components/CartEmpty'
-import ScrollToTop from 'components/ScrollToTop'
 
 const usedStyles = makeStyles((theme) => ({
   root: {

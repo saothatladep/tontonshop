@@ -90,7 +90,7 @@ const usedStyles = makeStyles((theme) => ({
   },
 }))
 const Profile = (props) => {
-  const { location, history } = props
+  const { history } = props
 
   const classes = usedStyles()
 

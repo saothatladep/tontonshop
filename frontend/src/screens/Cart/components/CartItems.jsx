@@ -1,10 +1,10 @@
-import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { primaryText, whiteText, maxWidth } from 'assets/css_variable/variable'
-import { Link } from 'react-router-dom'
 import DeleteIcon from '@material-ui/icons/Delete'
-import { useDispatch, useSelector } from 'react-redux'
 import { addToCart, removeFromCart } from 'actions/cartActions'
+import { primaryText } from 'assets/css_variable/variable'
+import React from 'react'
+import { useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 const usedStyles = makeStyles((theme) => ({
   root: {},

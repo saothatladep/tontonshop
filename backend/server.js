@@ -19,6 +19,10 @@ app.get('/', (req, res) => {
   res.send('API is running...')
 })
 
+app.get('/api/config/paypal', (req, res) =>
+  res.send(process.env.PAYPAL_CLIENT_ID)
+)
+
 app.use('/api/users', userRoutes)
 app.use('/api/categories', categoryRoutes)
 app.use('/api/types', typeRoutes)
