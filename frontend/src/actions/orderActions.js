@@ -12,8 +12,11 @@ import {
   ORDER_LIST_MY_REQUEST,
   ORDER_LIST_MY_SUCCESS,
   ORDER_LIST_MY_FAIL,
+  ORDER_CREATE_RESET
 } from 'constants/orderConstants'
 import axios from 'axios'
+
+import {CART_RESET_ITEM} from 'constants/cartConstants'
 
 export const createOrder = (order) => async (dispatch, getState) => {
   try {
@@ -37,6 +40,18 @@ export const createOrder = (order) => async (dispatch, getState) => {
     dispatch({
       type: ORDER_CREATE_SUCCESS,
       payload: data,
+    })
+
+    dispatch({
+      type: CART_RESET_ITEM,
+    })
+
+    dispatch({
+      type: ORDER_PAY_RESET,
+    })
+
+    dispatch({
+      type: ORDER_CREATE_RESET,
     })
   } catch (error) {
     dispatch({

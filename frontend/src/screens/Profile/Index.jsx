@@ -18,7 +18,7 @@ const usedStyles = makeStyles((theme) => ({
   container: {
     width: maxWidth,
     margin: '0 auto',
-    padding: '48px 0',
+    padding: '40px 0 64px 0',
     marginTop: 2,
   },
   paper: {
@@ -60,7 +60,8 @@ const usedStyles = makeStyles((theme) => ({
   },
   form: {
     width: '50%',
-    border: '1px solid #e1e1e1',
+    border: '1px solid',
+    borderColor: primaryText,
     padding: '48px 64px',
     borderRadius: '5px',
     '& label': {

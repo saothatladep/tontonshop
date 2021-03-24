@@ -13,6 +13,8 @@ import Shipping from 'screens/Shipping/Index'
 import Payment from 'screens/Payment/Index'
 import PlaceOrder from 'screens/PlaceOrder/Index'
 import Order from 'screens/Order/Index'
+import MyOrder from 'screens/MyOrder/Index'
+
 const app = () => {
   return (
     <div className='app'>
@@ -29,6 +31,7 @@ const app = () => {
         <Route path='/payment' component={Payment} />
         <Route path='/placeorder' component={PlaceOrder} />
         <Route path='/order/:id' component={Order} />
+        <Route path='/myorders' component={MyOrder} />
       </Switch>
       <Footer />
     </div>

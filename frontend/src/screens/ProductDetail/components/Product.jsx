@@ -1,6 +1,9 @@
 import { Box, Container, Grid, Paper } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import { listProductDetails } from 'actions/productActions.js'
+import {
+  listProductDetails,
+  resetListProductDetails,
+} from 'actions/productActions.js'
 import { maxWidth } from 'assets/css_variable/variable'
 import Loading from 'components/Loading'
 import React, { useEffect } from 'react'
@@ -27,7 +30,6 @@ const Product = (props) => {
   const { match, history } = props
   const classes = usedStyles()
 
-
   const dispatch = useDispatch()
 
   const productDetails = useSelector((state) => state.productDetails)
@@ -36,6 +38,10 @@ const Product = (props) => {
   useEffect(() => {
     dispatch(listProductDetails(match.params.id))
     window.scrollTo(0, 0)
+
+    return function cleanup() {
+      dispatch(resetListProductDetails())
+    }
   }, [dispatch, match])
 
   return (

@@ -108,7 +108,7 @@ const SummaryPlaceOrder = (props) => {
         taxPrice: cart.taxPrice,
         totalPrice: cart.totalPrice,
     }))
-    console.log(cartItems)
+    
   }
 
   return (

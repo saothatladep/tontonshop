@@ -83,6 +83,7 @@ const usedStyles = makeStyles((theme) => ({
   status: {
     fontSize: '2.5rem',
     margin: 0,
+    // eslint-disable-next-line
     padding: '0',
     fontWeight: 600,
     color: '#333',
@@ -106,7 +107,8 @@ const usedStyles = makeStyles((theme) => ({
       fontSize: '2rem',
       marginLeft: 10,
       color: '#333',
-      border: '1px solid #e1e1e1',
+      border: '1px solid',
+      borderColor: primaryText,
       fontWeight: 600,
       outline: '0 !important',
       boxShadow: 'none',

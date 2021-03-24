@@ -5,6 +5,7 @@ import {
   PRODUCT_DETAILS_REQUEST,
   PRODUCT_DETAILS_SUCCESS,
   PRODUCT_DETAILS_FAIL,
+  PRODUCT_DETAILS_RESET,
 } from '../constants/productConstants'
 
 import axios from 'axios'
@@ -39,4 +40,8 @@ export const listProductDetails = (id) => async (dispatch) => {
           : error.message,
     })
   }
+}
+
+export const resetListProductDetails = () => async (dispatch) => {
+  dispatch({ type: PRODUCT_DETAILS_RESET })
 }

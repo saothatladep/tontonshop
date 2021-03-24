@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles'
 import DeleteIcon from '@material-ui/icons/Delete'
 import { addToCart, removeFromCart } from 'actions/cartActions'
-import { primaryText } from 'assets/css_variable/variable'
+import { primaryText, whiteText } from 'assets/css_variable/variable'
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -10,15 +10,15 @@ const usedStyles = makeStyles((theme) => ({
   root: {},
   container: {
     width: '100%',
-    padding: '24px 0 64px 0',
+    padding: '52px 0 64px 0',
   },
   table: {
     width: '100%',
     border: '1px solid #e1e1e1',
     '& thead': {
       fontSize: '1.6rem',
-      backgroundColor: '#f5f5f5',
-      color: '#333',
+      backgroundColor: primaryText,
+      color: whiteText,
 
       '& th': {
         fontWeight: 600,
@@ -32,11 +32,13 @@ const usedStyles = makeStyles((theme) => ({
         padding: '17px 10px !important',
         textAlign: 'center',
         borderTop: '1px solid #ddd',
+        borderLeft: '1px solid #ddd',
+
       },
 
       '& td:nth-child(1)': {
         '& img': {
-          height: 82,
+          height: 80,
           maxWidth: 100,
           textAlign: 'center',
         },

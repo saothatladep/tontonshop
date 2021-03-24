@@ -33,13 +33,13 @@ const ProductImages = (props) => {
   const { product } = props
   const classes = usedStyles()
 
-  const [img, setImg] = useState(0)
+  const [img, setImg] = useState(product.images[0].img)
 
   return (
     <div>
         <div className={classes.container}>
           <Magnifier
-            src={img === 0 ? product.images[0].img : img}
+            src={img}
             mgShape='square'
             mgWidth={220}
             mgHeight={220}

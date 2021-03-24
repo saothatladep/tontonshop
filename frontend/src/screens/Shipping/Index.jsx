@@ -16,7 +16,7 @@ const usedStyles = makeStyles((theme) => ({
   container: {
     width: maxWidth,
     margin: '0 auto',
-    padding: '48px 0',
+    padding: '48px 0 64px 0',
     marginTop: 2,
   },
   paper: {
@@ -132,6 +132,7 @@ const Shipping = (props) => {
                 value={phone}
                 required={true}
                 onChange={(e) => setPhone(e.target.value)}
+                autoFocus={true}
               />
               <TextField
                 variant='outlined'
