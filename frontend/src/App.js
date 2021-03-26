@@ -14,11 +14,12 @@ import Payment from 'screens/Payment/Index'
 import PlaceOrder from 'screens/PlaceOrder/Index'
 import Order from 'screens/Order/Index'
 import MyOrder from 'screens/MyOrder/Index'
+import AdminUsers from 'screens/Admin/components/AdminUsers'
 
-const app = () => {
+const app = (props) => {
   return (
     <div className='app'>
-      <Header />
+      <Header/>
       <Switch>
         <Route path='/' component={Home} exact />
         <Route path='/category/:id' component={ProductList} />
@@ -32,8 +33,10 @@ const app = () => {
         <Route path='/placeorder' component={PlaceOrder} />
         <Route path='/order/:id' component={Order} />
         <Route path='/myorders' component={MyOrder} />
+        <Route path='/admin/userlist' component={AdminUsers} />
       </Switch>
       <Footer />
+
     </div>
   )
 }

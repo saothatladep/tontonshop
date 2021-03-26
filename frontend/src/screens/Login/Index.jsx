@@ -109,12 +109,17 @@ const Login = (props) => {
   const submitHandler = (e) => {
     e.preventDefault()
     dispatch(login(email, password))
+
+    // if(userInfo && userInfo.isAdmin){
+    //   history.push('/admin/userlist')
+    // }
   }
 
   useEffect(() => {
-    if (userInfo) {
+    if (userInfo && !userInfo.isAdmin) {
       history.push(redirect)
     }
+
     window.scrollTo(0, 0)
   }, [history, userInfo, redirect])
 
@@ -124,9 +129,7 @@ const Login = (props) => {
         <Container component='main' minWidth='xs'>
           <CssBaseline />
           <div className={classes.paper}>
-            {error && (
-              <Messages severity = {'error'} message={error}/>
-            )}
+            {error && <Messages severity={'error'} message={error} />}
             {loading && <Loading />}
             <p>Sign in to your account</p>
             <form className={classes.form} onSubmit={submitHandler} noValidate>

@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 
 const usedStyles = makeStyles((theme) => ({
   root: { 
-      paddingTop: 28,
+      padding: '28px 0 64px 0',
   },
   container: {
     padding: '20px 15px',

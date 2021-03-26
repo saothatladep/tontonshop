@@ -10,7 +10,7 @@ import {
   grayText,
   maxWidth,
   primaryText,
-  whiteText
+  whiteText,
 } from 'assets/css_variable/variable'
 import search from 'assets/icon/search.png'
 import cartImg from 'assets/icon/shopping-cart.svg'
@@ -171,7 +171,6 @@ const usedStyles = makeStyles((theme) => ({
     },
   },
 }))
-
 const NavHeader = () => {
   const classes = usedStyles()
   const cart = useSelector((state) => state.cart)
@@ -214,13 +213,30 @@ const NavHeader = () => {
                     <div className={classes.dropDown}>
                       <div className={classes.bridge}></div>
 
-                      <Link className={classes.link} to={'/profile'}>
-                        <p>My Profile</p>
+                      <Link
+                        className={classes.link}
+                        to={userInfo.isAdmin ? '/admin/userlist' : '/profile'}
+                      >
+                        <p>{userInfo.isAdmin ? 'Users' : 'My Profile'}</p>
                       </Link>
-                      <Link className={classes.link} to={'/myorders'}>
-                        <p>My Order</p>
+                      <Link
+                        className={classes.link}
+                        to={userInfo.isAdmin ? '/admin/orders' : '/myorders'}
+                      >
+                        <p>{userInfo.isAdmin ? 'Orders' : 'My Order'}</p>
                       </Link>
-                      <Link to ={'/'} className={classes.link} onClick={logOutHandler}>
+                      {userInfo.isAdmin ? (
+                        <Link className={classes.link} to={'/admin/products'}>
+                          <p>Products</p>
+                        </Link>
+                      ) : (
+                        ''
+                      )}
+                      <Link
+                        to={'/'}
+                        className={classes.link}
+                        onClick={logOutHandler}
+                      >
                         <p>Log Out</p>
                       </Link>
                     </div>
