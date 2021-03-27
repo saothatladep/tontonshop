@@ -116,7 +116,7 @@ const Login = (props) => {
   }
 
   useEffect(() => {
-    if (userInfo && !userInfo.isAdmin) {
+    if (userInfo) {
       history.push(redirect)
     }
 

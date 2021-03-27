@@ -15,6 +15,7 @@ import PlaceOrder from 'screens/PlaceOrder/Index'
 import Order from 'screens/Order/Index'
 import MyOrder from 'screens/MyOrder/Index'
 import AdminUsers from 'screens/Admin/components/AdminUsers'
+import AdminUserEdit from 'screens/Admin/components/AdminUserEdit'
 
 const app = (props) => {
   return (
@@ -34,6 +35,7 @@ const app = (props) => {
         <Route path='/order/:id' component={Order} />
         <Route path='/myorders' component={MyOrder} />
         <Route path='/admin/userlist' component={AdminUsers} />
+        <Route path='/admin/user/:id/edit' component={AdminUserEdit} />
       </Switch>
       <Footer />
 
