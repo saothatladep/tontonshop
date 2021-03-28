@@ -16,8 +16,9 @@ import Order from 'screens/Order/Index'
 import MyOrder from 'screens/MyOrder/Index'
 import AdminUsers from 'screens/Admin/components/AdminUsers'
 import AdminUserEdit from 'screens/Admin/components/AdminUserEdit'
+import AdminProductList from 'screens/Admin/components/AdminProductList'
 
-const app = (props) => {
+const app = () => {
   return (
     <div className='app'>
       <Header/>
@@ -36,6 +37,7 @@ const app = (props) => {
         <Route path='/myorders' component={MyOrder} />
         <Route path='/admin/userlist' component={AdminUsers} />
         <Route path='/admin/user/:id/edit' component={AdminUserEdit} />
+        <Route path='/admin/productlist' component={AdminProductList} />
       </Switch>
       <Footer />
 

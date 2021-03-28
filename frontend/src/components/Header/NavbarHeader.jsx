@@ -221,12 +221,12 @@ const NavHeader = () => {
                       </Link>
                       <Link
                         className={classes.link}
-                        to={userInfo.isAdmin ? '/admin/orders' : '/myorders'}
+                        to={userInfo.isAdmin ? '/admin/orderslist' : '/myorders'}
                       >
                         <p>{userInfo.isAdmin ? 'Orders' : 'My Order'}</p>
                       </Link>
                       {userInfo.isAdmin ? (
-                        <Link className={classes.link} to={'/admin/products'}>
+                        <Link className={classes.link} to={'/admin/productlist'}>
                           <p>Products</p>
                         </Link>
                       ) : (

@@ -24,7 +24,6 @@ const usedStyles = makeStyles((theme) => ({
     padding: '64px 0 64px 0',
     '& h1': {
       fontSize: '5rem',
-      textAlign: 'center',
       fontWeight: '600',
       color: primaryText,
       margin: 0,
