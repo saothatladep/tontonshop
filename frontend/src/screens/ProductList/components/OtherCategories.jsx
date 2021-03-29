@@ -37,6 +37,12 @@ const OtherCategories = (props) => {
       })
     }
     fetchCategories()
+    return function cleanup() {
+      setCategoriesList({
+        categories: [],
+        status: true,
+      })
+    }
   }, [catalogue])
 
   const { categories, status } = categoriesList

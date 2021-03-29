@@ -8,11 +8,12 @@ import Select from '@material-ui/core/Select'
 import { makeStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import { listCategories } from 'actions/categoryActions.js'
-import { listProductDetails } from 'actions/productActions.js'
+import { listProductDetails, updateProduct } from 'actions/productActions.js'
 import { maxWidth, primaryText, whiteText } from 'assets/css_variable/variable'
 import Loading from 'components/Loading'
 import Messages from 'components/Messages'
 import ScrollToTop from 'components/ScrollToTop'
+import { PRODUCT_UPDATE_RESET } from 'constants/productConstants'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -73,6 +74,7 @@ const usedStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
     '& label': {
       fontSize: '2rem',
+      fontWeight: 600,
     },
     '& span': {
       fontWeight: 600,
@@ -108,11 +110,79 @@ const usedStyles = makeStyles((theme) => ({
     alignItems: 'center',
   },
   formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
+    minWidth: '100%',
+    height: 50,
+    marginBottom: 16,
+    '& select': {
+      height: 20,
+      backgroundColor: '#f5f5f5',
+      fontSize: '1.6rem',
+      color: '#555',
+    },
   },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
+  count: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    margin: '16px 0 8px 0',
+    border: '1px solid #ccc',
+    borderRadius: '4px',
+    backgroundColor: '#f5f5f5',
+    height: 60,
+    '& div': {
+      marginLeft: 12,
+    },
+    '& label': {
+      color: '#555',
+      fontSize: '1.6rem',
+      padding: '0 8px 0 0',
+    },
+    '& input': {
+      height: 40,
+      width: 50,
+      textAlign: 'center',
+      border: '1px solid #ccc',
+      color: '#555',
+      fontSize: '1.6rem',
+      backgroundColor: '#fff',
+      borderRadius: '4px',
+    },
+  },
+  dimensions: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+
+  images: {
+    width: '100%',
+    minHeight: 100,
+    borderRadius: '4px',
+    border: '1px solid #ccc',
+    backgroundColor: '#f5f5f5',
+    margin: '16px 0 0 0',
+    position: 'relative',
+    '& p': {
+      fontSize: '1.6rem',
+      fontWeight: 600,
+      textTransform: 'none',
+      padding: '0 4px',
+      backgroundColor: 'transparent',
+      color: '#555',
+      position: 'absolute',
+      top: -12,
+      left: 10,
+    },
+    '& div': {
+      margin: '16px',
+    },
+    '& img': {
+      width: 96,
+      margin: '5px 7px 0 0',
+      border: '1px solid',
+      borderColor: primaryText,
+      borderRadius: '3px',
+      cursor: 'pointer',
+    },
   },
 }))
 const AdminProductEdit = (props) => {
@@ -154,43 +224,65 @@ const AdminProductEdit = (props) => {
     categories,
   } = categoryList
 
+  const productUpdate = useSelector((state) => state.productUpdate)
+  const {
+    loading: loadingUpdate,
+    error: errorUpdate,
+    success: successUpdate,
+  } = productUpdate
+
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (!product.name || product._id !== productId) {
-      dispatch(listProductDetails(productId))
+    if (successUpdate) {
+      dispatch({ type: PRODUCT_UPDATE_RESET })
+      history.push('/admin/productlist')
     } else {
-      dispatch(listCategories())
-      setCategory(product.category._id)
-      setSku(product.sku)
-      setName(product.name)
-      setPrice(product.price)
-      setCountInStock(product.countInStock)
-      setSalesOff(product.salesOff)
-      setPriceSalesOff(product.priceSalesOff)
-      setMaterial(product.material)
-      setColor(product.color)
-      setDimensions({
-        length: product.dimensions.length,
-        width: product.dimensions.width,
-        height: product.dimensions.height,
-      })
+      if (!product.name || product._id !== productId) {
+        dispatch(listProductDetails(productId))
+      } else {
+        dispatch(listCategories())
+        setCategory(product.category._id)
+        setSku(product.sku)
+        setName(product.name)
+        setPrice(product.price)
+        setCountInStock(product.countInStock)
+        setSalesOff(product.salesOff)
+        setPriceSalesOff(product.priceSalesOff)
+        setMaterial(product.material)
+        setColor(product.color)
+        setDimensions({
+          length: product.dimensions.length,
+          width: product.dimensions.width,
+          height: product.dimensions.height,
+        })
+        setImages(product.images)
+      }
     }
+
     window.scrollTo(0, 0)
 
     return function cleanup() {
       setCategory()
     }
-  }, [dispatch, history, productId, product])
-
-  //   console.log(categories)
-  //   console.log(category)
-  //   console.log(product)
-
-  console.log(dimensions)
+  }, [dispatch, history, productId, product, successUpdate])
 
   const submitHandler = (e) => {
     e.preventDefault()
+    dispatch(updateProduct({
+      _id: productId,
+      category,
+      sku,
+      name,
+      price,
+      salesOff,
+      priceSalesOff,
+      countInStock,
+      material,
+      color,
+      dimensions,
+      images,
+    }))
   }
 
   return (
@@ -200,6 +292,10 @@ const AdminProductEdit = (props) => {
           <CssBaseline />
           <div className={classes.paper}>
             <p>Edit Product</p>
+            {loadingUpdate && <Loading />}
+            {errorUpdate && (
+              <Messages severity={'error'} message={errorUpdate} />
+            )}
             {loadingProductDetails ? (
               <Loading />
             ) : errorProductDetails ? (
@@ -274,7 +370,7 @@ const AdminProductEdit = (props) => {
                     setPrice(e.target.value)
                   }}
                 />
-                <div>
+                <div className={classes.count}>
                   <div>
                     <label for='quantity'>Count in stock:</label>
                     <input
@@ -289,11 +385,11 @@ const AdminProductEdit = (props) => {
                   </div>
 
                   <div>
-                    <label for='salesoff'>Sales Off:</label>
+                    <label for='salesOff'>Sales Off:</label>
                     <input
                       type='number'
-                      id='salesoff'
-                      name='salesoff'
+                      id='salesOff'
+                      name='salesOff'
                       value={salesOff}
                       min={0}
                       max={100}
@@ -344,47 +440,59 @@ const AdminProductEdit = (props) => {
                   }}
                 />
 
-                <TextField
-                  variant='outlined'
-                  margin='normal'
-                  fullWidth
-                  id='length'
-                  label='Length'
-                  name='length'
-                  autoComplete='length'
-                  value={dimensions.length}
-                  onChange={(e) => {
-                    setDimensions({ ...dimensions, length: e.target.value })
-                  }}
-                />
+                <div className={classes.dimensions}>
+                  <TextField
+                    variant='outlined'
+                    margin='normal'
+                    style={{ width: 100 }}
+                    id='length'
+                    label='Length'
+                    name='length'
+                    autoComplete='length'
+                    value={dimensions.length}
+                    onChange={(e) => {
+                      setDimensions({ ...dimensions, length: e.target.value })
+                    }}
+                  />
 
-                <TextField
-                  variant='outlined'
-                  margin='normal'
-                  fullWidth
-                  id='width'
-                  label='Width'
-                  name='width'
-                  autoComplete='width'
-                  value={dimensions.width}
-                  onChange={(e) => {
-                    setDimensions({ ...dimensions, width: e.target.value })
-                  }}
-                />
+                  <TextField
+                    variant='outlined'
+                    margin='normal'
+                    style={{ width: 100 }}
+                    id='width'
+                    label='Width'
+                    name='width'
+                    autoComplete='width'
+                    value={dimensions.width}
+                    onChange={(e) => {
+                      setDimensions({ ...dimensions, width: e.target.value })
+                    }}
+                  />
 
-                <TextField
-                  variant='outlined'
-                  margin='normal'
-                  fullWidth
-                  id='height'
-                  label='Height'
-                  name='height'
-                  autoComplete='height'
-                  value={dimensions.height}
-                  onChange={(e) => {
-                    setDimensions({ ...dimensions, height: e.target.value })
-                  }}
-                />
+                  <TextField
+                    variant='outlined'
+                    margin='normal'
+                    style={{ width: 100 }}
+                    id='height'
+                    label='Height'
+                    name='height'
+                    autoComplete='height'
+                    value={dimensions.height}
+                    onChange={(e) => {
+                      setDimensions({ ...dimensions, height: e.target.value })
+                    }}
+                  />
+                </div>
+
+                <div className={classes.images}>
+                  <p>Images</p>
+                  <div>
+                    {images.length > 0 &&
+                      images.map((img) => (
+                        <img key={img._id} src={img.img} alt={img.img} />
+                      ))}
+                  </div>
+                </div>
 
                 <div className={classes.action}>
                   <Button

@@ -63,7 +63,7 @@ const ProductDetail = (props) => {
         <div className={classes.container}>
           <img
             className={classes.img}
-            src={product.images[0].img}
+            src={product.images.length > 0 && product.images[0].img}
             alt={product.name}
           />
           <div className={classes.info}>
