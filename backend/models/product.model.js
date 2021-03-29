@@ -79,9 +79,9 @@ const productSchema = mongoose.Schema(
       required: true,
     },
     dimensions: {
-      length: { type: Number },
-      width: { type: Number },
-      height: { type: Number },
+      length: { type: Number , default: 0,},
+      width: { type: Number , default: 0,},
+      height: { type: Number , default: 0,},
     },
     images:[imgSchema],
     rating: {

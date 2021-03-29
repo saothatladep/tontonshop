@@ -17,6 +17,7 @@ import MyOrder from 'screens/MyOrder/Index'
 import AdminUsers from 'screens/Admin/components/AdminUsers'
 import AdminUserEdit from 'screens/Admin/components/AdminUserEdit'
 import AdminProductList from 'screens/Admin/components/AdminProductList'
+import AdminProductEdit from 'screens/Admin/components/AdminProductEdit'
 
 const app = () => {
   return (
@@ -38,6 +39,7 @@ const app = () => {
         <Route path='/admin/userlist' component={AdminUsers} />
         <Route path='/admin/user/:id/edit' component={AdminUserEdit} />
         <Route path='/admin/productlist' component={AdminProductList} />
+        <Route path='/admin/product/:id/edit' component={AdminProductEdit} />
       </Switch>
       <Footer />
 

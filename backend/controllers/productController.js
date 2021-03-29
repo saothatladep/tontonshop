@@ -81,9 +81,9 @@ const deleteProduct = asyncHandler(async (req, res) => {
 // @access Private/Admin
 const createProduct = asyncHandler(async (req, res) => {
   const product = new Product({
-    category: req.category._id,
+    category: '603c9d90fafd2c4bbc488fd0',
     user: req.user._id,
-    sku: 'tonton...',
+    sku: `TT${Date.now().toString().slice(9)}`,
     name: 'Sample name',
     material: 'Sample material',
     color: 'Sample color',
@@ -99,7 +99,6 @@ const createProduct = asyncHandler(async (req, res) => {
 const updateProduct = asyncHandler(async (req, res) => {
   const {
     category,
-    user,
     sku,
     name,
     price,
@@ -116,7 +115,6 @@ const updateProduct = asyncHandler(async (req, res) => {
 
   if (product) {
     product.category = category
-    product.user = user
     product.sku = sku
     product.name = name
     product.price = price

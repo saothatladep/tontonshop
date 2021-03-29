@@ -11,9 +11,7 @@ const products = [
     material: 'Sheesham wood',
     color: 'Distress White',
     dimensions: {
-      length: 36,
-      width: 24,
-      height: 18,
+      dimensions
     },
     images: [
       {

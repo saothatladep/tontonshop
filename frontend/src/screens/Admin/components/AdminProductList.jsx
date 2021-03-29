@@ -3,7 +3,11 @@ import Button from '@material-ui/core/Button'
 import { makeStyles } from '@material-ui/core/styles'
 import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Edit'
-import { listAllProducts, deleteProduct } from 'actions/productActions'
+import {
+  listAllProducts,
+  deleteProduct,
+  createProduct,
+} from 'actions/productActions'
 import { maxWidth, primaryText, whiteText } from 'assets/css_variable/variable'
 import Loading from 'components/Loading'
 import Messages from 'components/Messages'
@@ -12,6 +16,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { PRODUCT_LIST_ALL_RESET } from 'constants/productConstants'
+import { PRODUCT_CREATE_RESET } from 'constants/productConstants'
 
 const usedStyles = makeStyles((theme) => ({
   root: {
@@ -123,24 +128,47 @@ const AdminProductList = (props) => {
   const { loading, error, products } = productListAll
 
   const productDelete = useSelector((state) => state.productDelete)
-  const { loading:loadingDelete, error:errorDelete, success:successDelete } = productDelete
+  const {
+    loading: loadingDelete,
+    error: errorDelete,
+    success: successDelete,
+  } = productDelete
+
+  const productCreate = useSelector((state) => state.productCreate)
+  const {
+    loading: loadingCreate,
+    error: errorCreate,
+    success: successCreate,
+    product: createdProduct,
+  } = productCreate
 
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 
   useEffect(() => {
-    if (userInfo && userInfo.isAdmin) {
-      dispatch(listAllProducts())
-    } else {
+    dispatch({ type: PRODUCT_CREATE_RESET })
+
+    if (!userInfo.isAdmin) {
       history.push('/login')
     }
 
-    return function cleanup() {
-        dispatch({type: PRODUCT_LIST_ALL_RESET})
-      };
-  }, [dispatch, history, userInfo, successDelete])
+    if (successCreate) {
+      history.push(`/admin/product/${createdProduct._id}/edit`)
+    } else {
+      dispatch(listAllProducts())
+    }
 
-  console.log(products)
+    return function cleanup() {
+      dispatch({ type: PRODUCT_LIST_ALL_RESET })
+    }
+  }, [
+    dispatch,
+    history,
+    userInfo,
+    successDelete,
+    successCreate,
+    createdProduct,
+  ])
 
   const deleteHandler = (id) => {
     if (window.confirm('Are you sure?')) {
@@ -148,14 +176,16 @@ const AdminProductList = (props) => {
     }
   }
 
-  const createProductHandler = (product) => {
-    // create product
+  const createProductHandler = () => {
+    dispatch(createProduct())
   }
 
   return (
     <Paper elevation={0} className={classes.root}>
-      {loadingDelete && <Loading/>}
+      {loadingDelete && <Loading />}
       {errorDelete && <Messages severity={'error'} message={errorDelete} />}
+      {loadingCreate && <Loading />}
+      {errorCreate && <Messages severity={'error'} message={errorCreate} />}
       {loading ? (
         <Loading />
       ) : error ? (
