@@ -29,7 +29,7 @@ const usedStyles = makeStyles((theme) => ({
 
 const Address = () => {
   const classes = usedStyles()
-  const [addresses, setAddresses] = useState(AddressesData)
+  const [addresses] = useState(AddressesData)
   return (
     <div className={classes.root}>
       <div className={classes.container}>

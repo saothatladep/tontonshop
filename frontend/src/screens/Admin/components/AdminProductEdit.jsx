@@ -17,6 +17,7 @@ import { PRODUCT_UPDATE_RESET } from 'constants/productConstants'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 const usedStyles = makeStyles((theme) => ({
   root: { background: '#fff' },
@@ -184,6 +185,34 @@ const usedStyles = makeStyles((theme) => ({
       cursor: 'pointer',
     },
   },
+  files: {
+    width: '100%',
+    margin: '12px 0 0 0',
+    '& input': {
+      // height: '100%',
+      // fontSize: '1.6rem',
+      // width: '100%',
+      // fontWeight: 500,
+      // '&:hover': {
+      //   backgroundColor: primaryText,
+      // },
+      display: 'none',
+    },
+    '& label': {
+      padding: '8px 8px',
+      backgroundColor: primaryText,
+      borderRadius: 5,
+      cursor: 'pointer',
+      color: whiteText,
+      border: '1px solid',
+      borderColor: primaryText,
+      fontSize: '1.6rem',
+      '&:hover': {
+        backgroundColor: whiteText,
+        color: primaryText,
+      },
+    },
+  },
 }))
 const AdminProductEdit = (props) => {
   const { match, history } = props
@@ -209,6 +238,8 @@ const AdminProductEdit = (props) => {
     height: 0,
   })
   const [images, setImages] = useState([])
+  const [uploading, setUploading] = useState(false)
+  const [fileImages, setFileImages] = useState()
 
   const productDetails = useSelector((state) => state.productDetails)
   const {
@@ -267,22 +298,59 @@ const AdminProductEdit = (props) => {
     }
   }, [dispatch, history, productId, product, successUpdate])
 
+  const uploadFileHandler = async (e) => {
+    const files = e.target.files
+    const formData = new FormData()
+
+    console.log(files)
+
+    for (let i = 0; i < files.length; i++) {
+      formData.append(`images`, files[i])
+    }
+
+    setUploading(true)
+
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+      const { data } = await axios.post('/api/upload', formData, config)
+
+      data.map((item) => {
+        images.push(item)
+      })
+
+      console.log(images)
+
+      // setImages([{ img: data }])
+      setUploading(false)
+    } catch (error) {
+      console.error(error)
+      setUploading(false)
+    }
+  }
+  // console.log(images)
+
   const submitHandler = (e) => {
     e.preventDefault()
-    dispatch(updateProduct({
-      _id: productId,
-      category,
-      sku,
-      name,
-      price,
-      salesOff,
-      priceSalesOff,
-      countInStock,
-      material,
-      color,
-      dimensions,
-      images,
-    }))
+    dispatch(
+      updateProduct({
+        _id: productId,
+        category,
+        sku,
+        name,
+        price,
+        salesOff,
+        priceSalesOff,
+        countInStock,
+        material,
+        color,
+        dimensions,
+        images,
+      })
+    )
   }
 
   return (
@@ -493,6 +561,15 @@ const AdminProductEdit = (props) => {
                       ))}
                   </div>
                 </div>
+                <form
+                  className={classes.files}
+                  id='uploadForm'
+                  onChange={uploadFileHandler}
+                >
+                  <input type='file' id='imagesFile' multiple />
+                  <label for='imagesFile'>Choose a files...</label>
+                </form>
+                {uploading && <Loading />}
 
                 <div className={classes.action}>
                   <Button

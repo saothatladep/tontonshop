@@ -84,7 +84,7 @@ const TopSellUp = (props) => {
       <Link to = {`/category/${categoryUp._id}`} className={classes.noDecoration}>
         <div className={classes.container}>
           <div>
-            <img className={classes.img} src={categoryUp.img} />
+            <img className={classes.img} src={categoryUp.img} alt={categoryUp.img} />
             <div className={classes.title}>
               <p>{categoryUp.name}</p>
               <div className={classes.line}></div>

@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import 'react-slideshow-image/dist/styles.css'
-import { Zoom } from 'react-slideshow-image'
-import slideAds from 'mocks/slideAds.js'
 import { makeStyles } from '@material-ui/core'
+import slideAds from 'mocks/slideAds.js'
+import React, { useState } from 'react'
+import { Zoom } from 'react-slideshow-image'
+import 'react-slideshow-image/dist/styles.css'
 
 const usedStyles = makeStyles((theme) => ({
   container: {
@@ -15,7 +15,7 @@ const usedStyles = makeStyles((theme) => ({
 
 const SlideAds = () => {
   const classes = usedStyles()
-  const [ads, setAds] = useState(slideAds)
+  const [ads] = useState(slideAds)
   const zoomProperties = {
     // duration: 3000,
     // pauseOnHover: true,

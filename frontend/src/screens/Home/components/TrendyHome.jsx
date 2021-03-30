@@ -77,7 +77,7 @@ const TrendyHome = () => {
     //   items: 1
     // }
   }
-  const [categories, setCategories] = useState(trendyCategories)
+  const [categories] = useState(trendyCategories)
   return (
     <div>
       <Paper className={classes.root} elevation={0}>

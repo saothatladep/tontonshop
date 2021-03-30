@@ -1,14 +1,13 @@
 import { makeStyles } from '@material-ui/core/styles'
-import { primaryText, whiteText } from 'assets/css_variable/variable'
-import Button from '@material-ui/core/Button'
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { getOrderDetails, payOrder } from 'actions/orderActions.js'
-import Messages from 'components/Messages'
-import Loading from 'components/Loading'
+import { primaryText, whiteText } from 'assets/css_variable/variable'
 import axios from 'axios'
-import { PayPalButton } from 'react-paypal-button-v2'
+import Loading from 'components/Loading'
+import Messages from 'components/Messages'
 import { ORDER_PAY_RESET } from 'constants/orderConstants'
+import React, { useEffect, useState } from 'react'
+import { PayPalButton } from 'react-paypal-button-v2'
+import { useDispatch, useSelector } from 'react-redux'
 
 const usedStyles = makeStyles((theme) => ({
   root: { paddingTop: 32 },

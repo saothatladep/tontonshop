@@ -40,8 +40,8 @@ const usedStyles = makeStyles((theme) => ({
 
 const TopSell = () => {
   const classes = usedStyles()
-  const [categoriesUp, setCategoriesUp] = useState(topSellCategoriesUp)
-  const [categoriesDown, setCategoriesDown] = useState(topSellCategoriesDown)
+  const [categoriesUp] = useState(topSellCategoriesUp)
+  const [categoriesDown] = useState(topSellCategoriesDown)
   return (
     <div>
       <Paper className={classes.root} elevation={0}>
