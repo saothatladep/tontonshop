@@ -13,11 +13,15 @@ import { maxWidth, primaryText, whiteText } from 'assets/css_variable/variable'
 import Loading from 'components/Loading'
 import Messages from 'components/Messages'
 import ScrollToTop from 'components/ScrollToTop'
-import { PRODUCT_UPDATE_RESET } from 'constants/productConstants'
+import {
+  PRODUCT_UPDATE_RESET,
+  PRODUCT_DETAILS_RESET,
+} from 'constants/productConstants'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import DeleteIcon from '@material-ui/icons/Delete'
 
 const usedStyles = makeStyles((theme) => ({
   root: { background: '#fff' },
@@ -184,6 +188,17 @@ const usedStyles = makeStyles((theme) => ({
       borderRadius: '3px',
       cursor: 'pointer',
     },
+    '& span': {
+      position: 'relative',
+      '& svg': {
+        position: 'absolute',
+        bottom: '80%',
+        left: '30%',
+        color: primaryText,
+        cursor: 'pointer',
+        // display: 'none',
+      },
+    },
   },
   files: {
     width: '100%',
@@ -239,7 +254,8 @@ const AdminProductEdit = (props) => {
   })
   const [images, setImages] = useState([])
   const [uploading, setUploading] = useState(false)
-  const [fileImages, setFileImages] = useState()
+  const [isOpen, setIsOpen] = useState(false)
+  const [index, setIndex] = useState('')
 
   const productDetails = useSelector((state) => state.productDetails)
   const {
@@ -267,6 +283,7 @@ const AdminProductEdit = (props) => {
   useEffect(() => {
     if (successUpdate) {
       dispatch({ type: PRODUCT_UPDATE_RESET })
+      dispatch({ type: PRODUCT_DETAILS_RESET })
       history.push('/admin/productlist')
     } else {
       if (!product.name || product._id !== productId) {
@@ -351,6 +368,19 @@ const AdminProductEdit = (props) => {
         images,
       })
     )
+  }
+
+  const handleDeleteImg = (e) => {
+    setImages(
+      images.filter((img) => img.img !== e.currentTarget.getAttribute('id'))
+    )
+  }
+
+  console.log(images)
+
+  const getKeyType = (e) => {
+    setIndex(e.currentTarget.getAttribute('id'))
+    setIsOpen(true)
   }
 
   return (
@@ -557,7 +587,23 @@ const AdminProductEdit = (props) => {
                   <div>
                     {images.length > 0 &&
                       images.map((img) => (
-                        <img key={img._id} src={img.img} alt={img.img} />
+                        <span>
+                          <img
+                            key={img._id}
+                            src={img.img}
+                            alt={img.img}
+                            id={img.img}
+                            onMouseEnter={(e) => getKeyType(e)}
+                            // onMouseLeave={() => setIsOpen(false)}
+                          />
+                          {index === img.img && isOpen && (
+                            <DeleteIcon
+                              id={img.img}
+                              onClick={handleDeleteImg}
+                              style={{ display: 'block' }}
+                            />
+                          )}
+                        </span>
                       ))}
                   </div>
                 </div>

@@ -21,8 +21,8 @@ const usedStyles = makeStyles((theme) => ({
   },
 }))
 
-const PlaceOrder = (props) => {
-  const { match } = props
+const Order = (props) => {
+  const { match, history } = props
 
   const classes = usedStyles()
 
@@ -40,10 +40,10 @@ const PlaceOrder = (props) => {
                 spacing={3}
               >
                 <Grid item md={8}>
-                  <OrderInfo match={match} />
+                  <OrderInfo match={match} history={history} />
                 </Grid>
                 <Grid item md={4}>
-                  <SummaryOrder match={match} />
+                  <SummaryOrder match={match} history={history} />
                 </Grid>
               </Grid>
             </Container>
@@ -55,4 +55,4 @@ const PlaceOrder = (props) => {
   )
 }
 
-export default PlaceOrder
+export default Order

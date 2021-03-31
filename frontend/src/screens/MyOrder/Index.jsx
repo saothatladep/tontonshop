@@ -89,6 +89,7 @@ const MyOrder = (props) => {
     } else {
       dispatch(listMyOrders())
     }
+    window.scrollTo(0, 0)
   }, [])
 
   return (
@@ -122,14 +123,14 @@ const MyOrder = (props) => {
                       currency: 'VND',
                     }).format(order.totalPrice)}
                   </td>
-                  <td>
+                  <td style={{color: 'green'}}>
                     {order.isPaid ? (
                       order.paidAt.substring(0, 10)
                     ) : (
                       <ClearIcon />
                     )}
                   </td>
-                  <td>
+                  <td style={{color: 'green'}}> 
                     {order.isDelivered ? (
                       order.deliveredAt.substring(0, 10)
                     ) : (

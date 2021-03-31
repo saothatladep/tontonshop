@@ -1,13 +1,18 @@
 import { makeStyles } from '@material-ui/core/styles'
-import { getOrderDetails, payOrder } from 'actions/orderActions.js'
 import { primaryText, whiteText } from 'assets/css_variable/variable'
 import axios from 'axios'
 import Loading from 'components/Loading'
 import Messages from 'components/Messages'
-import { ORDER_PAY_RESET } from 'constants/orderConstants'
+import { Button } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
 import { PayPalButton } from 'react-paypal-button-v2'
 import { useDispatch, useSelector } from 'react-redux'
+import {
+  getOrderDetails,
+  payOrder,
+  deliverOrder,
+} from 'actions/orderActions.js'
+import { ORDER_PAY_RESET, ORDER_DELIVER_RESET } from 'constants/orderConstants'
 
 const usedStyles = makeStyles((theme) => ({
   root: { paddingTop: 32 },
@@ -66,10 +71,14 @@ const usedStyles = makeStyles((theme) => ({
       },
     },
   },
+  lastBorder: {
+    borderBottom: '1px solid',
+    borderColor: primaryText,
+  },
 }))
 const SummaryOrder = (props) => {
   const classes = usedStyles()
-  const { match } = props
+  const { match, history } = props
   const orderId = match.params.id
 
   const [sdkReady, setSdkReady] = useState(false)
@@ -79,6 +88,15 @@ const SummaryOrder = (props) => {
   const orderDetails = useSelector((state) => state.orderDetails)
   const { order, loading, error } = orderDetails
 
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+
+  const orderPay = useSelector((state) => state.orderPay)
+  const { loading: loadingPay, success: successPay } = orderPay
+
+  const orderDeliver = useSelector((state) => state.orderDeliver)
+  const { loading: loadingDeliver, success: successDeliver } = orderDeliver
+
   if (!loading) {
     order.itemsPrice = order.orderItems.reduce(
       (acc, item) => acc + item.price * item.qty,
@@ -86,10 +104,10 @@ const SummaryOrder = (props) => {
     )
   }
 
-  const orderPay = useSelector((state) => state.orderPay)
-  const { loading: loadingPay, success: successPay } = orderPay
-
   useEffect(() => {
+    if (!userInfo) {
+      history.push('/login')
+    }
     const addPayPalScript = async () => {
       const { data: clientId } = await axios.get('/api/config/paypal')
       console.log(clientId)
@@ -103,8 +121,9 @@ const SummaryOrder = (props) => {
       document.body.appendChild(script)
     }
 
-    if (!order || order._id !== orderId || successPay) {
+    if (!order || order._id !== orderId || successPay || successDeliver) {
       dispatch({ type: ORDER_PAY_RESET })
+      dispatch({ type: ORDER_DELIVER_RESET })
       dispatch(getOrderDetails(orderId))
     } else if (!order.isPaid) {
       if (!window.paypal) {
@@ -113,11 +132,26 @@ const SummaryOrder = (props) => {
         setSdkReady(true)
       }
     }
-  }, [order, orderId, successPay, dispatch])
+    window.scrollTo(0, 0)
+  }, [order, orderId, successPay, dispatch, successDeliver])
 
   const successPaymentHandler = (details, data) => {
     console.log(details, data)
     dispatch(payOrder(orderId, details))
+  }
+
+  const deliverHandler = () => {
+    dispatch(deliverOrder(order))
+  }
+
+  const paidHandler = () => {
+    const paymentResult = {
+      id: Date.now() + Math.random(),
+      status: 'COMPLETED',
+      update_time: Date.now(),
+      email_address: order.user.email,
+    }
+    dispatch(payOrder(orderId, paymentResult))
   }
 
   return loading ? (
@@ -156,7 +190,7 @@ const SummaryOrder = (props) => {
               }).format(order.taxPrice)}
             </span>
           </h1>
-          <h1>
+          <h1 className={classes.lastBorder}>
             Total:{' '}
             <span>
               {new Intl.NumberFormat('vi-VN', {
@@ -166,7 +200,7 @@ const SummaryOrder = (props) => {
             </span>
           </h1>
         </div>
-        {!order.isPaid && (
+        {!order.isPaid && order.paymentMethod == 'PayPal' && (
           <div>
             {loadingPay && <Loading />}
             {!sdkReady ? (
@@ -179,6 +213,19 @@ const SummaryOrder = (props) => {
             )}
           </div>
         )}
+        {loadingDeliver && <Loading />}
+        {userInfo && userInfo.isAdmin && !order.isDelivered && (
+          <Button onClick={deliverHandler}> MARK AS DELIVERED</Button>
+        )}
+        {userInfo &&
+          userInfo.isAdmin &&
+          !order.isPaid &&
+          order.paymentMethod === 'Cash' && (
+            <Button style={{ marginTop: 0 }} onClick={paidHandler}>
+              {' '}
+              MARK AS PAID
+            </Button>
+          )}
       </div>
       {error && <Messages severity={'error'} message={error} />}
     </div>

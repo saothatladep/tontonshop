@@ -144,11 +144,6 @@ const Payment = (props) => {
                     label='PayPal'
                   />
                   <FormControlLabel
-                    value='Credit Card'
-                    control={<Radio />}
-                    label='Credit Card'
-                  />
-                  <FormControlLabel
                     value='Cash'
                     control={<Radio />}
                     label='Cash'

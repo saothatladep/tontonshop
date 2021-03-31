@@ -37,7 +37,7 @@ const usedStyles = makeStyles((theme) => ({
     border: '1px solid',
     borderColor: primaryText,
     paddingTop: 16,
-    marginTop: 24,
+    margin: '24px 0px 48px 0',
     '& p': {
       color: '#333',
       fontWeight: 600,

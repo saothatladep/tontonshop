@@ -18,6 +18,7 @@ import AdminUsers from 'screens/Admin/components/AdminUsers'
 import AdminUserEdit from 'screens/Admin/components/AdminUserEdit'
 import AdminProductList from 'screens/Admin/components/AdminProductList'
 import AdminProductEdit from 'screens/Admin/components/AdminProductEdit'
+import AdminOrdersList from 'screens/Admin/components/AdminOrdersList'
 
 const app = () => {
   return (
@@ -40,6 +41,7 @@ const app = () => {
         <Route path='/admin/user/:id/edit' component={AdminUserEdit} />
         <Route path='/admin/productlist' component={AdminProductList} />
         <Route path='/admin/product/:id/edit' component={AdminProductEdit} />
+        <Route path='/admin/orderslist' component={AdminOrdersList} />
       </Switch>
       <Footer />
 

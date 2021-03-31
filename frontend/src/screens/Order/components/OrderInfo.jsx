@@ -2,10 +2,10 @@ import { makeStyles } from '@material-ui/core/styles'
 import { primaryText } from 'assets/css_variable/variable'
 import Messages from 'components/Messages'
 import Loading from 'components/Loading'
+import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getOrderDetails } from 'actions/orderActions.js'
-import axios from 'axios'
 import { ORDER_PAY_RESET } from 'constants/orderConstants'
 
 const usedStyles = makeStyles((theme) => ({
@@ -76,9 +76,13 @@ const usedStyles = makeStyles((theme) => ({
       fontSize: '1.3rem',
     },
   },
+  lastBorder: {
+    borderBottom: '1px solid',
+    borderColor: primaryText,
+  },
 }))
 const OrderInfo = (props) => {
-  const { match } = props
+  const { match, history } = props
   const orderId = match.params.id
 
   const [sdkReady, setSdkReady] = useState(false)
@@ -88,10 +92,16 @@ const OrderInfo = (props) => {
   const orderDetails = useSelector((state) => state.orderDetails)
   const { order, loading, error } = orderDetails
 
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+
   const orderPay = useSelector((state) => state.orderPay)
   const { loading: loadingPay, success: successPay } = orderPay
 
   useEffect(() => {
+    if (!userInfo) {
+      history.push('/login')
+    }
     const addPayPalScript = async () => {
       const { data: clientId } = await axios.get('/api/config/paypal')
       const script = document.createElement('script')
@@ -114,6 +124,7 @@ const OrderInfo = (props) => {
         setSdkReady(true)
       }
     }
+    window.scrollTo(0, 0)
   }, [order, orderId, successPay, dispatch])
 
   // useEffect(() => {
@@ -154,8 +165,14 @@ const OrderInfo = (props) => {
           </h1>
           <h1>
             Status:{' '}
-            <span style={{ color: primaryText }}>
-              {order.isDelivered ? 'Delivered' : ' Not Delivered'}
+            <span
+              style={
+                order.isDelivered ? { color: 'green' } : { color: primaryText }
+              }
+            >
+              {order.isDelivered
+                ? `Delivered on ${order.deliveredAt}`
+                : ' Not Delivered'}
             </span>
           </h1>
           <h1>
@@ -163,8 +180,10 @@ const OrderInfo = (props) => {
           </h1>
           <h1>
             Payment status:{' '}
-            <span style={ order.isPaid ? {color: 'green'} : {color: primaryText} }>
-              {order.isPaid ?  `Paid on ${order.paidAt}` : 'Not Paid'}
+            <span
+              style={order.isPaid ? { color: 'green' } : { color: primaryText }}
+            >
+              {order.isPaid ? `Paid on ${order.paidAt}` : 'Not Paid'}
             </span>
           </h1>
         </div>
