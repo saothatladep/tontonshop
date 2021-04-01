@@ -1,11 +1,11 @@
 import { makeStyles } from '@material-ui/core/styles'
-import Rating from '@material-ui/lab/Rating'
+import { Rating } from '@material-ui/lab'
 import { primaryText } from 'assets/css_variable/variable'
 import React from 'react'
 
 const usedStyles = makeStyles((theme) => ({
   root: {
-    borderBottom: '1px solid #e1e1e1',
+    borderBottom: '1px solid #ff8a0c',
   },
   container: {
     padding: '12px 0',
@@ -28,27 +28,26 @@ const usedStyles = makeStyles((theme) => ({
     },
     '& span': {
       fontSize: '2rem',
-      color: primaryText,
       marginLeft: -1,
     },
   },
 }))
-const Comment = () => {
+const Comment = (props) => {
+  const { review } = props
   const classes = usedStyles()
+
   return (
     <div className={classes.root}>
       <div className={classes.container}>
         <Rating
-          name='half-rating-read'
-          defaultValue={5}
-          precision={0.5}
+          name='read-only'
+          size='large'
+          defaultValue={review.rating}
           readOnly
         />
-        <h1>Vijaya</h1>
-        <h2>Jan 13, 2021</h2>
-        <p>
-          Qualitydddddddddddddddffffffffffddddddddddddddddddddddddddghjghjghjfgjdddddddddddddddfgdfgdfgdfgdffgdfgfgdfgdgdfgdfgdfgdfgdfgdfgffffffffffffffffffffffffffddddddddddddddddddddddddddddddd.
-        </p>
+        <h1>{review.name}</h1>
+        <h2>{review.createdAt.substring(0, 10)}</h2>
+        <p>{review.comment}</p>
       </div>
     </div>
   )

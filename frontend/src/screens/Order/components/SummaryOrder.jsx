@@ -146,9 +146,9 @@ const SummaryOrder = (props) => {
 
   const paidHandler = () => {
     const paymentResult = {
-      id: Date.now() + Math.random(),
+      id: Date.now(),
       status: 'COMPLETED',
-      update_time: Date.now(),
+      update_time: new Date().toISOString(),
       email_address: order.user.email,
     }
     dispatch(payOrder(orderId, paymentResult))

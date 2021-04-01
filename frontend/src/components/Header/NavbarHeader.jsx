@@ -16,7 +16,7 @@ import search from 'assets/icon/search.png'
 import cartImg from 'assets/icon/shopping-cart.svg'
 import user from 'assets/icon/user.png'
 import logo from 'assets/logo/logo.png'
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
@@ -171,18 +171,30 @@ const usedStyles = makeStyles((theme) => ({
     },
   },
 }))
-const NavHeader = () => {
+const NavHeader = (props) => {
+  const { history } = props
+
   const classes = usedStyles()
   const cart = useSelector((state) => state.cart)
-
-  const logOutHandler = () => {
-    dispatch(logout())
-  }
+  const [keyword, setKeyWord] = useState('')
 
   const dispatch = useDispatch()
 
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
+
+  const logOutHandler = () => {
+    dispatch(logout())
+  }
+
+  const submitHandler = (e) => {
+    e.preventDefault()
+    if (keyword.trim()) {
+      history.push(`/search/${keyword}`)
+    } else {
+      history.push(`/`)
+    }
+  }
 
   return (
     <Paper>
@@ -192,7 +204,7 @@ const NavHeader = () => {
             <Link to='/' color='inherit'>
               <img className={classes.logo} src={logo} />
             </Link>
-            <div className={classes.search}>
+            <form className={classes.search} onSubmit={submitHandler}>
               <div className={classes.searchIcon}>
                 <img src={search}></img>
               </div>
@@ -202,8 +214,9 @@ const NavHeader = () => {
                   root: classes.inputRoot,
                   input: classes.inputInput,
                 }}
+                onChange={(e) => setKeyWord(e.target.value)}
               />
-            </div>
+            </form>
             <div className={classes.headerOptionRight}>
               {userInfo ? (
                 <div className={classes.menu}>
@@ -221,12 +234,17 @@ const NavHeader = () => {
                       </Link>
                       <Link
                         className={classes.link}
-                        to={userInfo.isAdmin ? '/admin/orderslist' : '/myorders'}
+                        to={
+                          userInfo.isAdmin ? '/admin/orderslist' : '/myorders'
+                        }
                       >
                         <p>{userInfo.isAdmin ? 'Orders' : 'My Order'}</p>
                       </Link>
                       {userInfo.isAdmin ? (
-                        <Link className={classes.link} to={'/admin/productlist'}>
+                        <Link
+                          className={classes.link}
+                          to={'/admin/productlist'}
+                        >
                           <p>Products</p>
                         </Link>
                       ) : (

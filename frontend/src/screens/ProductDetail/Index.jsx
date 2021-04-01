@@ -11,7 +11,7 @@ const ProductDetail = (props) => {
     <div>
       <Product match={match} history={history} />
       <MoreInfo />
-      <RateAndComment />
+      <RateAndComment match={match} history={history} />
       <RelatedProducts />
       <ScrollToTop />
     </div>
