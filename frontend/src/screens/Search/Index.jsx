@@ -1,7 +1,7 @@
 import { Box, Container, Grid, Paper } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { Pagination } from '@material-ui/lab'
-import { maxWidth } from 'assets/css_variable/variable'
+import { maxWidth, primaryText } from 'assets/css_variable/variable'
 import Loading from 'components/Loading'
 import Messages from 'components/Messages'
 import Empty from 'screens/ProductList/components/Empty'
@@ -38,20 +38,26 @@ const usedStyles = makeStyles((theme) => ({
   },
 }))
 const Index = (props) => {
-  const { match } = props
+  const { match, history } = props
   const classes = usedStyles()
 
   const keyword = match.params.keyword
 
+  const pageNumber = match.params.pageNumber ? match.params.pageNumber : 1
+
   const dispatch = useDispatch()
 
   const productListAll = useSelector((state) => state.productListAll)
-  const { loading, error, products } = productListAll
+  const { loading, error, products, page, pages } = productListAll
 
   useEffect(() => {
-    dispatch(listAllProducts(keyword))
-  }, [dispatch, match, keyword])
+    dispatch(listAllProducts(keyword, pageNumber))
+  }, [dispatch, match, keyword, pageNumber])
 
+  const pageHandler = (e, page) => {
+    history.push(`/search/${keyword}/page/${page}`)
+    window.scrollTo(0, 0)
+  }
   return (
     <div>
       {loading ? (
@@ -88,8 +94,9 @@ const Index = (props) => {
           <Pagination
             className={classes.pagination}
             color='primary'
-            count={5}
-            page={2}
+            count={pages}
+            page={Number(pageNumber)}
+            onChange={pageHandler}
             size='large'
           ></Pagination>
         </Paper>

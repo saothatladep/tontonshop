@@ -5,6 +5,9 @@ import Product from '../models/product.model.js'
 // @route  GET /api/products
 // @access Public
 const getProducts = asyncHandler(async (req, res) => {
+  const pageSize = 12
+  const page = Number(req.query.pageNumber) || 1
+
   const keyword = req.query.keyword
     ? {
         name: {
@@ -14,14 +17,45 @@ const getProducts = asyncHandler(async (req, res) => {
       }
     : {}
 
-  const products = await Product.find({ ...keyword }).populate({
-    path: 'category',
-  })
+  const count = await Product.countDocuments({ ...keyword })
+  const products = await Product.find({ ...keyword })
+    .populate({
+      path: 'category',
+    })
+    .limit(pageSize)
+    .skip(pageSize * (page - 1))
+
+  if (products) {
+    res.json({ products, page, pages: Math.ceil(count / pageSize) })
+  } else {
+    res.status(404)
+    throw new Error('Products not found')
+  }
+})
+
+// @desc   Fetch all products by category
+// @route  GET /api/products/categories/:id
+// @access Public
+const getProductsByCategory = asyncHandler(async (req, res) => {
+  const pageSize = 12
+  // const page = Number(req.query.pageNumber) || 1
+
+
+  const count = await Product.countDocuments({ category: req.params.id })
+  const products = await Product.find({ category: req.params.id })
+    .populate({
+      path: 'category',
+    })
+    // .limit(pageSize)
+    // .skip(pageSize * (page - 1))
+
+  // res.send(req.query.pageNumber)
+
   if (products) {
     res.json(products)
   } else {
     res.status(404)
-    throw new Error('Products not found')
+    throw new Error('Product not found')
   }
 })
 
@@ -30,22 +64,6 @@ const getProducts = asyncHandler(async (req, res) => {
 // @access Public
 const getProductsById = asyncHandler(async (req, res) => {
   const product = await Product.findById(req.params.id).populate({
-    path: 'category',
-  })
-
-  if (product) {
-    res.json(product)
-  } else {
-    res.status(404)
-    throw new Error('Product not found')
-  }
-})
-
-// @desc   Fetch all products by category
-// @route  GET /api/products/categories/:id
-// @access Public
-const getProductsByCategory = asyncHandler(async (req, res) => {
-  const product = await Product.find({ category: req.params.id }).populate({
     path: 'category',
   })
 

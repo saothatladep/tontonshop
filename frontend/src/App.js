@@ -24,11 +24,18 @@ import AdminOrdersList from 'screens/Admin/components/AdminOrdersList'
 const app = () => {
   return (
     <div className='app'>
-      <Header/>
+      <Header />
       <Switch>
         <Route path='/' component={Home} exact />
-        <Route path='/search/:keyword' component={Search} />
+        <Route path='/search/:keyword' component={Search} exact />
+        <Route path='/page/:pageNumber' component={Search} exact />
+        <Route
+          path='/search/:keyword/page/:pageNumber'
+          component={Search}
+          exact
+        />
         <Route path='/category/:id' component={ProductList} />
+        <Route path='/category/:id/page/pageNumber' component={ProductList} />
         <Route path='/product/:id' component={ProductDetail} />
         <Route path='/cart/:id?' component={Cart} />
         <Route path='/login' component={Login} />
@@ -41,12 +48,16 @@ const app = () => {
         <Route path='/myorders' component={MyOrder} />
         <Route path='/admin/userlist' component={AdminUsers} />
         <Route path='/admin/user/:id/edit' component={AdminUserEdit} />
-        <Route path='/admin/productlist' component={AdminProductList} />
+        <Route path='/admin/productlist' component={AdminProductList} exact />
+        <Route
+          path='/admin/productlist/:pageNumber'
+          component={AdminProductList}
+          exact
+        />
         <Route path='/admin/product/:id/edit' component={AdminProductEdit} />
         <Route path='/admin/orderslist' component={AdminOrdersList} />
       </Switch>
       <Footer />
-
     </div>
   )
 }

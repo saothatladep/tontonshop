@@ -3,6 +3,8 @@ import Button from '@material-ui/core/Button'
 import { makeStyles } from '@material-ui/core/styles'
 import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Edit'
+import { Pagination } from '@material-ui/lab'
+
 import {
   listAllProducts,
   deleteProduct,
@@ -113,6 +115,17 @@ const usedStyles = makeStyles((theme) => ({
       },
     },
   },
+  pagination: {
+    padding: '30px 0 8px 0',
+    position: 'relative',
+    left: '32.5%',
+    '& button': {
+      fontSize: '1.6rem',
+    },
+    '& svg': {
+      fontSize: '2.4rem !important',
+    },
+  },
   noPadding: {
     padding: 0,
   },
@@ -122,10 +135,13 @@ const AdminProductList = (props) => {
   const { history, match } = props
   const classes = usedStyles()
 
+  const pageNumber = match.params.pageNumber ? match.params.pageNumber : 1
+
+
   const dispatch = useDispatch()
 
   const productListAll = useSelector((state) => state.productListAll)
-  const { loading, error, products } = productListAll
+  const { loading, error, products, page, pages } = productListAll
 
   const productDelete = useSelector((state) => state.productDelete)
   const {
@@ -155,8 +171,9 @@ const AdminProductList = (props) => {
     if (successCreate) {
       history.push(`/admin/product/${createdProduct._id}/edit`)
     } else {
-      dispatch(listAllProducts())
+      dispatch(listAllProducts('', pageNumber))
     }
+    window.scrollTo(0, 0)
 
     return function cleanup() {
       dispatch({ type: PRODUCT_LIST_ALL_RESET })
@@ -168,7 +185,12 @@ const AdminProductList = (props) => {
     successDelete,
     successCreate,
     createdProduct,
+    pageNumber
   ])
+
+  const pageHandler = (e, page) => {
+    history.push(`/admin/productlist/${page}`)
+  }
 
   const deleteHandler = (id) => {
     if (window.confirm('Are you sure?')) {
@@ -249,6 +271,14 @@ const AdminProductList = (props) => {
                 ))}
             </tbody>
           </table>
+          <Pagination
+            className={classes.pagination}
+            color='primary'
+            count={pages}
+            page={Number(pageNumber)}
+            onChange={pageHandler}
+            size='large'
+          ></Pagination>
         </div>
       )}
       <ScrollToTop />
