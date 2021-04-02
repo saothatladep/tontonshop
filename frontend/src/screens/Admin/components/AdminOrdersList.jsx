@@ -137,15 +137,20 @@ const AdminOrdersList = (props) => {
                   <td>{order._id}</td>
                   <td>{order.user && order.user.name}</td>
                   <td>{order.createdAt.substring(0, 10)}</td>
-                  <td>{order.totalPrice}</td>
-                  <td style={{color: 'green'}}>
+                  <td>
+                    {new Intl.NumberFormat('vi-VN', {
+                      style: 'currency',
+                      currency: 'VND',
+                    }).format(order.totalPrice)}
+                  </td>
+                  <td style={{ color: 'green' }}>
                     {order.isPaid ? (
                       order.paidAt.substring(0, 10)
                     ) : (
                       <ClearIcon style={{ color: 'red' }} />
                     )}
                   </td>
-                  <td style={{color: 'green'}}>
+                  <td style={{ color: 'green' }}>
                     {order.isDelivered ? (
                       order.deliveredAt.substring(0, 10)
                     ) : (

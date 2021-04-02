@@ -24,11 +24,11 @@ import {
   PRODUCT_UPDATE_SUCCESS,
 } from '../constants/productConstants'
 
-export const listProducts = (id) => async (dispatch) => {
+export const listProducts = (id,pageNumber = '') => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_LIST_REQUEST })
     const { data } = await axios.get(
-      `/api/products/category/${id}`
+      `/api/products/category/${id}/${pageNumber}`
     )
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data })
   } catch (error) {

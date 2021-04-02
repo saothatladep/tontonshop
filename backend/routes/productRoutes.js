@@ -20,7 +20,7 @@ router
   .get(getProductsById)
   .delete(protect, admin, deleteProduct)
   .put(protect, admin, updateProduct)
-router.route('/category/:id').get(getProductsByCategory)
+router.route('/category/:id/:pageNumber').get(getProductsByCategory)
 router.route('/random/20').get(getProductsRandom)
 
 export default router

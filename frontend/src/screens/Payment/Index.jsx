@@ -15,6 +15,7 @@ import FormControl from '@material-ui/core/FormControl'
 import FormLabel from '@material-ui/core/FormLabel'
 import Radio from '@material-ui/core/Radio'
 import Messages from 'components/Messages'
+import Meta from 'components/Meta'
 
 const usedStyles = makeStyles((theme) => ({
   root: { background: '#fff' },
@@ -37,7 +38,6 @@ const usedStyles = makeStyles((theme) => ({
       fontSize: '3rem',
       textTransform: 'uppercase',
       margin: 0,
-      
     },
   },
   form: {
@@ -121,6 +121,7 @@ const Payment = (props) => {
 
   return (
     <div className={classes.root}>
+      <Meta title={`TonTon | Payment Method`} />
       <Paper className={classes.container} elevation={0}>
         <CheckOutSteps step1 step2 step3 />
         <Container component='main' minWidth='xs'>

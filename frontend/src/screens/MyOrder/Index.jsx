@@ -10,10 +10,11 @@ import ClearIcon from '@material-ui/icons/Clear'
 import { maxWidth, primaryText, whiteText } from 'assets/css_variable/variable'
 import { Paper } from '@material-ui/core'
 import ScrollToTop from 'components/ScrollToTop'
+import Meta from 'components/Meta'
 
 const usedStyles = makeStyles((theme) => ({
   root: {
-      marginTop: 2,
+    marginTop: 2,
   },
   container: {
     width: maxWidth,
@@ -94,6 +95,8 @@ const MyOrder = (props) => {
 
   return (
     <Paper elevation={0} className={classes.root}>
+      <Meta title={`TonTon | Your Order`} />
+
       {loading ? (
         <Loading />
       ) : error ? (
@@ -123,14 +126,14 @@ const MyOrder = (props) => {
                       currency: 'VND',
                     }).format(order.totalPrice)}
                   </td>
-                  <td style={{color: 'green'}}>
+                  <td style={{ color: 'green' }}>
                     {order.isPaid ? (
                       order.paidAt.substring(0, 10)
                     ) : (
                       <ClearIcon />
                     )}
                   </td>
-                  <td style={{color: 'green'}}> 
+                  <td style={{ color: 'green' }}>
                     {order.isDelivered ? (
                       order.deliveredAt.substring(0, 10)
                     ) : (
@@ -148,7 +151,7 @@ const MyOrder = (props) => {
           </table>
         </div>
       )}
-      <ScrollToTop/>
+      <ScrollToTop />
     </Paper>
   )
 }

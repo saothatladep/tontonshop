@@ -34,8 +34,8 @@ const app = () => {
           component={Search}
           exact
         />
-        <Route path='/category/:id' component={ProductList} />
-        <Route path='/category/:id/page/pageNumber' component={ProductList} />
+        <Route path='/category/:id' component={ProductList} exact />
+        <Route path='/category/:id?/page/:pageNumber?' component={ProductList} exact />
         <Route path='/product/:id' component={ProductDetail} />
         <Route path='/cart/:id?' component={Cart} />
         <Route path='/login' component={Login} />

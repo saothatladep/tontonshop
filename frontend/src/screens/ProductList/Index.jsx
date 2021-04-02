@@ -7,7 +7,7 @@ import axios from 'axios'
 import ScrollToTop from 'components/ScrollToTop'
 
 const ProductList = (props) => {
-  const { match } = props
+  const { match, history} = props
   const [categories, setCategories] = useState([])
 
   useEffect(() => {
@@ -18,13 +18,12 @@ const ProductList = (props) => {
     window.scrollTo(0, 0)
     fetchCategories()
   }, [match])
-  console.log(categories)
 
   return (
     <div>
       <OtherCategories catalogue={categories.catalogue} match={match} />
-      <Filter />
-      <Products match={match} />
+      {/* <Filter /> */}
+      <Products match={match} history={history}/>
       <Consult />
       <ScrollToTop />
     </div>

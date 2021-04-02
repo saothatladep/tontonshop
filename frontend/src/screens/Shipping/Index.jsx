@@ -10,6 +10,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { saveShippingAddress } from 'actions/cartActions'
 import CheckOutSteps from 'components/CheckOutSteps'
+import Meta from 'components/Meta'
 
 const usedStyles = makeStyles((theme) => ({
   root: { background: '#fff' },
@@ -114,6 +115,7 @@ const Shipping = (props) => {
 
   return (
     <div className={classes.root}>
+    <Meta title={`TonTon | Shipping Address`} />
       <Paper className={classes.container} elevation={0}>
         <CheckOutSteps step1 step2 />
         <Container component='main' minWidth='xs'>

@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import CartEmpty from './components/CartEmpty'
 import CartItems from './components/CartItems'
 import Summary from './components/Summary'
+import Meta from 'components/Meta'
 
 const usedStyles = makeStyles((theme) => ({
   root: {
@@ -46,6 +47,7 @@ const Cart = (props) => {
 
   return (
     <div>
+      <Meta title={`TonTon | Your Cart`} />
       <Paper className={classes.root} elevation={0}>
         {cartItems.length === 0 ? (
           <CartEmpty />

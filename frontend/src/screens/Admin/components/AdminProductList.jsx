@@ -1,24 +1,28 @@
 import { Paper } from '@material-ui/core'
 import Button from '@material-ui/core/Button'
+import FormControl from '@material-ui/core/FormControl'
+import InputLabel from '@material-ui/core/InputLabel'
+import Select from '@material-ui/core/Select'
 import { makeStyles } from '@material-ui/core/styles'
 import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Edit'
 import { Pagination } from '@material-ui/lab'
-
-import {
-  listAllProducts,
-  deleteProduct,
-  createProduct,
-} from 'actions/productActions'
 import { maxWidth, primaryText, whiteText } from 'assets/css_variable/variable'
 import Loading from 'components/Loading'
 import Messages from 'components/Messages'
 import ScrollToTop from 'components/ScrollToTop'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { PRODUCT_LIST_ALL_RESET } from 'constants/productConstants'
 import { PRODUCT_CREATE_RESET } from 'constants/productConstants'
+import {
+  listAllProducts,
+  listProducts,
+  deleteProduct,
+  createProduct,
+} from 'actions/productActions'
+import { listCategories } from 'actions/categoryActions.js'
 
 const usedStyles = makeStyles((theme) => ({
   root: {
@@ -115,10 +119,25 @@ const usedStyles = makeStyles((theme) => ({
       },
     },
   },
+  formControl: {
+    height: 50,
+    marginBottom: 16,
+    '& select': {
+      height: 20,
+      backgroundColor: '#f5f5f5',
+      fontSize: '1.6rem',
+      color: '#555',
+    },
+    '& label': {
+      fontSize: '1.6rem',
+      fontWeight: 600,
+    },
+  },
   pagination: {
     padding: '30px 0 8px 0',
-    position: 'relative',
-    left: '32.5%',
+    display: 'flex',
+    justifyContent: 'center',
+    textAlign: 'center',
     '& button': {
       fontSize: '1.6rem',
     },
@@ -134,14 +153,14 @@ const usedStyles = makeStyles((theme) => ({
 const AdminProductList = (props) => {
   const { history, match } = props
   const classes = usedStyles()
+  const [category, setCategory] = useState('603c9d90fafd2c4bbc488fd0')
 
   const pageNumber = match.params.pageNumber ? match.params.pageNumber : 1
 
-
   const dispatch = useDispatch()
 
-  const productListAll = useSelector((state) => state.productListAll)
-  const { loading, error, products, page, pages } = productListAll
+  const productList = useSelector((state) => state.productList)
+  const { loading, error, products, page, pages } = productList
 
   const productDelete = useSelector((state) => state.productDelete)
   const {
@@ -158,6 +177,13 @@ const AdminProductList = (props) => {
     product: createdProduct,
   } = productCreate
 
+  const categoryList = useSelector((state) => state.categoryList)
+  const {
+    loading: loadingCategories,
+    error: errorCategories,
+    categories,
+  } = categoryList
+
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 
@@ -171,7 +197,10 @@ const AdminProductList = (props) => {
     if (successCreate) {
       history.push(`/admin/product/${createdProduct._id}/edit`)
     } else {
-      dispatch(listAllProducts('', pageNumber))
+      dispatch(listCategories())
+      dispatch(listProducts(category, pageNumber))
+
+      // dispatch(listAllProducts('', pageNumber))
     }
     window.scrollTo(0, 0)
 
@@ -185,8 +214,11 @@ const AdminProductList = (props) => {
     successDelete,
     successCreate,
     createdProduct,
-    pageNumber
+    pageNumber,
+    category,
   ])
+
+  console.log(category)
 
   const pageHandler = (e, page) => {
     history.push(`/admin/productlist/${page}`)
@@ -216,6 +248,34 @@ const AdminProductList = (props) => {
         <div className={classes.container}>
           <div className={classes.addProduct}>
             <h1>PRODUCTS</h1>
+            <FormControl variant='outlined' className={classes.formControl}>
+              <InputLabel htmlFor='outlined-categories-native-simple'>
+                Categories
+              </InputLabel>
+              {loadingCategories ? (
+                <Loading />
+              ) : errorCategories ? (
+                <Messages severity={'error'} message={errorCategories} />
+              ) : (
+                <Select
+                  native
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}
+                  label='Categories'
+                  inputProps={{
+                    name: 'Categories',
+                    id: 'outlined-categories-native-simple',
+                  }}
+                >
+                  {categories &&
+                    categories.map((item) => (
+                      <option key={item._id} value={item._id}>
+                        {item.name}
+                      </option>
+                    ))}
+                </Select>
+              )}
+            </FormControl>
             <Link onClick={createProductHandler}>+ Create Product</Link>
           </div>
           <table className={classes.table}>

@@ -9,6 +9,7 @@ import ProductDetail from 'screens/ProductList/components/ProductDetail'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { listAllProducts } from 'actions/productActions.js'
+import Meta from 'components/Meta'
 
 const usedStyles = makeStyles((theme) => ({
   root: {
@@ -66,6 +67,7 @@ const Index = (props) => {
         <Messages severity={'error'} message={error} />
       ) : (
         <Paper className={classes.root} elevation={0}>
+          <Meta title={`TonTon | Search: ${keyword}`} />
           <div className={classes.container}>
             {products.length === 0 ? (
               <Empty />

@@ -7,7 +7,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import PlaceOrderInfo from './components/PlaceOrderInfo'
 import SummaryPlaceOrder from './components/SummaryPlaceOrder'
-
+import Meta from 'components/Meta'
 const usedStyles = makeStyles((theme) => ({
   root: {
     padding: '0',
@@ -28,13 +28,14 @@ const PlaceOrder = (props) => {
 
   const classes = usedStyles()
 
-  const cart = useSelector(state => state.cart)
+  const cart = useSelector((state) => state.cart)
   const userLogin = useSelector((state) => state.userLogin)
-  const { userInfo } = userLogin  
+  const { userInfo } = userLogin
   console.log(userInfo)
 
   return (
     <div>
+      <Meta title={`TonTon | Place Order`} />
       <Paper className={classes.root} elevation={0}>
         <div className={classes.container}>
           <CheckOutSteps step1 step2 step3 step4 />
@@ -50,8 +51,12 @@ const PlaceOrder = (props) => {
                 <Grid item md={8}>
                   <PlaceOrderInfo userInfo={userInfo} cart={cart} />
                 </Grid>
-                <Grid item md={4} >
-                  <SummaryPlaceOrder userInfo={userInfo} cart={cart} history={history} />
+                <Grid item md={4}>
+                  <SummaryPlaceOrder
+                    userInfo={userInfo}
+                    cart={cart}
+                    history={history}
+                  />
                 </Grid>
               </Grid>
             </Container>

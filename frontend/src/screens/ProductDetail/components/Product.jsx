@@ -10,6 +10,8 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import ProductImages from './ProductImages'
 import ProductInfo from './ProductInfo'
+import Meta from 'components/Meta'
+
 const usedStyles = makeStyles((theme) => ({
   root: {
     padding: '32px 0',
@@ -50,6 +52,7 @@ const Product = (props) => {
         <Loading />
       ) : (
         <Paper className={classes.root} elevation={0}>
+          <Meta title={`TonTon | ${product.name}`} />
           <div className={classes.container}>
             <Box>
               <Container className={classes.noPadding}>

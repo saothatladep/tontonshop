@@ -9,6 +9,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Empty from './Empty'
 import ProductDetail from './ProductDetail'
+import Meta from 'components/Meta'
 
 const usedStyles = makeStyles((theme) => ({
   root: {
@@ -37,15 +38,21 @@ const usedStyles = makeStyles((theme) => ({
   },
 }))
 const Products = (props) => {
-  const { match } = props
+  const { match, history } = props
   const classes = usedStyles()
   const dispatch = useDispatch()
 
+  const pageNumber = match.params.pageNumber ? match.params.pageNumber : 1
+
   const productList = useSelector((state) => state.productList)
-  const { loading, error, products } = productList
+  const { loading, error, products, page, pages } = productList
   useEffect(() => {
-    dispatch(listProducts(match.params.id))
-  }, [dispatch, match])
+    dispatch(listProducts(match.params.id, pageNumber))
+  }, [dispatch, match, pageNumber])
+
+  const pageHandler = (e, page) => {
+    history.push(`/category/${match.params.id}/page/${page}`)
+  }
 
   return (
     <div>
@@ -60,6 +67,7 @@ const Products = (props) => {
               <Empty />
             ) : (
               <div>
+                <Meta title = {`TonTon | ${products[0].category.name}`}/>
                 <Box>
                   <Container className={classes.noPadding}>
                     <Grid
@@ -83,9 +91,10 @@ const Products = (props) => {
           <Pagination
             className={classes.pagination}
             color='primary'
-            count={5}
-            page={2}
+            count={pages}
+            page={Number(pageNumber)}
             size='large'
+            onChange={pageHandler}
           ></Pagination>
         </Paper>
       )}

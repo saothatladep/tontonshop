@@ -9,6 +9,7 @@ import RoomCategories from './components/RoomCategories'
 import FeedBack from './components/FeedBack'
 import Addresses from './components/Addresses'
 import ScrollToTop from 'components/ScrollToTop'
+import Meta from 'components/Meta'
 
 const usedStyles = makeStyles((theme) => ({
   root: {},
@@ -20,6 +21,7 @@ const Home = () => {
   }, [])
   return (
     <div className={classes.root}>
+      <Meta title={'Welcome to TonTon Shop | Home'}/>
       <SlideAds />
       <CategoriesHome />
       <TrendyHome />

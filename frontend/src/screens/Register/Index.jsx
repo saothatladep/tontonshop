@@ -13,6 +13,7 @@ import ScrollToTop from 'components/ScrollToTop'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import Meta from 'components/Meta'
 
 const usedStyles = makeStyles((theme) => ({
   root: { background: '#fff' },
@@ -128,6 +129,7 @@ const Register = (props) => {
 
   return (
     <div className={classes.root}>
+      <Meta title={`TonTon | Register`} />
       <Paper className={classes.container} elevation={0}>
         <Container component='main' minWidth='xs'>
           <CssBaseline />

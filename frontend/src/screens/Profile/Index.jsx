@@ -12,6 +12,7 @@ import ScrollToTop from 'components/ScrollToTop'
 import { USER_UPDATE_PROFILE_RESET } from 'constants/userConstants'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import Meta from 'components/Meta'
 
 const usedStyles = makeStyles((theme) => ({
   root: { background: '#fff' },
@@ -101,7 +102,7 @@ const Profile = (props) => {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [message, setMessage] = useState(null)
   const [status, setStatus] = useState(false)
-  
+
   const dispatch = useDispatch()
 
   const userDetails = useSelector((state) => state.userDetails)
@@ -141,6 +142,7 @@ const Profile = (props) => {
 
   return (
     <div className={classes.root}>
+      <Meta title={`TonTon | Your Profiles`} />
       <Paper className={classes.container} elevation={0}>
         <Container component='main' minWidth='xs'>
           <CssBaseline />

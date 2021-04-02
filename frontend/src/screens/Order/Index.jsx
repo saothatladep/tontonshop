@@ -5,6 +5,7 @@ import ScrollToTop from 'components/ScrollToTop'
 import React from 'react'
 import OrderInfo from './components/OrderInfo'
 import SummaryOrder from './components/SummaryOrder'
+import Meta from 'components/Meta'
 
 const usedStyles = makeStyles((theme) => ({
   root: {
@@ -28,6 +29,7 @@ const Order = (props) => {
 
   return (
     <div>
+      <Meta title={`TonTon | Order`} />
       <Paper className={classes.root} elevation={0}>
         <div className={classes.container}>
           <Box>

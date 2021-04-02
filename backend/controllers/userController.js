@@ -109,8 +109,13 @@ const registerUser = asyncHandler(async (req, res) => {
 // @route  GET /api/users
 // @access Private/Admin
 const getUsers = asyncHandler(async (req, res) => {
-  const users = await User.find({})
-  res.json(users)
+  const users = await User.find({}).sort({createdAt: -1})
+  if (users) {
+    res.json(users)
+  } else {
+    res.status(404)
+    throw new Error('Users Not Found')
+  }
 })
 
 // @desc   Delete user

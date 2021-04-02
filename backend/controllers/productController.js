@@ -38,21 +38,18 @@ const getProducts = asyncHandler(async (req, res) => {
 // @access Public
 const getProductsByCategory = asyncHandler(async (req, res) => {
   const pageSize = 12
-  // const page = Number(req.query.pageNumber) || 1
-
+  const page = Number(req.params.pageNumber) ? Number(req.params.pageNumber) : 1
 
   const count = await Product.countDocuments({ category: req.params.id })
   const products = await Product.find({ category: req.params.id })
     .populate({
       path: 'category',
     })
-    // .limit(pageSize)
-    // .skip(pageSize * (page - 1))
-
-  // res.send(req.query.pageNumber)
+    .limit(pageSize)
+    .skip(pageSize * (page - 1))
 
   if (products) {
-    res.json(products)
+    res.json({ products, page, pages: Math.ceil(count / pageSize) })
   } else {
     res.status(404)
     throw new Error('Product not found')
