@@ -12,6 +12,7 @@ import {
   payOrder,
   deliverOrder,
 } from 'actions/orderActions.js'
+import { updateCountInStockProduct } from 'actions/productActions.js'
 import { ORDER_PAY_RESET, ORDER_DELIVER_RESET } from 'constants/orderConstants'
 
 const usedStyles = makeStyles((theme) => ({
@@ -110,7 +111,6 @@ const SummaryOrder = (props) => {
     }
     const addPayPalScript = async () => {
       const { data: clientId } = await axios.get('/api/config/paypal')
-      console.log(clientId)
       const script = document.createElement('script')
       script.type = 'text/javascript'
       script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`
@@ -138,6 +138,7 @@ const SummaryOrder = (props) => {
   const successPaymentHandler = (details, data) => {
     console.log(details, data)
     dispatch(payOrder(orderId, details))
+    dispatch(updateCountInStockProduct(order.orderItems))
   }
 
   const deliverHandler = () => {
@@ -152,6 +153,7 @@ const SummaryOrder = (props) => {
       email_address: order.user.email,
     }
     dispatch(payOrder(orderId, paymentResult))
+    dispatch(updateCountInStockProduct(order.orderItems))
   }
 
   return loading ? (
@@ -221,7 +223,7 @@ const SummaryOrder = (props) => {
           userInfo.isAdmin &&
           !order.isPaid &&
           order.paymentMethod === 'Cash' && (
-            <Button style={{ marginTop: 0 }} onClick={paidHandler}>
+            <Button style={{ marginTop: 24 }} onClick={paidHandler}>
               {' '}
               MARK AS PAID
             </Button>

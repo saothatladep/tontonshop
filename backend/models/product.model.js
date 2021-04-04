@@ -62,13 +62,11 @@ const productSchema = mongoose.Schema(
       required: true,
       default: 0,
     },
-    salesOff: { type: Number, required: true, default: 0 },
+    salesOff: { type: Number, required: true, default: 0, min: 0, max: 100 },
     priceSalesOff: {
       type: Number,
       required: true,
       default: 0,
-      min: 0,
-      max: 100,
     },
     countInStock: {
       type: Number,

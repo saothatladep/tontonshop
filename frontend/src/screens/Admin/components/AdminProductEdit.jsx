@@ -241,9 +241,7 @@ const AdminProductEdit = (props) => {
   const [name, setName] = useState('')
   const [price, setPrice] = useState(0)
   const [salesOff, setSalesOff] = useState(0)
-  const [priceSalesOff, setPriceSalesOff] = useState(
-    price - (salesOff * price) / 100
-  )
+  const [priceSalesOff, setPriceSalesOff] = useState(0)
   const [countInStock, setCountInStock] = useState('')
   const [material, setMaterial] = useState('')
   const [color, setColor] = useState('')
@@ -376,8 +374,6 @@ const AdminProductEdit = (props) => {
     )
   }
 
-  console.log(images)
-
   const getKeyType = (e) => {
     setIndex(e.currentTarget.getAttribute('id'))
     setIsOpen(true)
@@ -466,6 +462,11 @@ const AdminProductEdit = (props) => {
                   value={price}
                   onChange={(e) => {
                     setPrice(e.target.value)
+                    setPriceSalesOff(
+                      salesOff == 0
+                        ? 0
+                        : e.target.value - (salesOff * e.target.value) / 100
+                    )
                   }}
                 />
                 <div className={classes.count}>
@@ -493,6 +494,11 @@ const AdminProductEdit = (props) => {
                       max={100}
                       onChange={(e) => {
                         setSalesOff(e.target.value)
+                        setPriceSalesOff(
+                          e.target.value == 0
+                            ? 0
+                            : price - (e.target.value * price) / 100
+                        )
                       }}
                     />
                   </div>

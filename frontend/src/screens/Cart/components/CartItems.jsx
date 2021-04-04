@@ -3,7 +3,7 @@ import DeleteIcon from '@material-ui/icons/Delete'
 import { addToCart, removeFromCart } from 'actions/cartActions'
 import { primaryText, whiteText } from 'assets/css_variable/variable'
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 const usedStyles = makeStyles((theme) => ({
@@ -33,7 +33,6 @@ const usedStyles = makeStyles((theme) => ({
         textAlign: 'center',
         borderTop: '1px solid #ddd',
         borderLeft: '1px solid #ddd',
-
       },
 
       '& td:nth-child(1)': {
@@ -94,6 +93,9 @@ const CartItems = (props) => {
   const classes = usedStyles()
 
   const dispatch = useDispatch()
+
+  const productDetails = useSelector((state) => state.productDetails)
+  const { loading, error, product } = productDetails
 
   const removeFromCartHandler = (id) => {
     dispatch(removeFromCart(id))

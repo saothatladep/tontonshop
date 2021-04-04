@@ -96,6 +96,7 @@ const usedStyles = makeStyles((theme) => ({
         '& a': {
           textDecoration: 'none',
           color: '#666',
+          marginLeft: 4,
           '&:hover': {
             color: primaryText,
           },

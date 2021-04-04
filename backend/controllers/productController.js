@@ -196,6 +196,25 @@ const createProductReview = asyncHandler(async (req, res) => {
   }
 })
 
+// @desc   Update count in stock products
+// @route  PUT /api/products/countinstock
+// @access Private
+const updateCountInStockProduct = asyncHandler(async (req, res) => {
+  for (let i = 0; i < req.body.length; i++) {
+    let product = await Product.findById(req.body[i].product)
+    if (product) {
+      product.countInStock =
+        Number(product.countInStock) - Number(req.body[i].qty) >= 0
+          ? Number(product.countInStock) - Number(req.body[i].qty)
+          : 0
+      await product.save()
+    } else {
+      res.status(404)
+      throw new Error('Product not found')
+    }
+  }
+})
+
 export {
   getProducts,
   getProductsById,
@@ -205,4 +224,5 @@ export {
   createProduct,
   updateProduct,
   createProductReview,
+  updateCountInStockProduct,
 }

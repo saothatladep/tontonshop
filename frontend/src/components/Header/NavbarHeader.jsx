@@ -19,6 +19,7 @@ import logo from 'assets/logo/logo.png'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import {CART_RESET_ITEM} from 'constants/cartConstants'
 
 const usedStyles = makeStyles((theme) => ({
   root: {
@@ -185,6 +186,9 @@ const NavHeader = (props) => {
 
   const logOutHandler = () => {
     dispatch(logout())
+    dispatch({type: CART_RESET_ITEM})
+    localStorage.setItem('cartItems', JSON.stringify([]))
+    localStorage.setItem('shippingAddress', JSON.stringify({}))
   }
 
   const submitHandler = (e) => {

@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button'
 import React, {useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { createOrder } from 'actions/orderActions.js'
+import {CART_RESET_ITEM} from 'constants/cartConstants'
 import Messages from 'components/Messages'
 
 const usedStyles = makeStyles((theme) => ({
@@ -95,6 +96,8 @@ const SummaryPlaceOrder = (props) => {
     if(success) {
       history.push(`/order/${order._id}`)
     }
+    window.scrollTo(0, 0)
+
     // eslint-disable-next-line
   },[history, success])
 
@@ -108,6 +111,10 @@ const SummaryPlaceOrder = (props) => {
         taxPrice: cart.taxPrice,
         totalPrice: cart.totalPrice,
     }))
+
+    dispatch({type: CART_RESET_ITEM})
+    localStorage.setItem('cartItems', JSON.stringify([]))
+    localStorage.setItem('shippingAddress', JSON.stringify({}))
     
   }
 
