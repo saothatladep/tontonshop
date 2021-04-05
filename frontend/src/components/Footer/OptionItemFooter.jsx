@@ -1,5 +1,6 @@
-import { Link, ListItem, ListItemText, makeStyles } from '@material-ui/core'
+import { ListItem, ListItemText, makeStyles } from '@material-ui/core'
 import { minorText, primaryText } from 'assets/css_variable/variable'
+import {Link} from 'react-router-dom'
 import React from 'react'
 
 const usedStyles = makeStyles((theme) => ({
@@ -34,7 +35,7 @@ const OptionItemFooter = (props) => {
     <div className={classes.root}>
       {itemList.map((item) => (
         <ListItem className={classes.container} key={item.idList}>
-          <Link href={item.url} className={classes.link}>
+          <Link to={item.url} className={classes.link}>
             <ListItemText className={classes.title}>{item.text}</ListItemText>
           </Link>
         </ListItem>

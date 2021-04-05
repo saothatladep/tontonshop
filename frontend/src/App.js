@@ -20,6 +20,8 @@ import AdminUserEdit from 'screens/Admin/components/AdminUserEdit'
 import AdminProductList from 'screens/Admin/components/AdminProductList'
 import AdminProductEdit from 'screens/Admin/components/AdminProductEdit'
 import AdminOrdersList from 'screens/Admin/components/AdminOrdersList'
+import AboutUs from 'screens/AboutUs/Index'
+import Term from 'screens/Term/Index'
 
 const app = () => {
   return (
@@ -56,6 +58,8 @@ const app = () => {
         />
         <Route path='/admin/product/:id/edit' component={AdminProductEdit} />
         <Route path='/admin/orderslist' component={AdminOrdersList} />
+        <Route path='/aboutus' component={AboutUs}/>
+        <Route path='/termofyou' component={Term}/>
       </Switch>
       <Footer />
     </div>

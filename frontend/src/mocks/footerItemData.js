@@ -6,12 +6,7 @@ const footerItemData = [
       {
         idList: 11,
         text: 'About Us',
-        url: '#',
-      },
-      {
-        idList: 12,
-        text: 'Custom Furniture',
-        url: '#',
+        url: '/aboutus',
       },
       {
         idList: 13,
@@ -28,6 +23,11 @@ const footerItemData = [
         text: 'Furniture Exporters',
         url: '#',
       },
+      {
+        idList: 16,
+        text: 'Terms Of Use',
+        url: '/termofyou',
+      },
     ],
   },
 
@@ -38,11 +38,6 @@ const footerItemData = [
       {
         idList: 21,
         text: 'Sell On TonTon',
-        url: '#',
-      },
-      {
-        idList: 22,
-        text: 'Terms Of Use',
         url: '#',
       },
       {
