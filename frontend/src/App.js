@@ -22,6 +22,11 @@ import AdminProductEdit from 'screens/Admin/components/AdminProductEdit'
 import AdminOrdersList from 'screens/Admin/components/AdminOrdersList'
 import AboutUs from 'screens/AboutUs/Index'
 import Term from 'screens/Term/Index'
+import SecurityPrivacy from 'screens/SecurityPrivacy/Index'
+import RefundReturn from 'screens/RefundReturn/Index'
+import PaymentPolicy from 'screens/PaymentPolicy/Index'
+import TrackOrder from 'screens/TrackOrder/Index'
+import Stories from 'screens/Stories/Index'
 
 const app = () => {
   return (
@@ -60,6 +65,11 @@ const app = () => {
         <Route path='/admin/orderslist' component={AdminOrdersList} />
         <Route path='/aboutus' component={AboutUs}/>
         <Route path='/termofyou' component={Term}/>
+        <Route path='/securityprivacy' component={SecurityPrivacy}/>
+        <Route path='/refundreturn' component={RefundReturn}/>
+        <Route path='/paymentpolicy' component={PaymentPolicy}/>
+        <Route path='/trackorder' component={TrackOrder}/>
+        <Route path='/stories' component={Stories}/>
       </Switch>
       <Footer />
     </div>

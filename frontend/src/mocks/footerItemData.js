@@ -11,17 +11,17 @@ const footerItemData = [
       {
         idList: 13,
         text: 'Coupon Partners',
-        url: '#',
+        url: '/',
       },
       {
         idList: 14,
         text: 'Contact Us',
-        url: '#',
+        url: '/',
       },
       {
         idList: 15,
         text: 'Furniture Exporters',
-        url: '#',
+        url: '/',
       },
       {
         idList: 16,
@@ -38,42 +38,32 @@ const footerItemData = [
       {
         idList: 21,
         text: 'Sell On TonTon',
-        url: '#',
+        url: '/',
       },
       {
         idList: 23,
         text: 'Security & Privacy',
-        url: '#',
+        url: '/securityprivacy',
       },
       {
         idList: 24,
         text: 'Return & Refund',
-        url: '#',
+        url: '/refundreturn',
       },
       {
         idList: 25,
         text: 'Payment Policy',
-        url: '#',
+        url: '/paymentpolicy',
       },
       {
         idList: 26,
         text: 'Track Order',
-        url: '#',
-      },
-      {
-        idList: 27,
-        text: 'Type Of Wood',
-        url: '#',
+        url: '/trackorder',
       },
       {
         idList: 28,
         text: 'Customer Stories',
-        url: '#',
-      },
-      {
-        idList: 29,
-        text: 'Grievance Contact',
-        url: '#',
+        url: '/stories',
       },
     ],
   },

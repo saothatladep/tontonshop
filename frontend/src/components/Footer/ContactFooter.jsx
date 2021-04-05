@@ -147,13 +147,22 @@ const ContactFooter = () => {
           <span className={classes.mailAddress}>phamvantoan1903@gmail.com</span>
         </div>
         <div className={classes.social}>
-          <Link href='#' className={classes.linkSocial}>
+          <Link
+            href='https://www.facebook.com/TonTon1903'
+            className={classes.linkSocial}
+          >
             <FacebookIcon className={classes.iconFB} />
           </Link>
-          <Link href='#' className={classes.linkSocial}>
+          <Link
+            href='https://www.youtube.com/channel/UCpnelMPxDsGYLdYUTFRyd_w'
+            className={classes.linkSocial}
+          >
             <YouTubeIcon className={classes.iconYT} />
           </Link>
-          <Link href='#' className={classes.linkSocial}>
+          <Link
+            href='https://twitter.com/ToanPha16042716'
+            className={classes.linkSocial}
+          >
             <TwitterIcon className={classes.iconTW} />
           </Link>
         </div>
