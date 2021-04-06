@@ -20,6 +20,15 @@ const usedStyles = makeStyles((theme) => ({
       fontWeight: 600,
       color: '#333',
       lineHeight: 1.1,
+      display: 'flex',
+      '& span': {
+        background: primaryText,
+        color: '#fff',
+        padding: '4px 6px 2px 6px',
+        borderRadius: 10,
+        fontSize: '2rem',
+        marginLeft: 12,
+      },
     },
     '& h2': {
       fontSize: '2.5rem',
@@ -29,6 +38,9 @@ const usedStyles = makeStyles((theme) => ({
       color: '#333',
       '& span': {
         color: primaryText,
+      },
+      '& span:first-child': {
+        marginRight: 8,
       },
     },
   },
@@ -170,14 +182,29 @@ const ProductInfo = (props) => {
               ({product.numReviews} customer reviews)
             </span>
           </div>
-          <p>{product.name}</p>
+          <p>
+            {product.name}{' '}
+            {product.salesOff > 0 && <span>-{product.salesOff}%</span>}
+          </p>
           <h2>
             Price:{' '}
-            <span>
+            <span
+              style={
+                product.salesOff > 0
+                  ? { textDecoration: 'line-through', color: '#999' }
+                  : {}
+              }
+            >
               {new Intl.NumberFormat('vi-VN', {
                 style: 'currency',
                 currency: 'VND',
               }).format(product.price)}
+            </span>
+            <span style={product.salesOff > 0 ? {} : { display: 'none' }}>
+              {new Intl.NumberFormat('vi-VN', {
+                style: 'currency',
+                currency: 'VND',
+              }).format(product.priceSalesOff)}
             </span>
           </h2>
           <div className={classes.description}>

@@ -154,7 +154,7 @@ const usedStyles = makeStyles((theme) => ({
 const AdminProductList = (props) => {
   const { history, match } = props
   const classes = usedStyles()
-  const [category, setCategory] = useState('603c9d90fafd2c4bbc488fd0')
+  const [category, setCategory] = useState()
 
   const pageNumber = match.params.pageNumber ? match.params.pageNumber : 1
 
@@ -199,7 +199,7 @@ const AdminProductList = (props) => {
       history.push(`/admin/product/${createdProduct._id}/edit`)
     } else {
       dispatch(listCategories())
-      dispatch(listProducts(category, pageNumber))
+      dispatch(listProducts(category ? category : '603c9d90fafd2c4bbc488fd0', pageNumber))
 
       // dispatch(listAllProducts('', pageNumber))
     }

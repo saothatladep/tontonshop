@@ -48,7 +48,7 @@ const usedStyles = makeStyles((theme) => ({
           margin: 0,
           lineHeight: '2.5rem',
           color: '#333',
-          textAlign: 'left',
+          textAlign: 'center',
         },
         '& a': {
           textDecoration: 'none',
@@ -69,7 +69,7 @@ const usedStyles = makeStyles((theme) => ({
       },
       '& td:nth-child(4)': {
         '& h2': {
-          textAlign: 'left',
+          textAlign: 'center',
         },
       },
       '& td:nth-child(5)': {
