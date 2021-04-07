@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward'
-import { whiteText, maxWidth, primaryText } from 'assets/css_variable/variable'
+import { primaryText, whiteText } from 'assets/css_variable/variable'
+import React, { useEffect, useState } from 'react'
 
 const usedStyles = makeStyles((theme) => ({
   root: {},

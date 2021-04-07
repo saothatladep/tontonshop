@@ -2,7 +2,7 @@ import { Paper } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { mainText, maxWidth, primaryText } from 'assets/css_variable/variable'
 import AddressesData from 'mocks/addressesData.js'
-import React, { useState } from 'react'
+import React from 'react'
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 import 'react-slideshow-image/dist/styles.css'
@@ -80,14 +80,13 @@ const Addresses = () => {
     //   items: 1
     // }
   }
-  const [addresses, setAddresses] = useState(AddressesData)
   return (
     <div>
       <Paper className={classes.root} elevation={0}>
         <div className={classes.container}>
           <div className={classes.title}>
             <p>#TONTON_FURNITURE</p>
-            <img src='https://www.jodhpurifurniture.com/assets/images/border2.png' />
+            <img src='https://www.jodhpurifurniture.com/assets/images/border2.png' alt ='line' />
           </div>
           <Carousel
             responsive={responsive}
@@ -99,7 +98,7 @@ const Addresses = () => {
             className={classes.slide}
             customTransition={'all 2s ease 0s'}
           >
-            {addresses.map((address) => (
+            {AddressesData.map((address) => (
               <AddressChild key={address._id} address={address} />
             ))}
           </Carousel>

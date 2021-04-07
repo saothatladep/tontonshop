@@ -1,8 +1,8 @@
-import { Box, Container, Grid, Paper } from '@material-ui/core'
+import { Paper } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import { maxWidth, primaryText } from 'assets/css_variable/variable'
-import React from 'react'
 import FormatQuoteIcon from '@material-ui/icons/FormatQuote'
+import { primaryText } from 'assets/css_variable/variable'
+import React from 'react'
 
 const usedStyles = makeStyles((theme) => ({
   root: {
@@ -11,7 +11,6 @@ const usedStyles = makeStyles((theme) => ({
     height: 484,
   },
   container: {
-    width: maxWidth,
     margin: '0 auto',
     position: 'relative',
     background: primaryText,

@@ -91,7 +91,7 @@ const MyOrder = (props) => {
       dispatch(listMyOrders())
     }
     window.scrollTo(0, 0)
-  }, [])
+  }, [dispatch, history, userInfo])
 
   return (
     <Paper elevation={0} className={classes.root}>

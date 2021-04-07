@@ -47,7 +47,7 @@ const CategoryChild = (props) => {
   const classes = usedStyles()
   return (
     <div>
-      <Link to = {`/category/${category._id}`} className={classes.noDecoration}>
+      <Link to={`/category/${category._id}`} className={classes.noDecoration}>
         <div className={classes.container}>
           <div
             className={classes.img}
@@ -55,9 +55,9 @@ const CategoryChild = (props) => {
               backgroundImage: `url(${category.img})`,
             }}
           >
-            <a className={classes.link}>
+            <Link to={`/category/${category._id}`} className={classes.link}>
               <p>{category.name}</p>
-            </a>
+            </Link>
           </div>
         </div>
       </Link>

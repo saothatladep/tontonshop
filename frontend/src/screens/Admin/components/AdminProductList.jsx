@@ -17,7 +17,6 @@ import { Link } from 'react-router-dom'
 import { PRODUCT_LIST_ALL_RESET } from 'constants/productConstants'
 import { PRODUCT_CREATE_RESET } from 'constants/productConstants'
 import {
-  listAllProducts,
   listProducts,
   deleteProduct,
   createProduct,
@@ -161,7 +160,7 @@ const AdminProductList = (props) => {
   const dispatch = useDispatch()
 
   const productList = useSelector((state) => state.productList)
-  const { loading, error, products, page, pages } = productList
+  const { loading, error, products, pages } = productList
 
   const productDelete = useSelector((state) => state.productDelete)
   const {

@@ -317,8 +317,6 @@ const AdminProductEdit = (props) => {
     const files = e.target.files
     const formData = new FormData()
 
-    console.log(files)
-
     for (let i = 0; i < files.length; i++) {
       formData.append(`images`, files[i])
     }
@@ -333,20 +331,16 @@ const AdminProductEdit = (props) => {
       }
       const { data } = await axios.post('/api/upload', formData, config)
 
-      data.map((item) => {
-        images.push(item)
-      })
+      for(let i = 0; i < data.length; i++) {
+        images.push(data[i])
+      }
 
-      console.log(images)
-
-      // setImages([{ img: data }])
       setUploading(false)
     } catch (error) {
       console.error(error)
       setUploading(false)
     }
   }
-  // console.log(images)
 
   const submitHandler = (e) => {
     e.preventDefault()
@@ -463,7 +457,7 @@ const AdminProductEdit = (props) => {
                   onChange={(e) => {
                     setPrice(e.target.value)
                     setPriceSalesOff(
-                      salesOff == 0
+                      Number(salesOff) === 0
                         ? 0
                         : e.target.value - (salesOff * e.target.value) / 100
                     )
@@ -495,7 +489,7 @@ const AdminProductEdit = (props) => {
                       onChange={(e) => {
                         setSalesOff(e.target.value)
                         setPriceSalesOff(
-                          e.target.value == 0
+                          Number(e.target.value) === 0
                             ? 0
                             : price - (e.target.value * price) / 100
                         )

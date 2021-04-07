@@ -31,7 +31,6 @@ const PlaceOrder = (props) => {
   const cart = useSelector((state) => state.cart)
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
-  console.log(userInfo)
 
   return (
     <div>

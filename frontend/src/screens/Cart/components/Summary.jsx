@@ -1,8 +1,7 @@
-import React from 'react'
-import { primaryText, whiteText, maxWidth } from 'assets/css_variable/variable'
-import { makeStyles } from '@material-ui/core/styles'
-import { Link } from 'react-router-dom'
 import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
+import { primaryText, whiteText } from 'assets/css_variable/variable';
+import React from 'react';
 
 const usedStyles = makeStyles((theme) => ({
   root: { 

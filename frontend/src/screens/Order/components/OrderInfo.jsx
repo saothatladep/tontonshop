@@ -96,7 +96,7 @@ const OrderInfo = (props) => {
   const { userInfo } = userLogin
 
   const orderPay = useSelector((state) => state.orderPay)
-  const { loading: loadingPay, success: successPay } = orderPay
+  const { success: successPay } = orderPay
 
   useEffect(() => {
     if (!userInfo) {
@@ -118,20 +118,14 @@ const OrderInfo = (props) => {
       dispatch({ type: ORDER_PAY_RESET })
       dispatch(getOrderDetails(orderId))
     } else if (!order.isPaid) {
-      if (!window.paypal) {
+      if (!window.paypal && !sdkReady) {
         addPayPalScript()
       } else {
         setSdkReady(true)
       }
     }
     window.scrollTo(0, 0)
-  }, [order, orderId, successPay, dispatch])
-
-  // useEffect(() => {
-  //   if (!order || order._id !== orderId) {
-  //     dispatch(getOrderDetails(orderId))
-  //   }
-  // }, [order, orderId])
+  }, [order, orderId, successPay, dispatch, history, userInfo])
 
   const classes = usedStyles()
 

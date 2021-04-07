@@ -133,7 +133,7 @@ const SummaryOrder = (props) => {
       }
     }
     window.scrollTo(0, 0)
-  }, [order, orderId, successPay, dispatch, successDeliver])
+  }, [order, orderId, successPay, dispatch, successDeliver, history, userInfo])
 
   const successPaymentHandler = (details, data) => {
     console.log(details, data)
@@ -143,6 +143,10 @@ const SummaryOrder = (props) => {
 
   const deliverHandler = () => {
     dispatch(deliverOrder(order))
+  }
+
+  const continueHandler = () => {
+    history.push('/')
   }
 
   const paidHandler = () => {
@@ -202,7 +206,7 @@ const SummaryOrder = (props) => {
             </span>
           </h1>
         </div>
-        {!order.isPaid && order.paymentMethod == 'PayPal' && (
+        {!order.isPaid && order.paymentMethod === 'PayPal' && (
           <div>
             {loadingPay && <Loading />}
             {!sdkReady ? (
@@ -214,6 +218,12 @@ const SummaryOrder = (props) => {
               />
             )}
           </div>
+        )}
+        {!order.isPaid && !userInfo.isAdmin && order.paymentMethod === 'Cash' && (
+          <Button onClick={continueHandler}> CONTINUE SHOPPING</Button>
+        )}
+        {!userInfo.isAdmin && order.isPaid && order.paymentMethod === 'PayPal' && (
+          <Button onClick={continueHandler}> CONTINUE SHOPPING</Button>
         )}
         {loadingDeliver && <Loading />}
         {userInfo && userInfo.isAdmin && !order.isDelivered && (

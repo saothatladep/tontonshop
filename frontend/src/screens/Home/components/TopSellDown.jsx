@@ -47,7 +47,6 @@ const usedStyles = makeStyles((theme) => ({
     height: 112,
     width: 266,
     margin: '5px auto',
-    display: 'block',
     border: '1px solid #fff',
     background: 'rgba(10,15,28,.6)',
     padding: '12px 0',
@@ -61,7 +60,6 @@ const usedStyles = makeStyles((theme) => ({
       padding: '2px 0',
       fontSize: '1.8rem',
       color: whiteText,
-      padding: 0,
     },
     '& h4': {
       fontWeight: 700,
@@ -86,7 +84,7 @@ const TopSellDown = (props) => {
         className={classes.noDecoration}
       >
         <div className={classes.container}>
-          <img className={classes.img} src={categoryDown.img} />
+          <img className={classes.img} src={categoryDown.img} alt={categoryDown.img}/>
           <div className={classes.middleBox}>
             <div className={classes.box}>
               <div className={classes.boxIn}>

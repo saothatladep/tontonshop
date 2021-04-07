@@ -10,7 +10,6 @@ const usedStyles = makeStyles((theme) => ({
   container: {
     width: '100%',
     marginTop: 8,
-    // border: '1px solid #e1e1e1',
   },
   info: {
     '& p': {
@@ -71,7 +70,6 @@ const usedStyles = makeStyles((theme) => ({
       '& li': {
         fontSize: '1.5rem',
         margin: 0,
-        padding: '0',
         fontWeight: 500,
         color: '#666',
         padding: '20px 0 0 32px',
@@ -95,8 +93,6 @@ const usedStyles = makeStyles((theme) => ({
   status: {
     fontSize: '2.5rem',
     margin: 0,
-    // eslint-disable-next-line
-    padding: '0',
     fontWeight: 600,
     color: '#333',
     padding: '24px 0 32px 0',

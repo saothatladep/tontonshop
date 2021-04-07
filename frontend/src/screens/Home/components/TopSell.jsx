@@ -3,10 +3,9 @@ import { makeStyles } from '@material-ui/core/styles'
 import { mainText, maxWidth } from 'assets/css_variable/variable'
 import topSellCategoriesDown from 'mocks/topSellCategoriesDown'
 import topSellCategoriesUp from 'mocks/topSellCategoriesUp'
-import React, { useState } from 'react'
+import React from 'react'
 import TopSellDown from './TopSellDown'
 import TopSellUp from './TopSellUp'
-
 
 const usedStyles = makeStyles((theme) => ({
   root: {
@@ -40,15 +39,13 @@ const usedStyles = makeStyles((theme) => ({
 
 const TopSell = () => {
   const classes = usedStyles()
-  const [categoriesUp] = useState(topSellCategoriesUp)
-  const [categoriesDown] = useState(topSellCategoriesDown)
   return (
     <div>
       <Paper className={classes.root} elevation={0}>
         <div className={classes.container}>
           <div className={classes.title}>
             <p>TOP SELLINGS</p>
-            <img src='https://www.jodhpurifurniture.com/assets/images/border2.png' />
+            <img src='https://www.jodhpurifurniture.com/assets/images/border2.png' alt ='line'/>
           </div>
           <div>
             <Box>
@@ -59,7 +56,7 @@ const TopSell = () => {
                   justify='space-between'
                   alignItems='center'
                 >
-                  {categoriesUp.map((categoryUp) => (
+                  {topSellCategoriesUp.map((categoryUp) => (
                     <Grid key={categoryUp._id} item md-3>
                       <TopSellUp categoryUp={categoryUp} />
                     </Grid>
@@ -78,7 +75,7 @@ const TopSell = () => {
                   justify='space-between'
                   alignItems='center'
                 >
-                  {categoriesDown.map((categoryDown) => (
+                  {topSellCategoriesDown.map((categoryDown) => (
                     <Grid key={categoryDown._id} item md-6>
                       <TopSellDown categoryDown={categoryDown} />
                     </Grid>

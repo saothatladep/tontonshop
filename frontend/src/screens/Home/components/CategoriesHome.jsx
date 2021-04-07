@@ -2,7 +2,7 @@ import { Box, Container, Grid, Paper } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { mainText, maxWidth } from 'assets/css_variable/variable'
 import categoriesHome from 'mocks/categoriesHome.js'
-import React, { useState } from 'react'
+import React from 'react'
 import CategoryChild from './CategoryChild'
 
 const usedStyles = makeStyles((theme) => ({
@@ -33,14 +33,13 @@ const usedStyles = makeStyles((theme) => ({
 }))
 const CategoriesHome = () => {
   const classes = usedStyles()
-  const [categories, setCategories] = useState(categoriesHome)
   return (
     <div>
       <Paper className={classes.root} elevation={0}>
         <div className={classes.container}>
           <div className={classes.title}>
             <p>EXPLORE OUR WIDE RANGE</p>
-            <img src='https://www.jodhpurifurniture.com/assets/images/border2.png' />
+            <img src='https://www.jodhpurifurniture.com/assets/images/border2.png' alt ='line' />
           </div>
           <div>
             <Box>
@@ -51,7 +50,7 @@ const CategoriesHome = () => {
                   justify='space-between'
                   alignItems='center'
                 >
-                  {categories.map((category) => (
+                  {categoriesHome.map((category) => (
                     <Grid key={category._id} item md-2>
                       <CategoryChild category={category} />
                     </Grid>

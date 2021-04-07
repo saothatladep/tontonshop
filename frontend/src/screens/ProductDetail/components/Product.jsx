@@ -10,6 +10,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import ProductImages from './ProductImages'
 import ProductInfo from './ProductInfo'
+import Messages from 'components/Messages'
 import Meta from 'components/Meta'
 
 const usedStyles = makeStyles((theme) => ({
@@ -50,6 +51,8 @@ const Product = (props) => {
     <div>
       {loading ? (
         <Loading />
+      ) : error ? (
+        <Messages severity={'error'} message={error} />
       ) : (
         <Paper className={classes.root} elevation={0}>
           <Meta title={`TonTon | ${product.name}`} />

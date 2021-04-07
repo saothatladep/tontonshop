@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react'
-import Consult from './components/Consult'
-import Filter from './components/Filter'
-import OtherCategories from './components/OtherCategories'
-import Products from './components/Products'
 import axios from 'axios'
 import ScrollToTop from 'components/ScrollToTop'
+import React, { useEffect, useState } from 'react'
+import Consult from './components/Consult'
+import OtherCategories from './components/OtherCategories'
+import Products from './components/Products'
 
 const ProductList = (props) => {
   const { match, history} = props

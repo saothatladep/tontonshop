@@ -2,7 +2,7 @@ import { Box, Container, Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { maxWidth, whiteText } from 'assets/css_variable/variable'
 import footerItemData from 'mocks/footerItemData'
-import React, { useState } from 'react'
+import React from 'react'
 import ContactFooter from './ContactFooter'
 import OptionFooter from './OptionFooter'
 const usedStyles = makeStyles((theme) => ({
@@ -24,8 +24,6 @@ const usedStyles = makeStyles((theme) => ({
 }))
 const DetailFooter = () => {
   const classes = usedStyles()
-  const initDataFooter = footerItemData
-  const [footerListOption, setFooterListOption] = useState(initDataFooter)
   return (
     <div className={classes.root}>
       <Box className={classes.container}>
@@ -37,7 +35,7 @@ const DetailFooter = () => {
             alignItems='flex-start'
             spacing={5}
           >
-            {footerListOption.map((footer) => (
+            {footerItemData.map((footer) => (
               <Grid item md={3} key={footer.id}>
                 <OptionFooter footer={footer} />
               </Grid>

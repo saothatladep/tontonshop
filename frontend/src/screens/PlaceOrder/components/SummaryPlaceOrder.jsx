@@ -1,10 +1,10 @@
 import { makeStyles } from '@material-ui/core/styles'
 import { primaryText, whiteText } from 'assets/css_variable/variable'
 import Button from '@material-ui/core/Button'
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { createOrder } from 'actions/orderActions.js'
-import {CART_RESET_ITEM} from 'constants/cartConstants'
+import { CART_RESET_ITEM } from 'constants/cartConstants'
 import Messages from 'components/Messages'
 
 const usedStyles = makeStyles((theme) => ({
@@ -73,7 +73,7 @@ const SummaryPlaceOrder = (props) => {
 
   const dispatch = useDispatch()
 
-  const { userInfo, cart, history } = props
+  const { cart, history } = props
   const { cartItems, shippingAddress, paymentMethod } = cart
 
   //calculate prices
@@ -90,19 +90,20 @@ const SummaryPlaceOrder = (props) => {
     Number(cart.itemsPrice) + Number(cart.shippingPrice) + Number(cart.taxPrice)
 
   const orderCreate = useSelector((state) => state.orderCreate)
-  const { order, success, error } = orderCreate 
+  const { order, success, error } = orderCreate
 
   useEffect(() => {
-    if(success) {
+    if (success) {
       history.push(`/order/${order._id}`)
     }
     window.scrollTo(0, 0)
 
     // eslint-disable-next-line
-  },[history, success])
+  }, [history, success])
 
   const placeOrderHandler = () => {
-    dispatch(createOrder({
+    dispatch(
+      createOrder({
         orderItems: cartItems,
         shippingAddress: shippingAddress,
         paymentMethod: paymentMethod,
@@ -110,12 +111,12 @@ const SummaryPlaceOrder = (props) => {
         shippingPrice: cart.shippingPrice,
         taxPrice: cart.taxPrice,
         totalPrice: cart.totalPrice,
-    }))
+      })
+    )
 
-    dispatch({type: CART_RESET_ITEM})
+    dispatch({ type: CART_RESET_ITEM })
     localStorage.setItem('cartItems', JSON.stringify([]))
     localStorage.setItem('shippingAddress', JSON.stringify({}))
-    
   }
 
   return (
@@ -171,7 +172,6 @@ const SummaryPlaceOrder = (props) => {
         </Button>
       </div>
       {error && <Messages severity={'error'} message={error} />}
-
     </div>
   )
 }

@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
-import DetailFooter from './DetailFooter'
+import React from 'react'
 import Address from './Address'
+import DetailFooter from './DetailFooter'
 import RightsFooter from './RightsFooter'
 
 const Footer = () => {

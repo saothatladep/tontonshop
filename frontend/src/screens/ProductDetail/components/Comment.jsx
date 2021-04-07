@@ -1,6 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles'
 import { Rating } from '@material-ui/lab'
-import { primaryText } from 'assets/css_variable/variable'
 import React from 'react'
 
 const usedStyles = makeStyles((theme) => ({

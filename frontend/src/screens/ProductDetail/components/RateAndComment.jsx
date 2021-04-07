@@ -2,19 +2,17 @@ import { Box, Container, Grid, Paper } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Rating from '@material-ui/lab/Rating'
-import { maxWidth, primaryText, whiteText } from 'assets/css_variable/variable'
-import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import Loading from 'components/Loading'
-import Messages from 'components/Messages'
-import Comment from './Comment'
-import { useDispatch, useSelector } from 'react-redux'
 import {
-  listProductDetails,
-  resetListProductDetails,
-  createProductReview,
+  createProductReview, listProductDetails,
+  resetListProductDetails
 } from 'actions/productActions.js'
+import { maxWidth, primaryText, whiteText } from 'assets/css_variable/variable'
+import Messages from 'components/Messages'
 import { PRODUCT_CREATE_REVIEW_RESET } from 'constants/productConstants'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
+import Comment from './Comment'
 
 const usedStyles = makeStyles((theme) => ({
   root: {
@@ -140,7 +138,7 @@ const usedStyles = makeStyles((theme) => ({
   },
 }))
 const RateAndComment = (props) => {
-  const { match, history } = props
+  const { match } = props
 
   const classes = usedStyles()
   const dispatch = useDispatch()
@@ -149,7 +147,7 @@ const RateAndComment = (props) => {
   const [comment, setComment] = useState('')
 
   const productDetails = useSelector((state) => state.productDetails)
-  const { loading, error, product } = productDetails
+  const { product } = productDetails
 
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
@@ -227,6 +225,7 @@ const RateAndComment = (props) => {
               <p className={classes.condition}>Please <Link to={'/login'}> Sign In </Link> To Write Review</p>
             )}
           </div>
+          {product.reviews.length === 0 && <h1>No reviews</h1>}
           <div className={classes.showComments}>
             <Box>
               <Container className={classes.noPadding}>
@@ -237,7 +236,6 @@ const RateAndComment = (props) => {
                   alignItems='flex-start'
                   spacing={0}
                 >
-                  {product.reviews.length === 0 && ''}
                   {product.reviews.map((review) => (
                     <Grid item md={12} key={review._id}>
                       <Comment review={review} />

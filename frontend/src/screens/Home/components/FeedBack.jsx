@@ -2,7 +2,7 @@ import { Paper } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { mainText, maxWidth } from 'assets/css_variable/variable'
 import feedBack from 'mocks/feedBack'
-import React, { useState } from 'react'
+import React from 'react'
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 import 'react-slideshow-image/dist/styles.css'
@@ -66,14 +66,13 @@ const FeedBack = () => {
     //   items: 1
     // }
   }
-  const [comments, setComments] = useState(feedBack)
   return (
     <div>
       <Paper className={classes.root} elevation={0}>
         <div className={classes.container}>
           <div className={classes.title}>
             <p>WHAT OUR CUSTOMERS SAY</p>
-            <img src='https://www.jodhpurifurniture.com/assets/images/border2.png' />
+            <img src='https://www.jodhpurifurniture.com/assets/images/border2.png' alt='line' />
           </div>
           <Carousel
             responsive={responsive}
@@ -85,7 +84,7 @@ const FeedBack = () => {
             className={classes.slide}
             customTransition={'all 4s ease 0s'}
           >
-            {comments.map((comment) => (
+            {feedBack.map((comment) => (
               <FeedBackChild key={comment._id} comment={comment} />
             ))}
           </Carousel>

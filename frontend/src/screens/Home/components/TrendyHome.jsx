@@ -1,12 +1,12 @@
 import { Paper } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { mainText, maxWidth, primaryText } from 'assets/css_variable/variable'
-import React, { useState } from 'react'
+import trendyCategories from 'mocks/trendyCategories.js'
+import React from 'react'
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 import 'react-slideshow-image/dist/styles.css'
 import TrendyChild from './TrendyChild'
-import trendyCategories from 'mocks/trendyCategories.js'
 
 const usedStyles = makeStyles((theme) => ({
   root: {
@@ -77,14 +77,13 @@ const TrendyHome = () => {
     //   items: 1
     // }
   }
-  const [categories] = useState(trendyCategories)
   return (
     <div>
       <Paper className={classes.root} elevation={0}>
         <div className={classes.container}>
           <div className={classes.title}>
             <p>TRENDY FURNITURE CUSTOMIZED FOR YOUR HOME</p>
-            <img src='https://www.jodhpurifurniture.com/assets/images/border2.png' />
+            <img src='https://www.jodhpurifurniture.com/assets/images/border2.png' alt ='line'/>
           </div>
           <Carousel
             responsive={responsive}
@@ -95,7 +94,7 @@ const TrendyHome = () => {
             className={classes.slide}
             customTransition={'all 2s ease 0s'}
           >
-            {categories.map((category) => (
+            {trendyCategories.map((category) => (
               <TrendyChild key={category._id} category={category} />
             ))}
           </Carousel>

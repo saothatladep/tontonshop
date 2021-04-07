@@ -1,15 +1,15 @@
 import { Box, Container, Grid, Paper } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { Pagination } from '@material-ui/lab'
-import { maxWidth, primaryText } from 'assets/css_variable/variable'
+import { listAllProducts } from 'actions/productActions.js'
+import { maxWidth } from 'assets/css_variable/variable'
 import Loading from 'components/Loading'
 import Messages from 'components/Messages'
-import Empty from 'screens/ProductList/components/Empty'
-import ProductDetail from 'screens/ProductList/components/ProductDetail'
+import Meta from 'components/Meta'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { listAllProducts } from 'actions/productActions.js'
-import Meta from 'components/Meta'
+import Empty from 'screens/ProductList/components/Empty'
+import ProductDetail from 'screens/ProductList/components/ProductDetail'
 
 const usedStyles = makeStyles((theme) => ({
   root: {
@@ -49,7 +49,7 @@ const Index = (props) => {
   const dispatch = useDispatch()
 
   const productListAll = useSelector((state) => state.productListAll)
-  const { loading, error, products, page, pages } = productListAll
+  const { loading, error, products, pages } = productListAll
 
   useEffect(() => {
     dispatch(listAllProducts(keyword, pageNumber))

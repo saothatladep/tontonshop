@@ -104,7 +104,7 @@ const HotDeal = () => {
         <div className={classes.container}>
           <div className={classes.title}>
             <p>HOT DEALS</p>
-            <img src='https://www.jodhpurifurniture.com/assets/images/border2.png' />
+            <img src='https://www.jodhpurifurniture.com/assets/images/border2.png' alt = 'line' />
           </div>
           {status ? (
             <Loading />

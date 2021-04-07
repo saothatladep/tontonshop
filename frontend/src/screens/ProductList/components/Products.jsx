@@ -45,7 +45,7 @@ const Products = (props) => {
   const pageNumber = match.params.pageNumber ? match.params.pageNumber : 1
 
   const productList = useSelector((state) => state.productList)
-  const { loading, error, products, page, pages } = productList
+  const { loading, error, products, pages } = productList
   useEffect(() => {
     dispatch(listProducts(match.params.id, pageNumber))
   }, [dispatch, match, pageNumber])

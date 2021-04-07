@@ -67,7 +67,7 @@ const DetailCatalogue = (props) => {
     <div className={classes.listCatalogue}>
       {listCatalogues.map((listCatalogue) => (
         <ListItem className={classes.ItemDetail} key={listCatalogue._id}>
-          <img src={listCatalogue.img}></img>
+          <img src={listCatalogue.img} alt={listCatalogue.img}></img>
           <Typography color='inherit'>{listCatalogue.name}</Typography>
           <List>
             <Categories listCategories={listCatalogue.listCategories} />
