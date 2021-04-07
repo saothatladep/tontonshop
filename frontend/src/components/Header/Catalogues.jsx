@@ -60,12 +60,12 @@ const Catalogues = (props) => {
             justify='flex-start'
             alignItems='flex-start'
           >
-            <Grid item md-8>
+            <Grid item md={8}>
               <List>
                 <DetailCatalogue listCatalogues={type.listCatalogues} />
               </List>
             </Grid>
-            <Grid className={classes.img} item md-4>
+            <Grid className={classes.img} item md={4}>
               <img
                 style={{
                   width: type.imgDimensions.width,

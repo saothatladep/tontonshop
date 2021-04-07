@@ -51,7 +51,7 @@ const CategoriesHome = () => {
                   alignItems='center'
                 >
                   {categoriesHome.map((category) => (
-                    <Grid key={category._id} item md-2>
+                    <Grid key={category._id} item md={2}>
                       <CategoryChild category={category} />
                     </Grid>
                   ))}

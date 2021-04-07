@@ -59,7 +59,7 @@ const HotDealChild = (props) => {
     <div>
       <Link to = {`/product/${product._id}`} className={classes.noDecoration}>
         <div className={classes.container}>
-          {product.images.length > 0 ? <img src={product.images[0].img} alt='' /> : ''}
+          {product.images.length > 0 ? <img src={product.images[0].img} alt='img' /> : ''}
           <p>{product.name}</p>
           <h4>
             Price: &nbsp;

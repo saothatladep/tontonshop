@@ -57,7 +57,7 @@ const TopSell = () => {
                   alignItems='center'
                 >
                   {topSellCategoriesUp.map((categoryUp) => (
-                    <Grid key={categoryUp._id} item md-3>
+                    <Grid key={categoryUp._id} item md={3}>
                       <TopSellUp categoryUp={categoryUp} />
                     </Grid>
                   ))}
@@ -76,7 +76,7 @@ const TopSell = () => {
                   alignItems='center'
                 >
                   {topSellCategoriesDown.map((categoryDown) => (
-                    <Grid key={categoryDown._id} item md-6>
+                    <Grid key={categoryDown._id} item md={6}>
                       <TopSellDown categoryDown={categoryDown} />
                     </Grid>
                   ))}
